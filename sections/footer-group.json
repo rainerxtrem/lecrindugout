@@ -52,13 +52,13 @@
           "settings": {
             "title": "Horaires",
             "lundi": "",
-            "mardi": "",
-            "mercredi": "",
-            "jeudi": "",
-            "vendredi": "",
-            "samedi": "",
+            "mardi": "10h - 12h30 / 14h30 - 18h30",
+            "mercredi": "10h - 12h30 / 14h30 - 18h30",
+            "jeudi": "10h - 12h30 / 14h30 - 19h",
+            "vendredi": "10h - 12h30 / 14h30 - 19h",
+            "samedi": "10h - 12h30 / 14h30 - 19h",
             "dimanche": "",
-            "note": ""
+            "note": "Les horaires peuvent varier au moment des périodes de fêtes, voir nos réseaux"
           }
         }
       },
