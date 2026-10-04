@@ -2,41 +2,31 @@
   assign main_menu = linklists[section.settings.menu]
 -%}
 
-<header class="site-header color-scheme-{{ section.settings.color_scheme }}" data-site-header>
-  <div class="page-width site-header__inner">
+<header class="site-header site-header--centered color-scheme-{{ section.settings.color_scheme }}{% if section.settings.stripes %} has-stripes{% endif %}" data-site-header>
+  <div class="page-width site-header__top">
+    <div class="site-header__left">
+      <button class="btn--icon site-header__menu-btn" data-mobile-nav-open aria-label="{{ 'general.menu.open' | t }}">
+        {% render 'icon', name: 'menu' %}
+      </button>
+      {% render 'social-icons', class: 'site-header__social' %}
+    </div>
+
     <a href="{{ routes.root_url }}" class="site-header__logo">
       {% if settings.logo %}
         <img
-          src="{{ settings.logo | image_url: width: 300 }}"
+          src="{{ settings.logo | image_url: width: 400 }}"
           alt="{{ shop.name }}"
           width="{{ settings.logo.width }}"
           height="{{ settings.logo.height }}"
-          style="--logo-width: {{ settings.logo_width }}px; max-width: var(--logo-width);"
+          style="--logo-width: {{ settings.logo_width }}px;"
         >
       {% else %}
         <span class="site-header__logo-text">{{ shop.name }}</span>
+        {% if section.settings.tagline != blank %}
+          <span class="site-header__tagline">{{ section.settings.tagline }}</span>
+        {% endif %}
       {% endif %}
     </a>
-
-    {% if main_menu %}
-      <nav class="site-nav" aria-label="{{ 'header.catalog' | t }}">
-        <ul class="site-nav__list" role="list" style="display:flex; align-items:center; gap:inherit; list-style:none;">
-          {% for link in main_menu.links %}
-            <li class="site-nav__item" data-nav-item>
-              {% if link.links.size > 0 %}
-                <button class="site-nav__link" data-nav-trigger aria-expanded="false" aria-haspopup="true">
-                  {{ link.title }}
-                  {% render 'icon', name: 'chevron-down' %}
-                </button>
-                {% render 'mega-menu', link: link, section: section %}
-              {% else %}
-                <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </nav>
-    {% endif %}
 
     <div class="site-header__actions">
       {% if section.settings.show_search %}
@@ -45,32 +35,48 @@
         </button>
       {% endif %}
 
-      <a href="{{ routes.account_url }}" class="btn--icon" aria-label="{{ 'general.account.title' | t }}">
+      <a href="{{ routes.account_url }}" class="btn--icon site-header__account" aria-label="{{ 'general.account.title' | t }}">
         {% render 'icon', name: 'account' %}
       </a>
 
       {% if settings.cart_type == 'drawer' %}
-        <button class="btn--icon" data-cart-drawer-open aria-label="{{ 'cart.general.title' | t }}" style="position:relative;">
+        <button class="btn--icon site-header__cart" data-cart-drawer-open aria-label="{{ 'cart.general.title' | t }}">
           {% render 'icon', name: 'cart' %}
-          <span data-cart-count style="position:absolute; top:-2px; right:-2px; background:var(--color-terracotta); color:#fff; font-size:0.65rem; border-radius:50%; width:18px; height:18px; display:flex; align-items:center; justify-content:center;{% if cart.item_count == 0 %}display:none;{% endif %}">{{ cart.item_count }}</span>
+          <span class="cart-count{% if cart.item_count == 0 %} hidden{% endif %}" data-cart-count>{{ cart.item_count }}</span>
         </button>
       {% else %}
-        <a href="{{ routes.cart_url }}" class="btn--icon" aria-label="{{ 'cart.general.title' | t }}" style="position:relative;">
+        <a href="{{ routes.cart_url }}" class="btn--icon site-header__cart" aria-label="{{ 'cart.general.title' | t }}">
           {% render 'icon', name: 'cart' %}
-          <span data-cart-count style="position:absolute; top:-2px; right:-2px; background:var(--color-terracotta); color:#fff; font-size:0.65rem; border-radius:50%; width:18px; height:18px; display:flex; align-items:center; justify-content:center;{% if cart.item_count == 0 %}display:none;{% endif %}">{{ cart.item_count }}</span>
+          <span class="cart-count{% if cart.item_count == 0 %} hidden{% endif %}" data-cart-count>{{ cart.item_count }}</span>
         </a>
       {% endif %}
-
-      <button class="btn--icon" data-mobile-nav-open aria-label="{{ 'general.menu.open' | t }}" style="display:none;" id="MobileNavOpenBtn">
-        {% render 'icon', name: 'menu' %}
-      </button>
     </div>
   </div>
 
+  {% if main_menu %}
+    <nav class="site-nav" aria-label="{{ 'header.catalog' | t }}">
+      <ul class="site-nav__list" role="list">
+        {% for link in main_menu.links %}
+          <li class="site-nav__item" data-nav-item>
+            {% if link.links.size > 0 %}
+              <button class="site-nav__link" data-nav-trigger aria-expanded="false" aria-haspopup="true">
+                {{ link.title }}
+                {% render 'icon', name: 'chevron-down' %}
+              </button>
+              {% render 'mega-menu', link: link, section: section %}
+            {% else %}
+              <a href="{{ link.url }}" class="site-nav__link{% if link.active %} is-active{% endif %}">{{ link.title }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
+
   {% if section.settings.show_search %}
-    <div class="header-search-panel" data-search-panel hidden style="border-top:1px solid var(--scheme-border); background:var(--scheme-bg);">
-      <form action="{{ routes.search_url }}" method="get" class="page-width" style="display:flex; gap:10px; padding-block:16px;">
-        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.search' | t }}" autofocus>
+    <div class="header-search-panel" data-search-panel hidden>
+      <form action="{{ routes.search_url }}" method="get" class="page-width header-search-panel__form">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.search' | t }}">
         <input type="hidden" name="type" value="product">
         <button type="submit" class="btn btn--small">{{ 'general.search.search' | t }}</button>
       </form>
@@ -107,7 +113,7 @@
               </div>
             </details>
           {% else %}
-            <a href="{{ link.url }}" class="mobile-nav__link" style="display:block; padding:16px 4px; font-family:var(--font-heading); font-size:1.05rem; border-bottom:1px solid rgba(0,0,0,0.08);">{{ link.title }}</a>
+            <a href="{{ link.url }}" class="mobile-nav__link mobile-nav__link--top">{{ link.title }}</a>
           {% endif %}
         {% endfor %}
       </nav>
@@ -118,12 +124,6 @@
     </div>
   </div>
 </div>
-
-<style>
-  @media screen and (max-width: 989px) {
-    #MobileNavOpenBtn { display: inline-flex !important; }
-  }
-</style>
 
 {% schema %}
 {
@@ -146,11 +146,26 @@
       "id": "color_scheme",
       "label": "Ambiance de couleur",
       "options": [
+        { "value": "chocolat", "label": "Chocolat" },
+        { "value": "sombre", "label": "Noir doux" },
+        { "value": "sauge-profond", "label": "Vert profond" },
         { "value": "ivoire", "label": "Ivoire" },
-        { "value": "blanc-casse", "label": "Blanc cassé" },
-        { "value": "sable", "label": "Sable" }
+        { "value": "blanc-casse", "label": "Blanc cassé" }
       ],
-      "default": "ivoire"
+      "default": "chocolat"
+    },
+    {
+      "type": "checkbox",
+      "id": "stripes",
+      "label": "Fines rayures sur le fond",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Signature sous le nom",
+      "info": "Affichée seulement sans logo image",
+      "default": "Épicerie fine — Arnage"
     }
   ],
   "blocks": [

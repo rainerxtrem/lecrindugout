@@ -3,11 +3,50 @@
   "type": "header",
   "sections": {
     "announcement-bar": {
-      "type": "announcement-bar"
+      "type": "announcement-bar",
+      "blocks": {
+        "a1": {
+          "type": "item",
+          "settings": {
+            "text": "Click & Collect à Arnage"
+          }
+        },
+        "a2": {
+          "type": "item",
+          "settings": {
+            "text": "Paniers gourmands sur mesure"
+          }
+        },
+        "a3": {
+          "type": "item",
+          "settings": {
+            "text": "Sélection de producteurs & artisans"
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "settings": {
+        "enable": true,
+        "color_scheme": "sauge-profond"
+      }
     },
     "header": {
-      "type": "header"
+      "type": "header",
+      "settings": {
+        "menu": "main-menu",
+        "show_search": true,
+        "color_scheme": "chocolat",
+        "stripes": true,
+        "tagline": "Épicerie fine — Arnage"
+      }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }

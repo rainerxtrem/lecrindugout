@@ -8,29 +8,42 @@
 
     <div class="grid grid--categories">
       {% for block in section.blocks %}
-        <a
-          href="{{ block.settings.url }}"
-          class="category-card hover-lift{% if block.settings.size == 'wide' %} category-card--wide{% endif %}"
-          data-animate
-          {{ block.shopify_attributes }}
-        >
+        {%- liquid
+          assign cat_collection = collections[block.settings.collection]
+          assign cat_image = block.settings.image
+          if cat_image == blank and cat_collection != blank
+            assign cat_image = cat_collection.featured_image
+            if cat_image == blank
+              for p in cat_collection.products limit: 24
+                if p.featured_image
+                  assign cat_image = p.featured_image
+                  break
+                endif
+              endfor
+            endif
+          endif
+          assign cat_title = block.settings.title | default: cat_collection.title
+          assign cat_url = block.settings.url | default: cat_collection.url
+        -%}
+        <a href="{{ cat_url | default: routes.collections_url }}" class="category-card" data-animate {{ block.shopify_attributes }}>
           <div class="category-card__media">
-            {% if block.settings.image %}
+            {% if cat_image %}
               <img
-                src="{{ block.settings.image | image_url: width: 800 }}"
-                srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w"
-                alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                src="{{ cat_image | image_url: width: 700 }}"
+                srcset="{{ cat_image | image_url: width: 400 }} 400w, {{ cat_image | image_url: width: 700 }} 700w"
+                sizes="(min-width: 990px) 400px, 50vw"
+                alt="{{ cat_title | escape }}"
                 loading="lazy"
-                width="{{ block.settings.image.width }}"
-                height="{{ block.settings.image.height }}"
+                width="{{ cat_image.width }}"
+                height="{{ cat_image.height }}"
               >
             {% else %}
-              {{ 'collection-1' | placeholder_svg_tag }}
+              <div class="media-fallback media-fallback--light"></div>
             {% endif %}
           </div>
           <div class="category-card__content">
-            <h3>{{ block.settings.title }}</h3>
-            {% if block.settings.description != blank %}<p style="opacity:0.75; font-size:0.92rem; margin-top:6px;">{{ block.settings.description }}</p>{% endif %}
+            <h3>{{ cat_title }}</h3>
+            {% if block.settings.description != blank %}<p>{{ block.settings.description }}</p>{% endif %}
           </div>
         </a>
       {% endfor %}
@@ -51,9 +64,9 @@
         { "value": "sauge-clair", "label": "Vert sauge clair" },
         { "value": "sable", "label": "Sable" }
       ],
-      "default": "sauge-clair"
+      "default": "ivoire"
     },
-    { "type": "checkbox", "id": "center_heading", "label": "Centrer le titre", "default": false },
+    { "type": "checkbox", "id": "center_heading", "label": "Centrer le titre", "default": true },
     { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Collections" },
     { "type": "text", "id": "title", "label": "Titre", "default": "Explorer l'épicerie" },
     { "type": "textarea", "id": "text", "label": "Texte", "default": "Des grandes familles de produits, pensées pour la cuisine, la dégustation et le cadeau." }
@@ -63,20 +76,11 @@
       "type": "category",
       "name": "Catégorie",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "title", "label": "Nom", "default": "Sucré" },
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Facultatif : sinon l'image de la collection ou de son premier produit" },
+        { "type": "text", "id": "title", "label": "Nom", "info": "Facultatif : sinon le nom de la collection" },
         { "type": "textarea", "id": "description", "label": "Description courte" },
-        { "type": "url", "id": "url", "label": "Lien" },
-        {
-          "type": "select",
-          "id": "size",
-          "label": "Format de la carte",
-          "options": [
-            { "value": "normal", "label": "Normal" },
-            { "value": "wide", "label": "Large" }
-          ],
-          "default": "normal"
-        }
+        { "type": "url", "id": "url", "label": "Lien", "info": "Facultatif : sinon la page de la collection" }
       ]
     }
   ],
@@ -84,12 +88,12 @@
     {
       "name": "Catégories",
       "blocks": [
-        { "type": "category", "settings": { "title": "Sucré", "size": "wide" } },
+        { "type": "category", "settings": { "title": "Sucré" } },
         { "type": "category", "settings": { "title": "Salé" } },
         { "type": "category", "settings": { "title": "Chocolats" } },
         { "type": "category", "settings": { "title": "Condiments" } },
         { "type": "category", "settings": { "title": "Boissons" } },
-        { "type": "category", "settings": { "title": "Coffrets cadeaux", "size": "wide" } }
+        { "type": "category", "settings": { "title": "Coffrets cadeaux" } }
       ]
     }
   ]

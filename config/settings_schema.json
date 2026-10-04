@@ -55,7 +55,7 @@
         "max": 130,
         "step": 5,
         "unit": "%",
-        "default": 105
+        "default": 100
       },
       {
         "type": "header",
@@ -65,7 +65,7 @@
         "type": "font_picker",
         "id": "type_body_font",
         "label": "Police du texte",
-        "default": "inter_n4",
+        "default": "jost_n4",
         "info": "Une sans-serif moderne pour les textes et boutons"
       },
       {
@@ -198,7 +198,7 @@
         "max": 24,
         "step": 2,
         "unit": "px",
-        "default": 4
+        "default": 0
       },
       {
         "type": "range",
@@ -208,7 +208,7 @@
         "max": 32,
         "step": 2,
         "unit": "px",
-        "default": 6
+        "default": 0
       }
     ]
   },
@@ -233,7 +233,7 @@
         "max": 140,
         "step": 10,
         "unit": "px",
-        "default": 90
+        "default": 100
       }
     ]
   },
@@ -276,12 +276,14 @@
       {
         "type": "text",
         "id": "social_instagram",
+        "default": "https://www.instagram.com/lecrindugout/",
         "label": "Instagram",
         "info": "URL complète"
       },
       {
         "type": "text",
         "id": "social_facebook",
+        "default": "https://www.facebook.com/profile.php?id=61584056300790",
         "label": "Facebook",
         "info": "URL complète"
       },

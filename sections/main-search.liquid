@@ -1,8 +1,8 @@
 <div class="section color-scheme-{{ section.settings.color_scheme }}">
   <div class="page-width">
-    <div class="section-heading" data-animate>
+    <div class="section-heading section-heading--center" data-animate>
       <h1>{{ 'general.search.search' | t }}</h1>
-      <form action="{{ routes.search_url }}" method="get" style="display:flex; gap:10px; max-width:30rem; margin-top:20px;">
+      <form action="{{ routes.search_url }}" method="get" class="search-form">
         <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.search' | t }}">
         <input type="hidden" name="type" value="product">
         <button type="submit" class="btn">{{ 'general.search.search' | t }}</button>
@@ -14,7 +14,7 @@
         <p style="opacity:0.7;">{{ 'general.search.no_results' | t: terms: search.terms }}</p>
       {% else %}
         {% paginate search.results by 24 %}
-          <p style="opacity:0.7; margin-bottom:24px;">{{ 'general.search.results_count' | t: count: search.results_count }}</p>
+          <p class="text-center" style="opacity:0.8; margin-bottom:32px;">{{ 'general.search.results_count' | t: count: search.results_count }}</p>
           <div class="grid grid--collection">
             {% for item in search.results %}
               {% if item.object_type == 'product' %}

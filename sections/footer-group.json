@@ -3,11 +3,49 @@
   "type": "footer",
   "sections": {
     "newsletter": {
-      "type": "newsletter"
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "sauge-profond"
+      }
     },
     "footer": {
-      "type": "footer"
+      "type": "footer",
+      "blocks": {
+        "shop": {
+          "type": "link_list",
+          "settings": {
+            "title": "La boutique",
+            "menu": "main-menu"
+          }
+        },
+        "infos": {
+          "type": "link_list",
+          "settings": {
+            "title": "Informations",
+            "menu": "footer"
+          }
+        },
+        "contact": {
+          "type": "contact",
+          "settings": {
+            "title": "Nous trouver",
+            "show_address": true,
+            "text": "<p>Click &amp; Collect en boutique</p>"
+          }
+        }
+      },
+      "block_order": [
+        "shop",
+        "infos",
+        "contact"
+      ],
+      "settings": {
+        "color_scheme": "chocolat"
+      }
     }
   },
-  "order": ["newsletter", "footer"]
+  "order": [
+    "newsletter",
+    "footer"
+  ]
 }

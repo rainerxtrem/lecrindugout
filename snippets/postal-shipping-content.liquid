@@ -1,0 +1,7 @@
+{%- comment -%} Contenu texte de la section « Envoi postal » {%- endcomment -%}
+{% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+{% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+{% if section.settings.text != blank %}<div class="editorial-split__text">{{ section.settings.text }}</div>{% endif %}
+{% if section.settings.button_label != blank %}
+  <a href="{{ section.settings.button_url | default: routes.all_products_collection_url }}" class="btn btn--outline">{{ section.settings.button_label }}</a>
+{% endif %}

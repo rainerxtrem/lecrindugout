@@ -1,31 +1,31 @@
-<div class="section color-scheme-{{ section.settings.color_scheme }}">
-  <div class="page-width">
-    <div class="editorial{% if section.settings.image_position == 'right' %} editorial--reverse{% endif %}">
-      <div class="editorial__media" data-animate>
-        {% if section.settings.image %}
-          <img
-            src="{{ section.settings.image | image_url: width: 1000 }}"
-            srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 1000 }} 1000w"
-            alt="{{ section.settings.image.alt | escape }}"
-            loading="lazy"
-            width="{{ section.settings.image.width }}"
-            height="{{ section.settings.image.height }}"
-          >
-        {% else %}
-          <div class="media-fallback media-fallback--light"></div>
-        {% endif %}
-      </div>
-      <div class="editorial__content" data-animate>
-        {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
-        {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
-        {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
-        {% if section.settings.button_label != blank %}
-          <a href="{{ section.settings.button_url }}" class="btn btn--outline">{{ section.settings.button_label }}</a>
-        {% endif %}
-      </div>
+<section class="editorial-split color-scheme-{{ section.settings.color_scheme }}{% if section.settings.image_position == 'right' %} editorial-split--reverse{% endif %}">
+  <div class="editorial-split__media">
+    {% if section.settings.image %}
+      <img
+        src="{{ section.settings.image | image_url: width: 1400 }}"
+        srcset="{{ section.settings.image | image_url: width: 750 }} 750w, {{ section.settings.image | image_url: width: 1100 }} 1100w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+        sizes="(min-width: 900px) 50vw, 100vw"
+        alt="{{ section.settings.image.alt | escape }}"
+        loading="lazy"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+      >
+    {% else %}
+      <div class="media-fallback"></div>
+    {% endif %}
+  </div>
+  <div class="editorial-split__content">
+    <div class="editorial-split__inner" data-animate>
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.text != blank %}<div class="editorial-split__text">{{ section.settings.text | newline_to_br }}</div>{% endif %}
+      {% if section.settings.signature != blank %}<p class="editorial-split__signature">{{ section.settings.signature }}</p>{% endif %}
+      {% if section.settings.button_label != blank %}
+        <a href="{{ section.settings.button_url | default: routes.collections_url }}" class="btn btn--outline">{{ section.settings.button_label }}</a>
+      {% endif %}
     </div>
   </div>
-</div>
+</section>
 
 {% schema %}
 {
@@ -36,12 +36,14 @@
       "id": "color_scheme",
       "label": "Ambiance de couleur",
       "options": [
-        { "value": "ivoire", "label": "Ivoire" },
         { "value": "blanc-casse", "label": "Blanc cassé" },
+        { "value": "ivoire", "label": "Ivoire" },
         { "value": "sable", "label": "Sable" },
-        { "value": "sauge-clair", "label": "Vert sauge clair" }
+        { "value": "sauge-clair", "label": "Vert sauge clair" },
+        { "value": "sauge-profond", "label": "Vert profond" },
+        { "value": "chocolat", "label": "Chocolat" }
       ],
-      "default": "sable"
+      "default": "blanc-casse"
     },
     {
       "type": "select",
@@ -62,6 +64,7 @@
       "label": "Texte",
       "default": "Nous parcourons les maisons, producteurs et artisans pour sélectionner des produits qui ont quelque chose à raconter."
     },
+    { "type": "text", "id": "signature", "label": "Signature (facultatif)", "info": "Ex. : le nom de la fondatrice" },
     { "type": "text", "id": "button_label", "label": "Bouton", "default": "Découvrir notre sélection" },
     { "type": "url", "id": "button_url", "label": "Lien du bouton" }
   ],

@@ -88,6 +88,7 @@
     }
   },
   "newsletter": {
+    "email": "Votre adresse e-mail",
     "success": "Merci, votre inscription est confirmée.",
     "error": "Une erreur est survenue, merci de réessayer."
   },

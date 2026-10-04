@@ -1,4 +1,4 @@
-<footer class="site-footer color-scheme-{{ section.settings.color_scheme }}">
+<footer class="site-footer has-stripes color-scheme-{{ section.settings.color_scheme }}">
   <div class="page-width">
     <div class="site-footer__grid">
       <div class="site-footer__brand">
@@ -20,19 +20,31 @@
       </div>
 
       {% for block in section.blocks %}
-        {% if block.type == 'link_list' %}
-          {% assign footer_menu = linklists[block.settings.menu] %}
-          <div {{ block.shopify_attributes }}>
-            <p class="site-footer__heading">{{ block.settings.title }}</p>
-            {% if footer_menu %}
-              <ul class="site-footer__list" role="list">
-                {% for link in footer_menu.links %}
-                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                {% endfor %}
-              </ul>
+        {% case block.type %}
+          {% when 'link_list' %}
+            {% assign footer_menu = linklists[block.settings.menu] %}
+            {% if footer_menu.links.size > 0 %}
+              <div {{ block.shopify_attributes }}>
+                <p class="site-footer__heading">{{ block.settings.title }}</p>
+                <ul class="site-footer__list" role="list">
+                  {% for link in footer_menu.links %}
+                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
             {% endif %}
-          </div>
-        {% endif %}
+          {% when 'contact' %}
+            <div {{ block.shopify_attributes }}>
+              <p class="site-footer__heading">{{ block.settings.title }}</p>
+              <div class="site-footer__list site-footer__contact">
+                {% if block.settings.show_address and shop.address.city != blank %}
+                  <p>{{ shop.address.address1 }}{% if shop.address.address2 != blank %}, {{ shop.address.address2 }}{% endif %}<br>{{ shop.address.zip }} {{ shop.address.city }}</p>
+                {% endif %}
+                {% if shop.phone != blank %}<p><a href="tel:{{ shop.phone | remove: ' ' }}">{{ shop.phone }}</a></p>{% endif %}
+                {% if block.settings.text != blank %}{{ block.settings.text }}{% endif %}
+              </div>
+            </div>
+        {% endcase %}
       {% endfor %}
     </div>
 
@@ -77,6 +89,16 @@
   ],
   "blocks": [
     {
+      "type": "contact",
+      "name": "Coordonnées",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Nous trouver" },
+        { "type": "checkbox", "id": "show_address", "label": "Afficher l'adresse de la boutique", "info": "Reprise des réglages Shopify", "default": true },
+        { "type": "richtext", "id": "text", "label": "Texte (horaires…)" }
+      ]
+    },
+    {
       "type": "link_list",
       "name": "Colonne de liens",
       "settings": [
@@ -93,13 +115,6 @@
         }
       ]
     }
-  ],
-  "default": {
-    "blocks": [
-      { "type": "link_list", "settings": { "title": "Shop" } },
-      { "type": "link_list", "settings": { "title": "Entreprises" } },
-      { "type": "link_list", "settings": { "title": "La maison" } }
-    ]
-  }
+  ]
 }
 {% endschema %}

@@ -1,31 +1,27 @@
 {% if section.settings.enable %}
-<div class="section color-scheme-{{ section.settings.color_scheme }}">
-  <div class="page-width">
-    <div class="seasonal" data-animate>
-      <div class="seasonal__media">
-        {% if section.settings.image %}
-          <img
-            src="{{ section.settings.image | image_url: width: 1600 }}"
-            alt="{{ section.settings.image.alt | escape }}"
-            loading="lazy"
-            width="{{ section.settings.image.width }}"
-            height="{{ section.settings.image.height }}"
-          >
-        {% else %}
-          <div class="media-fallback"></div>
-        {% endif %}
-      </div>
-      <div class="seasonal__content">
-        {% if section.settings.eyebrow != blank %}<p class="eyebrow" style="color:var(--color-gold-light);">{{ section.settings.eyebrow }}</p>{% endif %}
-        {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
-        {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
-        {% if section.settings.button_label != blank %}
-          <a href="{{ section.settings.button_url }}" class="btn" style="background:var(--color-gold); color:var(--color-chocolate);">{{ section.settings.button_label }}</a>
-        {% endif %}
-      </div>
+<section class="seasonal color-scheme-{{ section.settings.color_scheme }}{% unless section.settings.image %} has-stripes{% endunless %}{% if section.settings.image %} seasonal--image{% endif %}">
+  {% if section.settings.image %}
+    <div class="seasonal__media">
+      <img
+        src="{{ section.settings.image | image_url: width: 2000 }}"
+        srcset="{{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1600 }} 1600w, {{ section.settings.image | image_url: width: 2000 }} 2000w"
+        sizes="100vw"
+        alt="{{ section.settings.image.alt | escape }}"
+        loading="lazy"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+      >
     </div>
+  {% endif %}
+  <div class="page-width seasonal__content" data-animate>
+    {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+    {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+    {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+    {% if section.settings.button_label != blank %}
+      <a href="{{ section.settings.button_url | default: routes.all_products_collection_url }}" class="btn{% if section.settings.image %} btn--light{% endif %}">{{ section.settings.button_label }}</a>
+    {% endif %}
   </div>
-</div>
+</section>
 {% endif %}
 
 {% schema %}
@@ -36,12 +32,14 @@
     {
       "type": "select",
       "id": "color_scheme",
-      "label": "Ambiance de couleur (fond de section)",
+      "label": "Ambiance de couleur (sans image)",
       "options": [
-        { "value": "ivoire", "label": "Ivoire" },
-        { "value": "sable", "label": "Sable" }
+        { "value": "chocolat", "label": "Chocolat" },
+        { "value": "sauge-profond", "label": "Vert profond" },
+        { "value": "sombre", "label": "Noir doux" },
+        { "value": "terracotta", "label": "Terracotta" }
       ],
-      "default": "ivoire"
+      "default": "sauge-profond"
     },
     { "type": "image_picker", "id": "image", "label": "Image" },
     { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "En ce moment" },

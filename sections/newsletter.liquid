@@ -1,7 +1,7 @@
-<div class="section newsletter color-scheme-{{ section.settings.color_scheme }}">
+<div class="section newsletter color-scheme-{{ section.settings.color_scheme }}{% if section.settings.stripes %} has-stripes{% endif %}">
   <div class="page-width">
     <div class="newsletter__inner" data-animate>
-      {% if section.settings.eyebrow != blank %}<p class="eyebrow" style="justify-content:center;">{{ section.settings.eyebrow }}</p>{% endif %}
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
       {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
       {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
 
@@ -11,12 +11,12 @@
           <input
             type="email"
             name="contact[email]"
-            placeholder="{{ 'general.search.placeholder' | t }}"
-            aria-label="Email"
+            placeholder="{{ 'newsletter.email' | t }}"
+            aria-label="{{ 'newsletter.email' | t }}"
             required
             value="{% if customer %}{{ customer.email }}{% endif %}"
           >
-          <button type="submit" class="btn" style="background:var(--scheme-button-bg); color:var(--scheme-button-text);">{{ section.settings.button_label }}</button>
+          <button type="submit" class="btn btn--outline">{{ section.settings.button_label }}</button>
         </div>
 
         {% if form.posted_successfully? %}
@@ -38,12 +38,13 @@
       "id": "color_scheme",
       "label": "Ambiance de couleur",
       "options": [
-        { "value": "sauge-profond", "label": "Vert profond" },
         { "value": "chocolat", "label": "Chocolat" },
+        { "value": "sauge-profond", "label": "Vert profond" },
         { "value": "brun", "label": "Brun" }
       ],
       "default": "sauge-profond"
     },
+    { "type": "checkbox", "id": "stripes", "label": "Fines rayures sur le fond", "default": false },
     { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Newsletter" },
     { "type": "text", "id": "title", "label": "Titre", "default": "Les nouvelles gourmandes" },
     {

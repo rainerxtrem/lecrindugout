@@ -1,44 +1,43 @@
-<div class="section color-scheme-{{ section.settings.color_scheme }}">
-  <div class="page-width">
-    <div class="corporate-banner" data-animate>
-      <div class="corporate-banner__media">
-        {% if section.settings.image %}
-          <img
-            src="{{ section.settings.image | image_url: width: 1600 }}"
-            srcset="{{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1600 }} 1600w"
-            alt="{{ section.settings.image.alt | escape }}"
-            loading="lazy"
-            width="{{ section.settings.image.width }}"
-            height="{{ section.settings.image.height }}"
-          >
-        {% else %}
-          <div class="media-fallback"></div>
-        {% endif %}
-      </div>
-      <div class="corporate-banner__content">
-        {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
-        {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
-        {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+<section class="editorial-split editorial-split--reverse color-scheme-{{ section.settings.color_scheme }}{% if section.settings.color_scheme == 'chocolat' %} has-stripes{% endif %}">
+  <div class="editorial-split__media">
+    {% if section.settings.image %}
+      <img
+        src="{{ section.settings.image | image_url: width: 1400 }}"
+        srcset="{{ section.settings.image | image_url: width: 750 }} 750w, {{ section.settings.image | image_url: width: 1100 }} 1100w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+        sizes="(min-width: 900px) 50vw, 100vw"
+        alt="{{ section.settings.image.alt | escape }}"
+        loading="lazy"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+      >
+    {% else %}
+      <div class="media-fallback media-fallback--light"></div>
+    {% endif %}
+  </div>
+  <div class="editorial-split__content">
+    <div class="editorial-split__inner" data-animate>
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.text != blank %}<div class="editorial-split__text">{{ section.settings.text }}</div>{% endif %}
 
-        {% if section.settings.note != blank %}
-          <div class="corporate-banner__note">
-            {% render 'icon', name: 'truck' %}
-            <span>{{ section.settings.note }}</span>
-          </div>
-        {% endif %}
-
-        <div class="corporate-banner__actions">
-          {% if section.settings.button_label != blank %}
-            <a href="{{ section.settings.button_url }}" class="btn" style="background:var(--color-gold); color:var(--color-chocolate);">{{ section.settings.button_label }}</a>
-          {% endif %}
-          {% if section.settings.button_label_2 != blank %}
-            <a href="{{ section.settings.button_url_2 }}" class="btn btn--outline" style="color:#fff; border-color:#fff;">{{ section.settings.button_label_2 }}</a>
-          {% endif %}
+      {% if section.settings.note != blank %}
+        <div class="corporate-note">
+          {% render 'icon', name: 'truck' %}
+          <span>{{ section.settings.note }}</span>
         </div>
+      {% endif %}
+
+      <div class="button-row">
+        {% if section.settings.button_label != blank %}
+          <a href="{{ section.settings.button_url | default: '/pages/contact' }}" class="btn">{{ section.settings.button_label }}</a>
+        {% endif %}
+        {% if section.settings.button_label_2 != blank %}
+          <a href="{{ section.settings.button_url_2 | default: '/pages/contact' }}" class="btn btn--outline">{{ section.settings.button_label_2 }}</a>
+        {% endif %}
       </div>
     </div>
   </div>
-</div>
+</section>
 
 {% schema %}
 {
@@ -47,12 +46,14 @@
     {
       "type": "select",
       "id": "color_scheme",
-      "label": "Ambiance de couleur (fond de section)",
+      "label": "Ambiance de couleur",
       "options": [
-        { "value": "ivoire", "label": "Ivoire" },
-        { "value": "chocolat", "label": "Chocolat" }
+        { "value": "chocolat", "label": "Chocolat" },
+        { "value": "sauge-profond", "label": "Vert profond" },
+        { "value": "sombre", "label": "Noir doux" },
+        { "value": "ivoire", "label": "Ivoire" }
       ],
-      "default": "ivoire"
+      "default": "chocolat"
     },
     { "type": "image_picker", "id": "image", "label": "Photographie" },
     { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Entreprises" },

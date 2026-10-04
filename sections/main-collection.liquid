@@ -11,10 +11,11 @@
           >
         </div>
       {% endif %}
-      <div class="section-heading" data-animate>
+      <div class="section-heading section-heading--center" data-animate>
+        <p class="eyebrow">Nos rayons</p>
         <h1>{{ collection.title }}</h1>
         {% if collection.description != blank %}
-          <div>{{ collection.description }}</div>
+          <div class="collection-header__description rte">{{ collection.description }}</div>
         {% endif %}
       </div>
     </div>
@@ -26,6 +27,13 @@
         </p>
         <div class="collection-toolbar__controls">
           <form data-sort-form>
+            {%- for filter in collection.filters -%}
+              {%- for value in filter.active_values -%}<input type="hidden" name="{{ value.param_name }}" value="{{ value.value }}">{%- endfor -%}
+              {%- if filter.type == 'price_range' -%}
+                {%- if filter.min_value.value != nil -%}<input type="hidden" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | money_without_currency | replace: ',', '.' }}">{%- endif -%}
+                {%- if filter.max_value.value != nil -%}<input type="hidden" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | money_without_currency | replace: ',', '.' }}">{%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
             <select name="sort_by" class="field__select" aria-label="{{ 'collections.general.sort_button' | t }}" onchange="this.form.submit()">
               {% for option in collection.sort_options %}
                 <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>{{ option.name }}</option>
@@ -39,29 +47,54 @@
         {% if section.settings.enable_filters %}
           <aside class="filters-panel">
             <form data-filters-form>
+              {% if collection.sort_by != blank %}<input type="hidden" name="sort_by" value="{{ collection.sort_by }}">{% endif %}
+              {%- assign active_filters = 0 -%}
               {% for filter in collection.filters %}
-                <details class="filters-panel__group" open>
-                  <summary>{{ filter.label }}</summary>
-                  <div class="filters-panel__options">
-                    {% for value in filter.values %}
+                {%- assign active_filters = active_filters | plus: filter.active_values.size -%}
+                {% if filter.type == 'price_range' %}
+                  {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}{%- assign active_filters = active_filters | plus: 1 -%}{%- endif -%}
+                  <details class="filters-panel__group" open>
+                    <summary>{{ filter.label }}</summary>
+                    <div class="filters-panel__price">
                       <label>
-                        <input
-                          type="checkbox"
-                          name="{{ value.param_name }}"
-                          value="{{ value.value }}"
-                          {% if value.active %}checked{% endif %}
-                          onchange="this.form.submit()"
-                        >
-                        {{ value.label }} ({{ value.count }})
+                        <span class="visually-hidden">Prix minimum</span>
+                        <input type="number" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | money_without_currency | replace: ',', '.' }}" placeholder="0" min="0" step="1">
                       </label>
-                    {% endfor %}
-                  </div>
-                </details>
+                      <span>—</span>
+                      <label>
+                        <span class="visually-hidden">Prix maximum</span>
+                        <input type="number" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | money_without_currency | replace: ',', '.' }}" placeholder="{{ filter.range_max | money_without_currency | replace: ',', '.' }}" min="0" step="1">
+                      </label>
+                      <span>{{ cart.currency.symbol }}</span>
+                    </div>
+                  </details>
+                {% elsif filter.values.size > 0 %}
+                  <details class="filters-panel__group" open>
+                    <summary>{{ filter.label }}</summary>
+                    <div class="filters-panel__options">
+                      {% for value in filter.values %}
+                        <label>
+                          <input
+                            type="checkbox"
+                            name="{{ value.param_name }}"
+                            value="{{ value.value }}"
+                            {% if value.active %}checked{% endif %}
+                            {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                            onchange="this.form.submit()"
+                          >
+                          {{ value.label }} ({{ value.count }})
+                        </label>
+                      {% endfor %}
+                    </div>
+                  </details>
+                {% endif %}
               {% endfor %}
-              {% if collection.current_vendors != empty or collection.current_type != blank %}
+              <div class="filters-panel__actions">
                 <button type="submit" class="btn btn--outline btn--small">{{ 'collections.general.filter_and_sort' | t }}</button>
-                <a href="{{ collection.url }}" class="btn--ghost btn--small">{{ 'collections.general.clear_all' | t }}</a>
-              {% endif %}
+                {% if active_filters > 0 %}
+                  <a href="{{ collection.url }}{% if collection.sort_by != blank %}?sort_by={{ collection.sort_by }}{% endif %}" class="filters-panel__clear">{{ 'collections.general.clear_all' | t }}</a>
+                {% endif %}
+              </div>
             </form>
           </aside>
         {% endif %}

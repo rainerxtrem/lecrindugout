@@ -1,0 +1,69 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="section-heading section-heading--center" data-animate>
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+      <h1>{{ section.settings.title | default: page_title }}</h1>
+    </div>
+
+    <div class="grid grid--categories">
+      {% for collection in collections %}
+        {%- liquid
+          if collection.products_count == 0 or collection.handle == 'all' or collection.handle == 'frontpage'
+            continue
+          endif
+          assign cat_image = collection.featured_image
+          if cat_image == blank
+            for p in collection.products limit: 24
+              if p.featured_image
+                assign cat_image = p.featured_image
+                break
+              endif
+            endfor
+          endif
+        -%}
+        <a href="{{ collection.url }}" class="category-card" data-animate>
+          <div class="category-card__media">
+            {% if cat_image %}
+              <img
+                src="{{ cat_image | image_url: width: 700 }}"
+                srcset="{{ cat_image | image_url: width: 400 }} 400w, {{ cat_image | image_url: width: 700 }} 700w"
+                sizes="(min-width: 990px) 400px, 50vw"
+                alt="{{ collection.title | escape }}"
+                loading="lazy"
+                width="{{ cat_image.width }}"
+                height="{{ cat_image.height }}"
+              >
+            {% else %}
+              {% render 'image-placeholder' %}
+            {% endif %}
+          </div>
+          <div class="category-card__content">
+            <h2 class="h3">{{ collection.title }}</h2>
+            <p>{{ collection.products_count }} produit{% if collection.products_count > 1 %}s{% endif %}</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Liste des collections",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" },
+        { "value": "sable", "label": "Sable" }
+      ],
+      "default": "ivoire"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Nos rayons" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Toute l'épicerie" }
+  ]
+}
+{% endschema %}

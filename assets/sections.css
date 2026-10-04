@@ -38,21 +38,31 @@
   position: relative;
   z-index: 2;
   width: 100%;
+  max-width: var(--page-width);
+  margin-inline: auto;
   display: flex;
-  padding: clamp(80px, 14vw, 140px) 24px clamp(48px, 8vw, 90px);
+  align-items: center;
+  padding: clamp(64px, 10vw, 120px) 20px;
 }
-.hero__inner { max-width: 36rem; color: var(--hero-text-color, #fff); }
+@media screen and (min-width: 750px) { .hero__content { padding-inline: 40px; } }
+.hero__inner { max-width: 44rem; color: var(--hero-text-color, #fff); }
+.hero__inner h1 { letter-spacing: 0.12em; }
 .hero__inner .eyebrow { color: inherit; }
 .hero__inner { text-shadow: 0 1px 18px rgba(20,14,10,0.35); }
 .hero__inner .btn { text-shadow: none; }
 .hero__inner h1 { color: inherit; }
-.hero__inner p { color: inherit; font-size: 1.15rem; margin: 18px 0 30px; }
+.hero__inner p { color: inherit; font-size: 1.1rem; margin: 20px auto 34px; max-width: 34rem; }
+.hero--align-left .hero__inner p { margin-left: 0; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
 .hero--align-left { justify-content: flex-start; text-align: left; }
-.hero--align-center { justify-content: center; text-align: center; }
+.hero--align-center { text-align: center; }
+.hero--align-center .hero__content { justify-content: center; }
 .hero--align-center .hero__inner { margin-inline: auto; }
-.hero--align-right { justify-content: flex-end; text-align: right; }
+.hero--align-center .hero__actions, .hero--align-center .eyebrow { justify-content: center; }
+.hero--align-right { text-align: right; }
+.hero--align-right .hero__content { justify-content: flex-end; }
+.hero--align-right .hero__actions { justify-content: flex-end; }
 
 /* ---------- Reassurance bar ---------- */
 
@@ -73,54 +83,35 @@
   padding: 4px;
 }
 .reassurance__icon {
-  width: 42px; height: 42px;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--scheme-accent, var(--color-sage-dark)) 14%, transparent);
   color: var(--scheme-accent, var(--color-sage-dark));
 }
-.reassurance__label { font-size: 0.86rem; letter-spacing: 0.01em; }
+.reassurance__icon svg { width: 30px; height: 30px; stroke-width: 1.2; }
+.reassurance__label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; margin: 0; }
+.reassurance__text { font-size: 0.86rem; opacity: 0.8; margin: -4px 0 0; max-width: 24ch; }
 
-/* ---------- Corporate gifts banner (home) ---------- */
+/* ---------- Texte d'introduction ---------- */
 
-.corporate-banner {
-  position: relative;
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  display: grid;
-  min-height: 420px;
-}
-.corporate-banner__media { position: absolute; inset: 0; }
-.corporate-banner__media img { width: 100%; height: 100%; object-fit: cover; }
-.corporate-banner__media::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(100deg, rgba(20,12,8,0.82) 0%, rgba(20,12,8,0.45) 55%, rgba(20,12,8,0.1) 100%);
-}
-.corporate-banner__content {
-  position: relative;
-  color: #fff;
-  padding: clamp(32px, 6vw, 64px);
-  max-width: 34rem;
+.rich-text { max-width: 46rem; margin-inline: auto; text-align: center; }
+.rich-text .eyebrow { justify-content: center; }
+.rich-text__text { margin: 24px auto 0; max-width: 38rem; font-size: 1.05rem; line-height: 1.8; }
+.rich-text .btn { margin-top: 32px; }
+
+/* ---------- Bandeau entreprises (home) ---------- */
+
+.corporate-note {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
+  gap: 14px;
+  align-items: center;
+  font-size: 0.9rem;
+  padding: 14px 18px;
+  margin: -8px 0 32px;
+  border: 1px solid var(--scheme-border);
 }
-.corporate-banner__content .eyebrow { color: var(--color-gold-light); }
-.corporate-banner__content h2 { color: #fff; }
-.corporate-banner__content p { font-size: 1.05rem; }
-.corporate-banner__note {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  font-size: 0.85rem;
-  padding: 12px 14px;
-  border-radius: var(--radius-button);
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.18);
-}
-.corporate-banner__actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 6px; }
+.corporate-note svg { width: 26px; height: 26px; flex-shrink: 0; color: var(--scheme-accent); }
+
+.button-row { display: flex; flex-wrap: wrap; gap: 14px; }
+.section-footer-cta { text-align: center; margin-top: 48px; }
 
 /* ---------- Corporate options cards (dedicated page) ---------- */
 
@@ -143,56 +134,58 @@
 }
 .option-card p { opacity: 0.8; font-size: 0.95rem; }
 
-/* ---------- Postal shipping ---------- */
+/* ---------- Bandeau texte centré (envoi postal sans image…) ---------- */
 
-.postal-shipping {
-  display: grid;
-  gap: 32px;
-  align-items: center;
-  grid-template-columns: 1fr;
-  border-radius: var(--radius-card);
-  overflow: hidden;
+.text-band { max-width: 40rem; margin-inline: auto; text-align: center; }
+.text-band .eyebrow { justify-content: center; }
+.text-band .editorial-split__text { margin-inline: auto; }
+.text-band__icon {
+  display: flex;
+  margin-inline: auto;
+  width: 56px; height: 56px;
+  align-items: center; justify-content: center;
+  border: 1px solid var(--scheme-border);
+  border-radius: 50%;
+  color: var(--scheme-accent);
+  margin-bottom: 22px;
 }
-@media screen and (min-width: 900px) {
-  .postal-shipping { grid-template-columns: 0.9fr 1.1fr; }
-}
-.postal-shipping__media { aspect-ratio: 4/3; }
-.postal-shipping__media img { width: 100%; height: 100%; object-fit: cover; }
-.postal-shipping__content { padding: clamp(24px, 4vw, 20px) clamp(8px, 4vw, 48px); }
+.text-band__icon svg { width: 26px; height: 26px; }
 
 /* ---------- Seasonal ---------- */
 
 .seasonal {
   position: relative;
-  border-radius: var(--radius-card);
   overflow: hidden;
-  min-height: 360px;
   display: flex;
   align-items: center;
+  min-height: 380px;
+  text-align: center;
 }
 .seasonal__media { position: absolute; inset: 0; }
 .seasonal__media img { width: 100%; height: 100%; object-fit: cover; }
-.seasonal__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(20,12,8,0.78) 0%, rgba(20,12,8,0.4) 60%, rgba(20,12,8,0.15) 100%); }
-.seasonal__content { position: relative; color: #fff; padding: clamp(32px, 6vw, 64px); max-width: 34rem; }
-.seasonal__content h2 { color: #fff; }
-.seasonal__content p { margin: 14px 0 26px; font-size: 1.05rem; }
+.seasonal__media::after { content: ""; position: absolute; inset: 0; background: rgba(20,12,8,0.5); }
+.seasonal__content { position: relative; padding-block: clamp(64px, 9vw, 110px); max-width: 44rem; }
+.seasonal__content .eyebrow { justify-content: center; }
+.seasonal__content p:not(.eyebrow) { margin: 18px auto 32px; font-size: 1.05rem; max-width: 34rem; }
+.seasonal--image .seasonal__content { color: #fff; }
+.seasonal--image .seasonal__content h2, .seasonal--image .seasonal__content .eyebrow { color: #fff; }
 
 /* ---------- Newsletter ---------- */
 
-.newsletter {
-  text-align: center;
-}
-.newsletter__inner { max-width: 34rem; margin-inline: auto; }
-.newsletter__inner p { opacity: 0.88; margin: 14px 0 28px; }
+.newsletter { text-align: center; }
+.newsletter__inner { max-width: 38rem; margin-inline: auto; }
+.newsletter__inner .eyebrow { justify-content: center; }
+.newsletter__inner p { margin: 16px 0 30px; }
 .newsletter-form { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 .newsletter-form input[type="email"] {
-  flex: 1;
-  min-width: 220px;
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.3);
-  color: inherit;
+  flex: 1 1 240px;
+  max-width: 300px;
+  background: var(--color-off-white);
+  border: 1px solid var(--color-off-white);
+  border-radius: var(--radius-button);
+  color: var(--color-ink);
 }
-.newsletter-form input[type="email"]::placeholder { color: inherit; opacity: 0.7; }
+.newsletter-form input[type="email"]::placeholder { color: var(--color-ink); opacity: 0.55; }
 
 /* ---------- Quote form section ---------- */
 
@@ -244,7 +237,9 @@
 }
 .variant-swatches label.is-disabled { opacity: 0.35; text-decoration: line-through; cursor: not-allowed; }
 .product-form__row { display: flex; gap: 12px; align-items: stretch; margin-top: 10px; }
-.product-info__meta { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; font-size: 0.86rem; opacity: 0.75; }
+.product-info__meta { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; }
+.product-info__meta span { display: flex; align-items: center; gap: 10px; }
+.product-info__meta svg { width: 20px; height: 20px; color: var(--scheme-accent, var(--color-sage-dark)); }
 
 /* ---------- Collection header ---------- */
 
@@ -263,11 +258,60 @@
 }
 .collection-toolbar__count { font-size: 0.85rem; opacity: 0.7; }
 .collection-toolbar__controls { display: flex; gap: 12px; align-items: center; }
+.collection-toolbar__controls select { width: auto; min-width: 200px; padding-block: 10px; font-size: 0.9rem; }
 .collection-layout { display: grid; grid-template-columns: 1fr; gap: 32px; }
 @media screen and (min-width: 990px) {
   .collection-layout--with-filters { grid-template-columns: 240px 1fr; }
 }
 .filters-panel { display: flex; flex-direction: column; gap: 26px; }
-.filters-panel__group summary { cursor: pointer; font-family: var(--font-heading); padding: 10px 0; }
+.filters-panel__group summary {
+  cursor: pointer;
+  padding: 10px 0;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--scheme-border);
+}
+.filters-panel__price { display: flex; align-items: center; gap: 8px; padding-top: 12px; font-size: 0.9rem; }
+.filters-panel__price input { padding: 9px 10px; font-size: 0.9rem; }
+.filters-panel__actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.filters-panel__clear { font-size: 0.85rem; text-decoration: underline; text-underline-offset: 4px; }
+.collection-header__description { max-width: 40rem; margin: 16px auto 0; }
 .filters-panel__options { display: flex; flex-direction: column; gap: 10px; padding: 8px 0 4px; font-size: 0.9rem; }
 .filters-panel__options label { display: flex; align-items: center; gap: 8px; }
+
+/* ---------- Recherche ---------- */
+
+.search-form { display: flex; gap: 10px; max-width: 34rem; margin: 28px auto 0; }
+.search-form input[type="search"] {
+  flex: 1;
+  font: inherit;
+  padding: 13px 16px;
+  border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+  border-radius: var(--radius-button);
+  background: var(--color-off-white);
+  color: inherit;
+}
+.search-form .btn { min-width: 0; }
+
+/* ---------- Blog / article ---------- */
+
+.article-card { display: block; }
+.article-card__content { padding-top: 18px; }
+.article-card__content h2 { margin: 6px 0 10px; }
+.article-card__content p:last-child { font-size: 0.95rem; opacity: 0.85; }
+.article-card__date { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.7; margin: 0; }
+.article { max-width: 60rem; }
+.article__image { margin-bottom: 48px; }
+.article__image img { width: 100%; height: auto; }
+.article__content { max-width: 42rem; margin-inline: auto; }
+.article__back { text-align: center; margin-top: 56px; }
+
+/* ---------- Page mot de passe ---------- */
+
+.password { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; }
+.password__inner { max-width: 30rem; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.password__message { margin: 24px 0 8px; }
+.password__form { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 16px; }
+.password__form input { width: auto; flex: 1 1 200px; background: var(--color-off-white); color: var(--color-ink); }

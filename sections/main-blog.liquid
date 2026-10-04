@@ -1,0 +1,62 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="section-heading section-heading--center" data-animate>
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+      <h1>{{ blog.title }}</h1>
+    </div>
+
+    {% paginate blog.articles by 9 %}
+      {% if blog.articles.size > 0 %}
+        <div class="grid grid--categories">
+          {% for article in blog.articles %}
+            <a href="{{ article.url }}" class="article-card" data-animate>
+              <div class="category-card__media">
+                {% if article.image %}
+                  <img
+                    src="{{ article.image | image_url: width: 800 }}"
+                    srcset="{{ article.image | image_url: width: 450 }} 450w, {{ article.image | image_url: width: 800 }} 800w"
+                    sizes="(min-width: 990px) 400px, 50vw"
+                    alt="{{ article.image.alt | default: article.title | escape }}"
+                    loading="lazy"
+                    width="{{ article.image.width }}"
+                    height="{{ article.image.height }}"
+                  >
+                {% else %}
+                  {% render 'image-placeholder' %}
+                {% endif %}
+              </div>
+              <div class="article-card__content">
+                <p class="article-card__date">{{ article.published_at | time_tag: format: 'date' }}</p>
+                <h2 class="h3">{{ article.title }}</h2>
+                <p>{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+        {% render 'pagination', paginate: paginate %}
+      {% else %}
+        <p class="text-center">Aucun article pour le moment.</p>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" },
+        { "value": "sable", "label": "Sable" }
+      ],
+      "default": "ivoire"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Le journal" }
+  ]
+}
+{% endschema %}

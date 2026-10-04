@@ -1,0 +1,36 @@
+{%- comment -%} Polices et variables CSS du thème, partagées par les layouts {%- endcomment -%}
+<style>
+  {%- comment -%} Polices natives Shopify {%- endcomment -%}
+  {{ settings.type_header_font | font_face: font_display: 'swap' }}
+  {{ settings.type_body_font | font_face: font_display: 'swap' }}
+
+  :root{
+    --font-heading: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+    --font-heading-weight: {{ settings.type_header_font.weight }};
+    --font-heading-style: {{ settings.type_header_font.style }};
+    --font-body: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    --font-body-weight: {{ settings.type_body_font.weight }};
+    --font-body-style: {{ settings.type_body_font.style }};
+    --heading-scale: {{ settings.heading_scale | default: 100 }};
+    --body-scale: {{ settings.body_scale | default: 100 }};
+
+    --color-ivory: {{ settings.color_ivory }};
+    --color-off-white: {{ settings.color_off_white }};
+    --color-sand: {{ settings.color_sand }};
+    --color-sage: {{ settings.color_sage }};
+    --color-sage-dark: {{ settings.color_sage_dark }};
+    --color-terracotta: {{ settings.color_terracotta }};
+    --color-bordeaux: {{ settings.color_bordeaux }};
+    --color-gold: {{ settings.color_gold }};
+    --color-brown: {{ settings.color_brown }};
+    --color-chocolate: {{ settings.color_chocolate }};
+    --color-ink: {{ settings.color_ink }};
+    --color-text-on-light: {{ settings.color_text_on_light }};
+    --color-text-on-dark: {{ settings.color_text_on_dark }};
+
+    --radius-button: {{ settings.border_radius }}px;
+    --radius-card: {{ settings.card_radius }}px;
+    --page-width: {{ settings.page_width }}px;
+    --spacing-section: {{ settings.spacing_sections }}px;
+  }
+</style>

@@ -2,9 +2,26 @@
 (function () {
   "use strict";
 
+  // Gère tous les formats monétaires Shopify ({{amount}}, {{amount_with_comma_separator}}…)
   function formatMoney(cents, format) {
-    var value = (cents / 100).toFixed(2).replace(".", ",");
-    return (format || "{{amount}} €").replace("{{amount}}", value);
+    format = format || "{{amount}} €";
+    function withDelimiters(number, precision, thousands, decimal) {
+      var parts = (number / 100).toFixed(precision).split(".");
+      var whole = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + thousands);
+      return parts[1] ? whole + decimal + parts[1] : whole;
+    }
+    return format.replace(/\{\{\s*(\w+)\s*\}\}/, function (match, key) {
+      switch (key) {
+        case "amount_no_decimals": return withDelimiters(cents, 0, ",", ".");
+        case "amount_with_comma_separator": return withDelimiters(cents, 2, ".", ",");
+        case "amount_no_decimals_with_comma_separator": return withDelimiters(cents, 0, ".", ",");
+        case "amount_with_space_separator": return withDelimiters(cents, 2, " ", ",");
+        case "amount_no_decimals_with_space_separator": return withDelimiters(cents, 0, " ", ",");
+        case "amount_with_period_and_space_separator": return withDelimiters(cents, 2, " ", ".");
+        case "amount_with_apostrophe_separator": return withDelimiters(cents, 2, "'", ".");
+        default: return withDelimiters(cents, 2, ",", ".");
+      }
+    });
   }
 
   document.querySelectorAll("[data-product-form]").forEach(function (form) {

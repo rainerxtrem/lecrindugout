@@ -53,10 +53,10 @@
       {% endif %}
       <div class="hero__actions">
         {% if section.settings.button_label != blank %}
-          <a href="{{ section.settings.button_url }}" class="btn">{{ section.settings.button_label }}</a>
+          <a href="{{ section.settings.button_url | default: routes.all_products_collection_url }}" class="btn btn--light">{{ section.settings.button_label }}</a>
         {% endif %}
         {% if section.settings.button_label_2 != blank %}
-          <a href="{{ section.settings.button_url_2 }}" class="btn btn--outline" style="color: var(--hero-text-color); border-color: var(--hero-text-color);">{{ section.settings.button_label_2 }}</a>
+          <a href="{{ section.settings.button_url_2 | default: routes.collections_url }}" class="btn btn--outline-light">{{ section.settings.button_label_2 }}</a>
         {% endif %}
       </div>
     </div>
@@ -113,7 +113,7 @@
         { "value": "center", "label": "Centré" },
         { "value": "right", "label": "Droite" }
       ],
-      "default": "left"
+      "default": "center"
     },
     {
       "type": "text",

@@ -1,30 +1,32 @@
-<div class="section color-scheme-{{ section.settings.color_scheme }}">
-  <div class="page-width">
-    <div class="postal-shipping" data-animate>
-      <div class="postal-shipping__media">
-        {% if section.settings.image %}
-          <img
-            src="{{ section.settings.image | image_url: width: 900 }}"
-            alt="{{ section.settings.image.alt | escape }}"
-            loading="lazy"
-            width="{{ section.settings.image.width }}"
-            height="{{ section.settings.image.height }}"
-          >
-        {% else %}
-          <div class="media-fallback media-fallback--light"></div>
-        {% endif %}
+{% if section.settings.image %}
+  <section class="editorial-split color-scheme-{{ section.settings.color_scheme }}">
+    <div class="editorial-split__media">
+      <img
+        src="{{ section.settings.image | image_url: width: 1400 }}"
+        srcset="{{ section.settings.image | image_url: width: 750 }} 750w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+        sizes="(min-width: 900px) 50vw, 100vw"
+        alt="{{ section.settings.image.alt | escape }}"
+        loading="lazy"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+      >
+    </div>
+    <div class="editorial-split__content">
+      <div class="editorial-split__inner" data-animate>
+        {% render 'postal-shipping-content', section: section %}
       </div>
-      <div class="postal-shipping__content">
-        {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
-        {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
-        {% if section.settings.text != blank %}<p style="opacity:0.85; margin:16px 0 26px; font-size:1.02rem;">{{ section.settings.text }}</p>{% endif %}
-        {% if section.settings.button_label != blank %}
-          <a href="{{ section.settings.button_url }}" class="btn btn--outline">{{ section.settings.button_label }}</a>
-        {% endif %}
+    </div>
+  </section>
+{% else %}
+  <div class="section color-scheme-{{ section.settings.color_scheme }}">
+    <div class="page-width">
+      <div class="text-band" data-animate>
+        <span class="text-band__icon">{% render 'icon', name: 'truck' %}</span>
+        {% render 'postal-shipping-content', section: section %}
       </div>
     </div>
   </div>
-</div>
+{% endif %}
 
 {% schema %}
 {

@@ -5,6 +5,7 @@
         <div class="reassurance__item" data-animate {{ block.shopify_attributes }}>
           <span class="reassurance__icon">{% render 'icon', name: block.settings.icon %}</span>
           <p class="reassurance__label">{{ block.settings.label }}</p>
+          {% if block.settings.text != blank %}<p class="reassurance__text">{{ block.settings.text }}</p>{% endif %}
         </div>
       {% endfor %}
     </div>
@@ -40,7 +41,10 @@
             { "value": "leaf", "label": "Feuille" },
             { "value": "truck", "label": "Camion" },
             { "value": "gift", "label": "Cadeau" },
-            { "value": "shield", "label": "Bouclier" }
+            { "value": "shield", "label": "Bouclier" },
+            { "value": "pin", "label": "Repère (boutique)" },
+            { "value": "star", "label": "Étoile" },
+            { "value": "check", "label": "Coche" }
           ],
           "default": "leaf"
         },
@@ -49,6 +53,11 @@
           "id": "label",
           "label": "Texte",
           "default": "Produits soigneusement sélectionnés"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Précision (facultatif)"
         }
       ]
     }

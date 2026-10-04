@@ -1,0 +1,7 @@
+{%- comment -%}
+  Visuel de remplacement sobre quand un produit n'a pas de photo.
+  Usage: {% render 'image-placeholder' %}
+{%- endcomment -%}
+<div class="image-placeholder{% if class %} {{ class }}{% endif %}" role="img" aria-label="{{ shop.name | escape }}">
+  <span class="image-placeholder__name">{{ shop.name }}</span>
+</div>

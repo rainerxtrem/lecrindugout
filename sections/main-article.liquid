@@ -1,0 +1,48 @@
+<article class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width article">
+    <header class="section-heading section-heading--center" data-animate>
+      <p class="eyebrow"><a href="{{ blog.url }}">{{ blog.title }}</a></p>
+      <h1>{{ article.title }}</h1>
+      <p class="article-card__date">{{ article.published_at | time_tag: format: 'date' }}</p>
+    </header>
+
+    {% if article.image %}
+      <div class="article__image" data-animate>
+        <img
+          src="{{ article.image | image_url: width: 1600 }}"
+          srcset="{{ article.image | image_url: width: 800 }} 800w, {{ article.image | image_url: width: 1600 }} 1600w"
+          sizes="(min-width: 1100px) 1000px, 100vw"
+          alt="{{ article.image.alt | default: article.title | escape }}"
+          width="{{ article.image.width }}"
+          height="{{ article.image.height }}"
+        >
+      </div>
+    {% endif %}
+
+    <div class="rte article__content" data-animate>
+      {{ article.content }}
+    </div>
+
+    <div class="article__back">
+      <a href="{{ blog.url }}" class="btn btn--outline">Retour au journal</a>
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" }
+      ],
+      "default": "ivoire"
+    }
+  ]
+}
+{% endschema %}

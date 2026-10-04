@@ -1,28 +1,20 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "hero": {
       "type": "hero",
       "settings": {
-        "height": 680,
-        "overlay_opacity": 25,
+        "image": "shopify://shop_images/kitchen-and-dining-minimal-2.jpg",
+        "height": 640,
+        "overlay_opacity": 35,
         "text_color": "#FBFAF6",
-        "text_position": "left",
-        "eyebrow": "L'Écrin du Goût",
-        "title": "Le goût des belles choses",
-        "text": "Une sélection de produits d'exception, choisis avec passion pour les gourmets curieux.",
-        "button_label": "Découvrir la collection",
-        "button_url": "",
-        "button_label_2": "Nos cadeaux gourmands",
-        "button_url_2": ""
+        "text_position": "center",
+        "eyebrow": "Épicerie fine — Arnage",
+        "title": "L'écrin du Goût",
+        "text": "Une sélection d'exception : produits d'artisans, grands crus et coffrets composés avec soin.",
+        "button_label": "Découvrir la boutique",
+        "button_url": "shopify://collections/all",
+        "button_label_2": "Composer un coffret",
+        "button_url_2": "shopify://pages/contact"
       }
     },
     "reassurance": {
@@ -31,29 +23,33 @@
         "r1": {
           "type": "item",
           "settings": {
-            "icon": "leaf",
-            "label": "Produits soigneusement sélectionnés"
+            "icon": "check",
+            "label": "Sélection exigeante",
+            "text": "Chaque produit est goûté et retenu pour son caractère."
           }
         },
         "r2": {
           "type": "item",
           "settings": {
-            "icon": "truck",
-            "label": "Expédition rapide"
+            "icon": "leaf",
+            "label": "Producteurs & artisans",
+            "text": "Des petites maisons, des récoltes limitées."
           }
         },
         "r3": {
           "type": "item",
           "settings": {
-            "icon": "gift",
-            "label": "Coffrets personnalisables"
+            "icon": "pin",
+            "label": "Click & Collect",
+            "text": "Commandez en ligne, retirez à la boutique."
           }
         },
         "r4": {
           "type": "item",
           "settings": {
-            "icon": "shield",
-            "label": "Paiement sécurisé"
+            "icon": "truck",
+            "label": "Adapté au transport",
+            "text": "Vos coffrets protégés, vos produits calés avec soin."
           }
         }
       },
@@ -63,7 +59,34 @@
         "r3",
         "r4"
       ],
-      "settings": {}
+      "settings": {
+        "color_scheme": "blanc-casse"
+      }
+    },
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "color_scheme": "ivoire",
+        "eyebrow": "La maison",
+        "title": "Le goût du beau produit, choisi un à un",
+        "text": "<p>À Arnage, L'écrin du Goût réunit épicerie sucrée et salée, cave et arts de la table. Nous travaillons avec des producteurs et des artisans dont nous partageons l'exigence — et nous composons pour vous des coffrets qui s'offrent comme un bijou.</p>",
+        "button_label": "",
+        "button_url": ""
+      }
+    },
+    "editorial-story": {
+      "type": "editorial-block",
+      "settings": {
+        "color_scheme": "sauge-profond",
+        "image_position": "left",
+        "image": "shopify://shop_images/20260620_161840.jpg",
+        "eyebrow": "Notre exigence",
+        "title": "Rien n'entre ici par hasard",
+        "text": "Chaque référence est goûtée avant d'être proposée. Nous privilégions les petites maisons, les récoltes limitées et les savoir-faire qui ne se pressent pas. L'écrin du Goût, c'est la garantie d'un rayon tenu comme une cave.",
+        "signature": "",
+        "button_label": "Voir la sélection",
+        "button_url": "shopify://collections/all"
+      }
     },
     "categories": {
       "type": "categories",
@@ -71,38 +94,43 @@
         "c1": {
           "type": "category",
           "settings": {
-            "title": "Sucré",
-            "description": "Chocolats, biscuits et confiseries de caractère.",
-            "size": "wide"
+            "collection": "confiseries-chocolats-et-produits-sucres",
+            "title": "Épicerie sucrée"
           }
         },
         "c2": {
           "type": "category",
           "settings": {
-            "title": "Salé",
-            "description": "Huiles, condiments et conserves d'exception."
+            "collection": "terrines-conserves",
+            "title": "Terrines & conserves"
           }
         },
         "c3": {
           "type": "category",
           "settings": {
-            "title": "Boissons",
-            "description": "Thés, infusions et cafés de belle provenance."
+            "collection": "biscuits-sales",
+            "title": "L'apéritif"
           }
         },
         "c4": {
           "type": "category",
           "settings": {
-            "title": "Épices & condiments",
-            "description": "Pour relever chaque préparation."
+            "collection": "sels-poivres-et-epices",
+            "title": "Sels, poivres & épices"
           }
         },
         "c5": {
           "type": "category",
           "settings": {
-            "title": "Coffrets cadeaux",
-            "description": "Des compositions prêtes à offrir.",
-            "size": "wide"
+            "collection": "vinaigres",
+            "title": "Huiles & vinaigres"
+          }
+        },
+        "c6": {
+          "type": "category",
+          "settings": {
+            "collection": "thes-et-cafes",
+            "title": "Thés & cafés"
           }
         }
       },
@@ -111,96 +139,79 @@
         "c2",
         "c3",
         "c4",
-        "c5"
+        "c5",
+        "c6"
       ],
       "settings": {
-        "color_scheme": "sauge-clair",
-        "eyebrow": "Collections",
+        "color_scheme": "ivoire",
+        "center_heading": true,
+        "eyebrow": "Nos rayons",
         "title": "Explorer l'épicerie",
-        "text": "Des grandes familles de produits, pensées pour la cuisine, la dégustation et le cadeau."
+        "text": ""
       }
     },
     "featured-products": {
       "type": "featured-products",
       "settings": {
-        "color_scheme": "ivoire",
+        "color_scheme": "blanc-casse",
+        "center_heading": true,
         "eyebrow": "Sélection",
         "title": "Les incontournables",
-        "text": "Les produits préférés de nos clients, choisis pour leur qualité et leur caractère.",
-        "product_limit": 8
-      }
-    },
-    "editorial-story": {
-      "type": "editorial-block",
-      "settings": {
-        "color_scheme": "sable",
-        "image_position": "left",
-        "eyebrow": "Notre sélection",
-        "title": "Des produits qui ont une histoire",
-        "text": "Nous parcourons les maisons, producteurs et artisans pour sélectionner des produits qui ont quelque chose à raconter.",
-        "button_label": "Découvrir notre sélection",
-        "button_url": ""
+        "text": "",
+        "collection": "epicerie-et-produits-locaux",
+        "product_limit": 8,
+        "show_view_all": true,
+        "view_all_label": "Voir toute l'épicerie"
       }
     },
     "corporate-banner": {
       "type": "corporate-gifts-banner",
       "settings": {
-        "color_scheme": "ivoire",
-        "eyebrow": "Entreprises",
-        "title": "Des cadeaux qui ont du goût",
-        "text": "Pour remercier vos collaborateurs, partenaires ou clients, nous imaginons des coffrets gourmands adaptés à vos envies et à votre budget.",
-        "note": "Certains de nos coffrets sont également compatibles avec l'expédition par voie postale.",
-        "button_label": "Créer mon cadeau d'entreprise",
-        "button_url": "",
+        "color_scheme": "chocolat",
+        "image": "shopify://shop_images/COFFRET_7.png",
+        "eyebrow": "Sur mesure",
+        "title": "Composez votre coffret",
+        "text": "Un anniversaire, un remerciement, une table de fête : choisissez les produits, nous les mettons en écrin. Emballage soigné, mot manuscrit, retrait en boutique ou livraison — le cadeau qui ne ressemble à aucun autre.",
+        "note": "Entreprises : coffrets personnalisés pour vos collaborateurs et clients, sur devis.",
+        "button_label": "Demander un coffret",
+        "button_url": "shopify://pages/contact",
         "button_label_2": "Demander un devis",
-        "button_url_2": ""
+        "button_url_2": "shopify://pages/contact"
       }
     },
     "postal-shipping": {
       "type": "postal-shipping",
       "settings": {
-        "color_scheme": "blanc-casse",
+        "color_scheme": "sable",
         "eyebrow": "Expédition",
-        "title": "Une sélection pensée pour être envoyée",
-        "text": "Certains de nos produits et coffrets sont spécialement adaptés à l'expédition par voie postale. Nous pouvons vous accompagner dans la sélection des produits les plus adaptés.",
-        "button_label": "Découvrir les produits expédiables",
-        "button_url": ""
-      }
-    },
-    "editorial-maison": {
-      "type": "editorial-block",
-      "settings": {
-        "color_scheme": "sauge-clair",
-        "image_position": "right",
-        "eyebrow": "La maison",
-        "title": "Notre maison",
-        "text": "Sélection, savoir-faire, producteurs, qualité : nous explorons sans relâche pour vous faire découvrir des produits gourmands qui valent le détour.",
-        "button_label": "Notre histoire",
-        "button_url": ""
+        "title": "Une sélection pensée pour voyager",
+        "text": "Certains de nos produits et coffrets sont spécialement adaptés à l'expédition par voie postale. Nous vous accompagnons dans le choix des produits les plus adaptés.",
+        "button_label": "Découvrir la boutique",
+        "button_url": "shopify://collections/all"
       }
     },
     "seasonal": {
       "type": "seasonal",
       "settings": {
         "enable": true,
-        "color_scheme": "ivoire",
+        "color_scheme": "chocolat",
         "eyebrow": "En ce moment",
         "title": "Les coffrets de fin d'année",
         "text": "Une sélection pensée pour les fêtes, entre gourmandise et élégance.",
-        "button_label": "Découvrir la sélection",
-        "button_url": ""
+        "button_label": "Réserver mon coffret",
+        "button_url": "shopify://pages/contact"
       }
     }
   },
   "order": [
     "hero",
     "reassurance",
+    "intro",
+    "editorial-story",
     "categories",
     "featured-products",
-    "editorial-story",
     "corporate-banner",
     "postal-shipping",
-    "editorial-maison",
     "seasonal"
   ]
 }
