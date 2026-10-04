@@ -295,10 +295,30 @@
 .site-footer__social svg { width: 20px; height: 20px; }
 .site-footer__contact p { margin: 0 0 10px; }
 .site-footer__contact a { text-decoration: underline; text-underline-offset: 3px; }
-.site-footer__hours { margin: 0; display: grid; gap: 8px; font-size: 0.92rem; }
-.site-footer__hours-row { display: flex; justify-content: space-between; gap: 16px; max-width: 17rem; }
-.site-footer__hours dt { opacity: 0.8; }
-.site-footer__hours dd { margin: 0; text-align: right; }
+.site-footer__hours {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content max-content;
+  column-gap: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.site-footer__hours dt,
+.site-footer__hours dd {
+  padding-block: 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-on-dark) 12%, transparent);
+}
+.site-footer__hours dt {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  padding-top: 10px;
+  padding-right: 22px;
+}
+.site-footer__hours dd { margin: 0; font-variant-numeric: tabular-nums; }
+.site-footer__hours dd span { display: block; white-space: nowrap; }
 .site-footer__hours-note { margin-top: 14px; font-size: 0.85rem; opacity: 0.8; }
 .site-footer__bottom {
   border-top: 1px solid color-mix(in srgb, var(--color-text-on-dark) 15%, transparent);

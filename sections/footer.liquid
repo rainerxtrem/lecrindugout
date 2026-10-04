@@ -50,7 +50,11 @@
               {%- for day in days -%}
                 {%- assign hours = block.settings[day] -%}
                 {%- if hours != blank -%}
-                  <div class="site-footer__hours-row"><dt>{{ day | capitalize }}</dt><dd>{{ hours }}</dd></div>
+                  <dt>{{ day | capitalize }}</dt>
+                  <dd>
+                    {%- assign slots = hours | split: '/' -%}
+                    {%- for slot in slots -%}<span>{{ slot | strip | replace: ' - ', ' – ' }}</span>{%- endfor -%}
+                  </dd>
                 {%- endif -%}
               {%- endfor -%}
             {%- endcapture -%}
@@ -121,7 +125,7 @@
       "limit": 1,
       "settings": [
         { "type": "text", "id": "title", "label": "Titre", "default": "Horaires" },
-        { "type": "paragraph", "content": "Ex. : 9h30 – 19h, ou Fermé. Un jour laissé vide n'est pas affiché." },
+        { "type": "paragraph", "content": "Ex. : 10h - 12h30 / 14h30 - 19h, ou Fermé. Le « / » sépare les créneaux, affichés l'un sous l'autre. Un jour laissé vide n'est pas affiché." },
         { "type": "text", "id": "lundi", "label": "Lundi" },
         { "type": "text", "id": "mardi", "label": "Mardi" },
         { "type": "text", "id": "mercredi", "label": "Mercredi" },
