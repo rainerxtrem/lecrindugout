@@ -44,6 +44,23 @@
                 {% if block.settings.text != blank %}{{ block.settings.text }}{% endif %}
               </div>
             </div>
+          {% when 'hours' %}
+            {%- capture hours_rows -%}
+              {%- assign days = 'lundi,mardi,mercredi,jeudi,vendredi,samedi,dimanche' | split: ',' -%}
+              {%- for day in days -%}
+                {%- assign hours = block.settings[day] -%}
+                {%- if hours != blank -%}
+                  <div class="site-footer__hours-row"><dt>{{ day | capitalize }}</dt><dd>{{ hours }}</dd></div>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endcapture -%}
+            {% if hours_rows != blank %}
+              <div {{ block.shopify_attributes }}>
+                <p class="site-footer__heading">{{ block.settings.title }}</p>
+                <dl class="site-footer__hours">{{ hours_rows }}</dl>
+                {% if block.settings.note != blank %}<p class="site-footer__hours-note">{{ block.settings.note }}</p>{% endif %}
+              </div>
+            {% endif %}
         {% endcase %}
       {% endfor %}
     </div>
@@ -96,6 +113,23 @@
         { "type": "text", "id": "title", "label": "Titre", "default": "Nous trouver" },
         { "type": "checkbox", "id": "show_address", "label": "Afficher l'adresse de la boutique", "info": "Reprise des réglages Shopify", "default": true },
         { "type": "richtext", "id": "text", "label": "Texte (horaires…)" }
+      ]
+    },
+    {
+      "type": "hours",
+      "name": "Horaires d'ouverture",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Horaires" },
+        { "type": "paragraph", "content": "Ex. : 9h30 – 19h, ou Fermé. Un jour laissé vide n'est pas affiché." },
+        { "type": "text", "id": "lundi", "label": "Lundi" },
+        { "type": "text", "id": "mardi", "label": "Mardi" },
+        { "type": "text", "id": "mercredi", "label": "Mercredi" },
+        { "type": "text", "id": "jeudi", "label": "Jeudi" },
+        { "type": "text", "id": "vendredi", "label": "Vendredi" },
+        { "type": "text", "id": "samedi", "label": "Samedi" },
+        { "type": "text", "id": "dimanche", "label": "Dimanche" },
+        { "type": "text", "id": "note", "label": "Précision (facultatif)", "info": "Ex. : Ouvert les dimanches de décembre" }
       ]
     },
     {

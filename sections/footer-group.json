@@ -46,12 +46,27 @@
             "show_address": true,
             "text": "<p>Click & Collect en boutique</p>"
           }
+        },
+        "hours": {
+          "type": "hours",
+          "settings": {
+            "title": "Horaires",
+            "lundi": "",
+            "mardi": "",
+            "mercredi": "",
+            "jeudi": "",
+            "vendredi": "",
+            "samedi": "",
+            "dimanche": "",
+            "note": ""
+          }
         }
       },
       "block_order": [
         "shop",
         "infos",
-        "contact"
+        "contact",
+        "hours"
       ],
       "settings": {
         "color_scheme": "chocolat",

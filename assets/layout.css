@@ -276,7 +276,7 @@
   padding-block: 56px 36px;
 }
 @media screen and (min-width: 700px) {
-  .site-footer__grid { grid-template-columns: 1.4fr repeat(3, 1fr); padding-block: 72px 48px; }
+  .site-footer__grid { grid-template-columns: 1.4fr; grid-auto-flow: column; grid-auto-columns: 1fr; padding-block: 72px 48px; }
 }
 .site-footer__brand .site-header__logo-text { color: inherit; }
 .site-footer__tagline { margin-top: 14px; opacity: 0.85; max-width: 30ch; font-size: 0.92rem; }
@@ -295,6 +295,11 @@
 .site-footer__social svg { width: 20px; height: 20px; }
 .site-footer__contact p { margin: 0 0 10px; }
 .site-footer__contact a { text-decoration: underline; text-underline-offset: 3px; }
+.site-footer__hours { margin: 0; display: grid; gap: 8px; font-size: 0.92rem; }
+.site-footer__hours-row { display: flex; justify-content: space-between; gap: 16px; max-width: 17rem; }
+.site-footer__hours dt { opacity: 0.8; }
+.site-footer__hours dd { margin: 0; text-align: right; }
+.site-footer__hours-note { margin-top: 14px; font-size: 0.85rem; opacity: 0.8; }
 .site-footer__bottom {
   border-top: 1px solid color-mix(in srgb, var(--color-text-on-dark) 15%, transparent);
   padding-block: 22px;
