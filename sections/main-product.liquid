@@ -55,6 +55,7 @@
 
             {% unless product.has_only_default_variant %}
               {% for option in product.options_with_values %}
+                {% assign option_index = option.position | minus: 1 %}
                 <div class="product-info__variants">
                   <p class="field__label" style="margin-bottom:10px;">{{ option.name }}</p>
                   <div class="variant-swatches">
@@ -66,7 +67,7 @@
                         name="option-{{ option.position }}"
                         value="{{ value | escape }}"
                         data-option-position="{{ option.position }}"
-                        {% if current_variant.options[option.position | minus: 1] == value %}checked{% endif %}
+                        {% if current_variant.options[option_index] == value %}checked{% endif %}
                       >
                       <label for="{{ input_id }}">{{ value }}</label>
                     {% endfor %}

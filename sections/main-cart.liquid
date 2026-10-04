@@ -42,7 +42,8 @@
                   <p class="cart-item__variant">{{ item.variant.title }}</p>
                 {% endunless %}
                 <div class="cart-item__footer">
-                  {% render 'quantity-input', name: 'updates[' | append: forloop.index0 | append: ']', value: item.quantity %}
+                  {% assign qty_name = 'updates[' | append: forloop.index0 | append: ']' %}
+                  {% render 'quantity-input', name: qty_name, value: item.quantity %}
                   <span class="price">{{ item.final_line_price | money }}</span>
                 </div>
               </div>
