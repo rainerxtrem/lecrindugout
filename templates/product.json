@@ -21,6 +21,7 @@
         },
         "a2": {
           "type": "accordion",
+          "disabled": true,
           "settings": {
             "title": "Ingrédients",
             "content": ""
@@ -28,6 +29,7 @@
         },
         "a3": {
           "type": "accordion",
+          "disabled": true,
           "settings": {
             "title": "Informations nutritionnelles",
             "content": ""
@@ -35,6 +37,7 @@
         },
         "a4": {
           "type": "accordion",
+          "disabled": true,
           "settings": {
             "title": "Allergènes",
             "content": ""
@@ -42,15 +45,9 @@
         },
         "a5": {
           "type": "accordion",
+          "disabled": true,
           "settings": {
             "title": "Conseils de dégustation",
-            "content": ""
-          }
-        },
-        "a6": {
-          "type": "accordion",
-          "settings": {
-            "title": "Livraison",
             "content": ""
           }
         }
@@ -60,8 +57,7 @@
         "a2",
         "a3",
         "a4",
-        "a5",
-        "a6"
+        "a5"
       ],
       "settings": {
         "color_scheme": "ivoire",
