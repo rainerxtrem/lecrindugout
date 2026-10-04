@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "contact": {
+      "type": "contact-form",
+      "settings": {
+        "color_scheme": "ivoire",
+        "eyebrow": "Contact",
+        "title": "Parlons-en",
+        "text": "Une question sur un produit, une commande ou une envie de cadeau ? Écrivez-nous."
+      }
+    }
+  },
+  "order": ["contact"]
+}

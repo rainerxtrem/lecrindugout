@@ -1,0 +1,97 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="section-heading{% if section.settings.center_heading %} section-heading--center{% endif %}" data-animate>
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+    </div>
+
+    <div class="grid grid--categories">
+      {% for block in section.blocks %}
+        <a
+          href="{{ block.settings.url }}"
+          class="category-card hover-lift{% if block.settings.size == 'wide' %} category-card--wide{% endif %}"
+          data-animate
+          {{ block.shopify_attributes }}
+        >
+          <div class="category-card__media">
+            {% if block.settings.image %}
+              <img
+                src="{{ block.settings.image | image_url: width: 800 }}"
+                srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w"
+                alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                loading="lazy"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+              >
+            {% else %}
+              {{ 'collection-1' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+          <div class="category-card__content">
+            <h3>{{ block.settings.title }}</h3>
+            {% if block.settings.description != blank %}<p style="opacity:0.75; font-size:0.92rem; margin-top:6px;">{{ block.settings.description }}</p>{% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Catégories",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "sauge-clair", "label": "Vert sauge clair" },
+        { "value": "sable", "label": "Sable" }
+      ],
+      "default": "sauge-clair"
+    },
+    { "type": "checkbox", "id": "center_heading", "label": "Centrer le titre", "default": false },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Collections" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Explorer l'épicerie" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Des grandes familles de produits, pensées pour la cuisine, la dégustation et le cadeau." }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Catégorie",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Nom", "default": "Sucré" },
+        { "type": "textarea", "id": "description", "label": "Description courte" },
+        { "type": "url", "id": "url", "label": "Lien" },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Format de la carte",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "wide", "label": "Large" }
+          ],
+          "default": "normal"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "category", "settings": { "title": "Sucré", "size": "wide" } },
+      { "type": "category", "settings": { "title": "Salé" } },
+      { "type": "category", "settings": { "title": "Chocolats" } },
+      { "type": "category", "settings": { "title": "Condiments" } },
+      { "type": "category", "settings": { "title": "Boissons" } },
+      { "type": "category", "settings": { "title": "Coffrets cadeaux", "size": "wide" } }
+    ]
+  },
+  "presets": [
+    { "name": "Catégories" }
+  ]
+}
+{% endschema %}

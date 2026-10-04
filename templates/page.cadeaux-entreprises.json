@@ -1,0 +1,69 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Entreprises",
+        "title": "Le cadeau d'entreprise, autrement.",
+        "text": "Nous imaginons des coffrets et paniers gourmands qui reflètent l'image de votre entreprise, pour vos collaborateurs, vos clients et vos partenaires.",
+        "button_label": "Parlons de votre projet",
+        "button_url": "#shopify-section-quote-form",
+        "button_label_2": "",
+        "button_url_2": "",
+        "height": 520,
+        "overlay_opacity": 35,
+        "text_color": "#FBFAF6",
+        "text_position": "left"
+      }
+    },
+    "intro": {
+      "type": "editorial-block",
+      "settings": {
+        "color_scheme": "ivoire",
+        "image_position": "right",
+        "eyebrow": "Notre approche",
+        "title": "Des attentions qui marquent",
+        "text": "Chaque entreprise a son identité, ses occasions, ses destinataires. Nous composons des sélections qui racontent quelque chose, au-delà du simple cadeau.",
+        "button_label": "",
+        "button_url": ""
+      }
+    },
+    "options": {
+      "type": "corporate-options",
+      "settings": {
+        "color_scheme": "blanc-casse",
+        "eyebrow": "Sur mesure",
+        "title": "Nos possibilités",
+        "text": "Quatre façons de faire plaisir, adaptées à chaque occasion professionnelle."
+      },
+      "blocks": {
+        "o1": { "type": "option", "settings": { "icon": "gift", "title": "Le coffret gourmand", "text": "Une sélection assemblée avec soin, prête à être offerte." } },
+        "o2": { "type": "option", "settings": { "icon": "leaf", "title": "Le panier sur mesure", "text": "Composé selon vos goûts, votre budget et votre occasion." } },
+        "o3": { "type": "option", "settings": { "icon": "truck", "title": "Le cadeau personnalisé", "text": "Carte, emballage et sélection pensés pour votre image de marque." } },
+        "o4": { "type": "option", "settings": { "icon": "mail", "title": "L'envoi à vos destinataires", "text": "Nous expédions directement à chacun de vos collaborateurs ou clients." } }
+      },
+      "block_order": ["o1", "o2", "o3", "o4"]
+    },
+    "postal": {
+      "type": "postal-shipping",
+      "settings": {
+        "color_scheme": "sable",
+        "eyebrow": "Expédition",
+        "title": "Une sélection pensée pour être envoyée",
+        "text": "Certains de nos produits et coffrets sont spécialement adaptés à l'expédition par voie postale. Nous pouvons vous accompagner dans la sélection des produits les plus adaptés.",
+        "button_label": "Découvrir les produits expédiables",
+        "button_url": ""
+      }
+    },
+    "quote-form": {
+      "type": "corporate-quote-form",
+      "settings": {
+        "color_scheme": "ivoire",
+        "eyebrow": "Votre projet",
+        "title": "Vous avez une idée précise ?",
+        "text": "Budget, nombre de destinataires, saison, occasion, identité de votre entreprise : nous adaptons chaque composition à votre projet."
+      }
+    }
+  },
+  "order": ["hero", "intro", "options", "postal", "quote-form"]
+}

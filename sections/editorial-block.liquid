@@ -1,0 +1,72 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="editorial{% if section.settings.image_position == 'right' %} editorial--reverse{% endif %}">
+      <div class="editorial__media" data-animate>
+        {% if section.settings.image %}
+          <img
+            src="{{ section.settings.image | image_url: width: 1000 }}"
+            srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 1000 }} 1000w"
+            alt="{{ section.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+          >
+        {% else %}
+          {{ 'lifestyle-2' | placeholder_svg_tag }}
+        {% endif %}
+      </div>
+      <div class="editorial__content" data-animate>
+        {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+        {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+        {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+        {% if section.settings.button_label != blank %}
+          <a href="{{ section.settings.button_url }}" class="btn btn--outline">{{ section.settings.button_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bloc éditorial",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" },
+        { "value": "sable", "label": "Sable" },
+        { "value": "sauge-clair", "label": "Vert sauge clair" }
+      ],
+      "default": "sable"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Position de l'image",
+      "options": [
+        { "value": "left", "label": "Gauche" },
+        { "value": "right", "label": "Droite" }
+      ],
+      "default": "left"
+    },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Notre sélection" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Des produits qui ont une histoire" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texte",
+      "default": "Nous parcourons les maisons, producteurs et artisans pour sélectionner des produits qui ont quelque chose à raconter."
+    },
+    { "type": "text", "id": "button_label", "label": "Bouton", "default": "Découvrir notre sélection" },
+    { "type": "url", "id": "button_url", "label": "Lien du bouton" }
+  ],
+  "presets": [
+    { "name": "Bloc éditorial" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,60 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="postal-shipping" data-animate>
+      <div class="postal-shipping__media">
+        {% if section.settings.image %}
+          <img
+            src="{{ section.settings.image | image_url: width: 900 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+          >
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag }}
+        {% endif %}
+      </div>
+      <div class="postal-shipping__content">
+        {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+        {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+        {% if section.settings.text != blank %}<p style="opacity:0.85; margin:16px 0 26px; font-size:1.02rem;">{{ section.settings.text }}</p>{% endif %}
+        {% if section.settings.button_label != blank %}
+          <a href="{{ section.settings.button_url }}" class="btn btn--outline">{{ section.settings.button_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Envoi postal",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" },
+        { "value": "sable", "label": "Sable" }
+      ],
+      "default": "blanc-casse"
+    },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Expédition" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Une sélection pensée pour être envoyée" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texte",
+      "default": "Certains de nos produits et coffrets sont spécialement adaptés à l'expédition par voie postale. Nous pouvons vous accompagner dans la sélection des produits les plus adaptés."
+    },
+    { "type": "text", "id": "button_label", "label": "Bouton", "default": "Découvrir les produits expédiables" },
+    { "type": "url", "id": "button_url", "label": "Lien du bouton" }
+  ],
+  "presets": [
+    { "name": "Envoi postal" }
+  ]
+}
+{% endschema %}

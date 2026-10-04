@@ -1,0 +1,59 @@
+{%- comment -%}
+  Mega menu généré depuis un lien de navigation Shopify (2 niveaux d'enfants).
+  Usage: {% render 'mega-menu', link: link, section: section %}
+{%- endcomment -%}
+{%- liquid
+  assign has_columns = false
+  for child in link.links
+    if child.links.size > 0
+      assign has_columns = true
+      break
+    endif
+  endfor
+-%}
+
+<div class="mega-menu" id="MegaMenu-{{ link.handle }}">
+  {% if has_columns %}
+    {% for child in link.links %}
+      <div class="mega-menu__column">
+        {% if child.url and child.url != '#' %}
+          <a href="{{ child.url }}" class="mega-menu__column-title" style="display:block;">{{ child.title }}</a>
+        {% else %}
+          <p class="mega-menu__column-title">{{ child.title }}</p>
+        {% endif %}
+        <ul class="mega-menu__list" role="list">
+          {% for grandchild in child.links %}
+            <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="mega-menu__column">
+      <ul class="mega-menu__list" role="list">
+        {% for child in link.links %}
+          <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% for block in section.blocks %}
+    {% if block.type == 'menu_feature' and block.settings.menu_item_title == link.title %}
+      <a href="{{ block.settings.url | default: '#' }}" class="mega-menu__feature">
+        {% if block.settings.image %}
+          <img
+            src="{{ block.settings.image | image_url: width: 500 }}"
+            alt="{{ block.settings.image.alt | default: block.settings.caption | escape }}"
+            loading="lazy"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+          >
+        {% endif %}
+        {% if block.settings.caption != blank %}
+          <span class="mega-menu__feature-caption">{{ block.settings.caption }}</span>
+        {% endif %}
+      </a>
+    {% endif %}
+  {% endfor %}
+</div>

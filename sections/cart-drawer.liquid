@@ -1,0 +1,96 @@
+{%- liquid
+  assign threshold_cents = settings.cart_free_shipping_threshold | times: 100
+  assign remaining_cents = threshold_cents | minus: cart.total_price
+  if remaining_cents < 0
+    assign remaining_cents = 0
+  endif
+  assign progress = 100
+  if threshold_cents > 0
+    assign progress = cart.total_price | times: 100.0 | divided_by: threshold_cents
+    if progress > 100
+      assign progress = 100
+    endif
+  endif
+  assign remaining_money = remaining_cents | money
+-%}
+
+<div class="cart-drawer" id="CartDrawer" hidden>
+  <div class="cart-drawer__overlay" data-cart-drawer-overlay></div>
+  <div class="cart-drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'cart.general.title' | t }}">
+    <div class="cart-drawer__header">
+      <h2>{{ 'cart.general.title' | t }} {% if cart.item_count > 0 %}({{ cart.item_count }}){% endif %}</h2>
+      <button class="btn--icon" data-cart-drawer-close aria-label="{{ 'cart.general.close_cart' | t }}">
+        {% render 'icon', name: 'close' %}
+      </button>
+    </div>
+
+    {% if settings.cart_free_shipping_enable %}
+      <div class="cart-drawer__shipping-bar">
+        {% if remaining_cents == 0 %}
+          <p class="inline-notice">{% render 'icon', name: 'check' %} {{ 'cart.general.free_shipping_reached' | t }}</p>
+        {% else %}
+          <p class="inline-notice">{% render 'icon', name: 'truck' %} {{ 'cart.general.free_shipping_remaining' | t: amount: remaining_money }}</p>
+        {% endif %}
+        <div class="cart-drawer__progress">
+          <div class="cart-drawer__progress-fill" style="width: {{ progress }}%;"></div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="cart-drawer__items">
+      {% if cart.item_count == 0 %}
+        <div class="cart-drawer__empty">
+          <p>{{ 'cart.general.empty' | t }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn--outline" style="margin-top:16px;">{{ 'cart.general.continue_shopping' | t }}</a>
+        </div>
+      {% else %}
+        {% for item in cart.items %}
+          <div class="cart-item">
+            <div class="cart-item__media">
+              {% if item.image %}
+                <img src="{{ item.image | image_url: width: 180 }}" alt="{{ item.image.alt | escape }}" width="84" height="100" loading="lazy">
+              {% endif %}
+            </div>
+            <div class="cart-item__info">
+              <p class="cart-item__title">{{ item.product.title }}</p>
+              {% unless item.variant.title contains 'Default' %}
+                <p class="cart-item__variant">{{ item.variant.title }}</p>
+              {% endunless %}
+              <div class="cart-item__footer">
+                <div class="quantity-selector" data-cart-quantity="{{ item.key }}" style="transform: scale(0.85); transform-origin: left center;">
+                  <button type="button" data-cart-quantity-step="-1" aria-label="moins">{% render 'icon', name: 'minus' %}</button>
+                  <input type="number" value="{{ item.quantity }}" min="0" aria-label="{{ 'products.product.quantity' | t }}">
+                  <button type="button" data-cart-quantity-step="1" aria-label="plus">{% render 'icon', name: 'plus' %}</button>
+                </div>
+                <span class="price">{{ item.final_line_price | money }}</span>
+              </div>
+              <button type="button" class="cart-item__remove" data-cart-remove="{{ item.key }}">{{ 'cart.general.remove' | t }}</button>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    {% if cart.item_count > 0 %}
+      <div class="cart-drawer__footer">
+        <div class="cart-drawer__subtotal">
+          <span>{{ 'cart.general.subtotal' | t }}</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <p class="cart-drawer__shipping-note">{{ 'cart.general.shipping_at_checkout' | t }}</p>
+        {% if settings.cart_note != blank %}
+          <div class="cart-drawer__shipping-note">{{ settings.cart_note }}</div>
+        {% endif %}
+        <form action="{{ routes.cart_url }}" method="post">
+          <button type="submit" name="checkout" class="btn btn--full">{{ 'cart.general.checkout' | t }}</button>
+        </form>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Panier latéral"
+}
+{% endschema %}

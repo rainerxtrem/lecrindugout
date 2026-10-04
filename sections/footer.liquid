@@ -1,0 +1,105 @@
+<footer class="site-footer color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        {% if settings.logo %}
+          <img
+            src="{{ settings.logo | image_url: width: 240 }}"
+            alt="{{ shop.name }}"
+            width="{{ settings.logo.width }}"
+            height="{{ settings.logo.height }}"
+            style="max-width:160px; filter: brightness(0) invert(1); opacity:0.92;"
+          >
+        {% else %}
+          <span class="site-header__logo-text">{{ shop.name }}</span>
+        {% endif %}
+        {% if section.settings.tagline != blank %}
+          <p class="site-footer__tagline">{{ section.settings.tagline }}</p>
+        {% endif %}
+        {% render 'social-icons' %}
+      </div>
+
+      {% for block in section.blocks %}
+        {% if block.type == 'link_list' %}
+          {% assign footer_menu = linklists[block.settings.menu] %}
+          <div {{ block.shopify_attributes }}>
+            <p class="site-footer__heading">{{ block.settings.title }}</p>
+            {% if footer_menu %}
+              <ul class="site-footer__list" role="list">
+                {% for link in footer_menu.links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.legal_text }}</p>
+      <div class="site-footer__payments">
+        {% for type in shop.enabled_payment_types %}
+          {{ type | payment_type_svg_tag }}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "chocolat", "label": "Chocolat" },
+        { "value": "brun", "label": "Brun" },
+        { "value": "sombre", "label": "Noir doux" }
+      ],
+      "default": "chocolat"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Phrase d'accroche",
+      "default": "Une sélection de produits d'exception pour les amoureux des belles choses."
+    },
+    {
+      "type": "text",
+      "id": "legal_text",
+      "label": "Mention légale courte",
+      "default": "Tous droits réservés."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Colonne de liens",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre de la colonne",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "link_list", "settings": { "title": "Shop" } },
+      { "type": "link_list", "settings": { "title": "Entreprises" } },
+      { "type": "link_list", "settings": { "title": "La maison" } }
+    ]
+  }
+}
+{% endschema %}

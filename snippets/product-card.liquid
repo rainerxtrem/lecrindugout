@@ -1,0 +1,83 @@
+{%- comment -%}
+  Carte produit réutilisable.
+  Usage: {% render 'product-card', product: product %}
+{%- endcomment -%}
+{%- liquid
+  assign card_product = product
+  assign featured_image = card_product.featured_media.preview_image | default: card_product.featured_image
+  assign second_image = nil
+  for media in card_product.media
+    if media.id != card_product.featured_media.id and media.media_type == 'image'
+      assign second_image = media.preview_image
+      break
+    endif
+  endfor
+  assign variant = card_product.selected_or_first_available_variant
+-%}
+<div class="product-card" data-animate>
+  <a href="{{ card_product.url }}" class="product-card__link" aria-label="{{ card_product.title | escape }}">
+    <div class="product-card__media">
+      {% if featured_image %}
+        <img
+          class="product-card__image--front"
+          src="{{ featured_image | image_url: width: 600 }}"
+          srcset="{{ featured_image | image_url: width: 400 }} 400w, {{ featured_image | image_url: width: 600 }} 600w, {{ featured_image | image_url: width: 800 }} 800w"
+          sizes="(min-width: 990px) 320px, 45vw"
+          alt="{{ featured_image.alt | default: card_product.title | escape }}"
+          loading="lazy"
+          width="{{ featured_image.width }}"
+          height="{{ featured_image.height }}"
+        >
+      {% else %}
+        <div class="product-card__image--front placeholder-media">{{ 'product-apparel-1' | placeholder_svg_tag }}</div>
+      {% endif %}
+
+      {% if second_image %}
+        <img
+          class="product-card__image--back"
+          src="{{ second_image | image_url: width: 600 }}"
+          alt=""
+          loading="lazy"
+          width="{{ second_image.width }}"
+          height="{{ second_image.height }}"
+        >
+      {% endif %}
+
+      <div class="product-card__badges">
+        {% if card_product.compare_at_price_max > card_product.price %}
+          <span class="badge badge--sale">{{ 'products.product.on_sale' | t }}</span>
+        {% endif %}
+        {% if card_product.tags contains 'nouveaute' %}
+          <span class="badge badge--new">{{ 'products.product.new' | t }}</span>
+        {% endif %}
+        {% unless card_product.available %}
+          <span class="badge badge--sold-out">{{ 'products.product.sold_out' | t }}</span>
+        {% endunless %}
+      </div>
+    </div>
+  </a>
+
+  {% if card_product.available and card_product.variants.size == 1 %}
+    <div class="product-card__quick-add">
+      <form data-product-form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{ variant.id }}">
+        <button type="submit" class="btn--icon" aria-label="{{ 'products.product.add_to_cart' | t }}" style="background: var(--color-ink); color: var(--color-ivory);">
+          {% render 'icon', name: 'plus' %}
+        </button>
+      </form>
+    </div>
+  {% endif %}
+
+  <div class="product-card__body">
+    {% if card_product.vendor != shop.name %}
+      <p class="product-card__vendor">{{ card_product.vendor }}</p>
+    {% endif %}
+    <h3 class="product-card__title">
+      <a href="{{ card_product.url }}">{{ card_product.title }}</a>
+    </h3>
+    {% render 'price', product: card_product %}
+    {% unless card_product.available %}
+      <p class="product-card__availability">{{ 'products.product.unavailable' | t }}</p>
+    {% endunless %}
+  </div>
+</div>

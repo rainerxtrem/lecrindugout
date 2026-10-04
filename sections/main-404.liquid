@@ -1,0 +1,25 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}" style="text-align:center;">
+  <div class="page-width">
+    <h1>{{ '404.title' | t }}</h1>
+    <p style="opacity:0.75; margin: 16px 0 30px;">{{ '404.subtext' | t }}</p>
+    <a href="{{ routes.root_url }}" class="btn btn--outline">{{ '404.link' | t }}</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page 404",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "sable", "label": "Sable" }
+      ],
+      "default": "sable"
+    }
+  ]
+}
+{% endschema %}

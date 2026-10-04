@@ -1,0 +1,57 @@
+{% if section.settings.enable %}
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="seasonal" data-animate>
+      <div class="seasonal__media">
+        {% if section.settings.image %}
+          <img
+            src="{{ section.settings.image | image_url: width: 1600 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+          >
+        {% else %}
+          {{ 'lifestyle-4' | placeholder_svg_tag }}
+        {% endif %}
+      </div>
+      <div class="seasonal__content">
+        {% if section.settings.eyebrow != blank %}<p class="eyebrow" style="color:var(--color-gold);">{{ section.settings.eyebrow }}</p>{% endif %}
+        {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+        {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+        {% if section.settings.button_label != blank %}
+          <a href="{{ section.settings.button_url }}" class="btn" style="background:var(--color-gold); color:var(--color-chocolate);">{{ section.settings.button_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Mise en avant saisonnière",
+  "settings": [
+    { "type": "checkbox", "id": "enable", "label": "Activer cette section", "default": true },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur (fond de section)",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "sable", "label": "Sable" }
+      ],
+      "default": "ivoire"
+    },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "En ce moment" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Les coffrets de fin d'année" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Une sélection pensée pour les fêtes, entre gourmandise et élégance." },
+    { "type": "text", "id": "button_label", "label": "Bouton", "default": "Découvrir la sélection" },
+    { "type": "url", "id": "button_url", "label": "Lien du bouton" }
+  ],
+  "presets": [
+    { "name": "Mise en avant saisonnière" }
+  ]
+}
+{% endschema %}

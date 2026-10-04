@@ -1,0 +1,66 @@
+{% if section.settings.enable and section.blocks.size > 0 %}
+<div class="announcement-bar color-scheme-{{ section.settings.color_scheme }}">
+  <div class="announcement-bar__inner">
+    {% for block in section.blocks %}
+      {% if block.settings.url != blank %}
+        <a href="{{ block.settings.url }}" class="announcement-bar__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</a>
+      {% else %}
+        <span class="announcement-bar__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Barre d'annonce",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Activer la barre d'annonce",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "brun", "label": "Brun" },
+        { "value": "chocolat", "label": "Chocolat" },
+        { "value": "sauge-profond", "label": "Vert profond" },
+        { "value": "sombre", "label": "Noir doux" }
+      ],
+      "default": "brun"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Indicateur",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte",
+          "default": "Livraison offerte dès 60 €"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Lien (facultatif)"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "item", "settings": { "text": "Livraison offerte dès 60 €" } },
+      { "type": "item", "settings": { "text": "Expédition rapide en 24/48h" } },
+      { "type": "item", "settings": { "text": "Paiement sécurisé" } },
+      { "type": "item", "settings": { "text": "Coffrets cadeaux personnalisables" } }
+    ]
+  }
+}
+{% endschema %}

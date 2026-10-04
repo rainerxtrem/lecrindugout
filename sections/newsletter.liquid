@@ -1,0 +1,58 @@
+<div class="section newsletter color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="newsletter__inner" data-animate>
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow" style="justify-content:center;">{{ section.settings.eyebrow }}</p>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+
+      {% form 'customer', id: 'NewsletterForm' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-form">
+          <input
+            type="email"
+            name="contact[email]"
+            placeholder="{{ 'general.search.placeholder' | t }}"
+            aria-label="Email"
+            required
+            value="{% if customer %}{{ customer.email }}{% endif %}"
+          >
+          <button type="submit" class="btn" style="background:var(--scheme-button-bg); color:var(--scheme-button-text);">{{ section.settings.button_label }}</button>
+        </div>
+
+        {% if form.posted_successfully? %}
+          <p class="form-status form-status--success" style="margin-inline:auto; max-width:26rem;">{{ 'newsletter.success' | t }}</p>
+        {% elsif form.errors %}
+          <p class="form-status form-status--error" style="margin-inline:auto; max-width:26rem;">{{ 'newsletter.error' | t }}</p>
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "sauge-profond", "label": "Vert profond" },
+        { "value": "chocolat", "label": "Chocolat" },
+        { "value": "brun", "label": "Brun" }
+      ],
+      "default": "sauge-profond"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Newsletter" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Les nouvelles gourmandes" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texte",
+      "default": "Recevez nos nouveautés, nos découvertes et nos inspirations directement dans votre boîte mail."
+    },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "S'inscrire" }
+  ]
+}
+{% endschema %}

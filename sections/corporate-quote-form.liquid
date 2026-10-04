@@ -1,0 +1,105 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }} quote-form-section">
+  <div class="page-width" style="max-width: 44rem;">
+    <div class="section-heading section-heading--center" data-animate>
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow" style="justify-content:center;">{{ section.settings.eyebrow }}</p>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+    </div>
+
+    {% form 'contact', id: 'CorporateQuoteForm' %}
+      {% if form.posted_successfully? %}
+        <p class="form-status form-status--success">{{ 'corporate.form.success' | t }}</p>
+      {% elsif form.errors %}
+        <p class="form-status form-status--error">{{ 'corporate.form.error' | t }}</p>
+      {% endif %}
+
+      <input type="hidden" name="contact[Sujet]" value="Demande de devis — Cadeaux d'entreprises">
+
+      <div class="form-grid form-grid--2">
+        <div class="field">
+          <label class="field__label" for="QuoteName">{{ 'corporate.form.name' | t }}</label>
+          <input class="field__input" type="text" id="QuoteName" name="contact[name]" required>
+        </div>
+        <div class="field">
+          <label class="field__label" for="QuoteCompany">{{ 'corporate.form.company' | t }}</label>
+          <input class="field__input" type="text" id="QuoteCompany" name="contact[Entreprise]" required>
+        </div>
+      </div>
+
+      <div class="form-grid form-grid--2">
+        <div class="field">
+          <label class="field__label" for="QuoteEmail">{{ 'corporate.form.email' | t }}</label>
+          <input class="field__input" type="email" id="QuoteEmail" name="contact[email]" required>
+        </div>
+        <div class="field">
+          <label class="field__label" for="QuotePhone">{{ 'corporate.form.phone' | t }}</label>
+          <input class="field__input" type="tel" id="QuotePhone" name="contact[Téléphone]">
+        </div>
+      </div>
+
+      <div class="form-grid form-grid--2">
+        <div class="field">
+          <label class="field__label" for="QuoteQuantity">{{ 'corporate.form.quantity' | t }}</label>
+          <input class="field__input" type="number" min="1" id="QuoteQuantity" name="contact[Nombre de coffrets]">
+        </div>
+        <div class="field">
+          <label class="field__label" for="QuoteBudget">{{ 'corporate.form.budget' | t }}</label>
+          <input class="field__input" type="text" id="QuoteBudget" name="contact[Budget indicatif]" placeholder="Ex. 30 à 50 € par coffret">
+        </div>
+      </div>
+
+      <div class="form-grid form-grid--2">
+        <div class="field">
+          <label class="field__label" for="QuoteDate">{{ 'corporate.form.date' | t }}</label>
+          <input class="field__input" type="date" id="QuoteDate" name="contact[Date souhaitée]">
+        </div>
+        <div class="field">
+          <label class="field__label" for="QuoteGiftType">{{ 'corporate.form.gift_type' | t }}</label>
+          <select class="field__select" id="QuoteGiftType" name="contact[Type de cadeau]">
+            <option value="Coffret gourmand">Coffret gourmand</option>
+            <option value="Panier sur mesure">Panier sur mesure</option>
+            <option value="Cadeau personnalisé">Cadeau personnalisé</option>
+            <option value="Envoi direct aux destinataires">Envoi direct aux destinataires</option>
+            <option value="Je ne sais pas encore">Je ne sais pas encore</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="QuoteMessage">{{ 'corporate.form.message' | t }}</label>
+        <textarea class="field__textarea" id="QuoteMessage" name="contact[body]" placeholder="Décrivez votre projet : budget global, occasion, identité de votre entreprise…"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn--full">{{ 'corporate.form.submit' | t }}</button>
+    {% endform %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Devis entreprises",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "sable", "label": "Sable" }
+      ],
+      "default": "sable"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Votre projet" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Parlons de votre projet" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texte",
+      "default": "Budget, nombre de destinataires, saison, occasion, identité de votre entreprise : nous adaptons chaque composition à votre projet."
+    }
+  ],
+  "presets": [
+    { "name": "Devis entreprises" }
+  ]
+}
+{% endschema %}

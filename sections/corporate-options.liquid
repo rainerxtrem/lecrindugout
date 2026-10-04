@@ -1,0 +1,74 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="section-heading section-heading--center" data-animate>
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow" style="justify-content:center;">{{ section.settings.eyebrow }}</p>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+    </div>
+
+    <div class="grid grid--4">
+      {% for block in section.blocks %}
+        <div class="option-card hover-lift" data-animate {{ block.shopify_attributes }}>
+          <span class="option-card__icon">{% render 'icon', name: block.settings.icon %}</span>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Nos possibilités",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" },
+        { "value": "sable", "label": "Sable" }
+      ],
+      "default": "blanc-casse"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Sur mesure" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Nos possibilités" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Quatre façons de faire plaisir, adaptées à chaque occasion professionnelle." }
+  ],
+  "blocks": [
+    {
+      "type": "option",
+      "name": "Option",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icône",
+          "options": [
+            { "value": "gift", "label": "Cadeau" },
+            { "value": "leaf", "label": "Feuille" },
+            { "value": "truck", "label": "Camion" },
+            { "value": "mail", "label": "Enveloppe" }
+          ],
+          "default": "gift"
+        },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Le coffret gourmand" },
+        { "type": "textarea", "id": "text", "label": "Texte", "default": "Une sélection assemblée avec soin, prête à être offerte." }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "option", "settings": { "icon": "gift", "title": "Le coffret gourmand", "text": "Une sélection assemblée avec soin, prête à être offerte." } },
+      { "type": "option", "settings": { "icon": "leaf", "title": "Le panier sur mesure", "text": "Composé selon vos goûts, votre budget et votre occasion." } },
+      { "type": "option", "settings": { "icon": "truck", "title": "Le cadeau personnalisé", "text": "Carte, emballage et sélection pensés pour votre image de marque." } },
+      { "type": "option", "settings": { "icon": "mail", "title": "L'envoi à vos destinataires", "text": "Nous expédions directement à chacun de vos collaborateurs ou clients." } }
+    ]
+  },
+  "presets": [
+    { "name": "Nos possibilités" }
+  ]
+}
+{% endschema %}

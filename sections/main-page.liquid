@@ -1,0 +1,29 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width" style="max-width: 48rem;">
+    <div class="section-heading section-heading--center" data-animate>
+      <h1>{{ page.title }}</h1>
+    </div>
+    <div class="rte" data-animate>
+      {{ page.content }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" },
+        { "value": "sable", "label": "Sable" }
+      ],
+      "default": "ivoire"
+    }
+  ]
+}
+{% endschema %}

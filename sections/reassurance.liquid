@@ -1,0 +1,68 @@
+<div class="section section--tight color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="reassurance">
+      {% for block in section.blocks %}
+        <div class="reassurance__item" data-animate {{ block.shopify_attributes }}>
+          <span class="reassurance__icon">{% render 'icon', name: block.settings.icon %}</span>
+          <p class="reassurance__label">{{ block.settings.label }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bandeau de réassurance",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" },
+        { "value": "sable", "label": "Sable" }
+      ],
+      "default": "blanc-casse"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Indicateur",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icône",
+          "options": [
+            { "value": "leaf", "label": "Feuille" },
+            { "value": "truck", "label": "Camion" },
+            { "value": "gift", "label": "Cadeau" },
+            { "value": "shield", "label": "Bouclier" }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Texte",
+          "default": "Produits soigneusement sélectionnés"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "item", "settings": { "icon": "leaf", "label": "Produits soigneusement sélectionnés" } },
+      { "type": "item", "settings": { "icon": "truck", "label": "Expédition rapide" } },
+      { "type": "item", "settings": { "icon": "gift", "label": "Coffrets personnalisables" } },
+      { "type": "item", "settings": { "icon": "shield", "label": "Paiement sécurisé" } }
+    ]
+  },
+  "presets": [
+    { "name": "Bandeau de réassurance" }
+  ]
+}
+{% endschema %}

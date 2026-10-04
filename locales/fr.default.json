@@ -1,0 +1,134 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tagués \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "search": {
+      "search": "Rechercher",
+      "placeholder": "Rechercher un produit, une collection…",
+      "no_results": "Aucun résultat pour « {{ terms }} ».",
+      "results_count": "{{ count }} résultat(s)",
+      "close": "Fermer la recherche"
+    },
+    "menu": {
+      "open": "Ouvrir le menu",
+      "close": "Fermer le menu"
+    },
+    "account": {
+      "title": "Mon compte",
+      "login": "Connexion",
+      "logout": "Déconnexion",
+      "register": "Créer un compte"
+    },
+    "continue_shopping": "Poursuivre mes achats",
+    "back_to_top": "Haut de page"
+  },
+  "header": {
+    "catalog": "Catalogue",
+    "corporate": "Cadeaux d'entreprises",
+    "story": "Notre histoire",
+    "contact": "Contact"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "sold_out": "Épuisé",
+      "unavailable": "Indisponible",
+      "on_sale": "Promotion",
+      "new": "Nouveauté",
+      "quantity": "Quantité",
+      "view_details": "Voir le produit",
+      "vendor": "Maison",
+      "sku": "Référence",
+      "choose_options": "Choisir les options",
+      "description": "Description",
+      "ingredients": "Ingrédients",
+      "nutrition": "Informations nutritionnelles",
+      "allergens": "Allergènes",
+      "advice": "Conseils de dégustation",
+      "delivery": "Livraison",
+      "regular_price": "Prix régulier",
+      "sale_price": "Prix réduit",
+      "unit_price": "Prix unitaire",
+      "will_not_ship_until": "Disponible à l'expédition le {{ date }}",
+      "related": "Vous aimerez peut-être aussi",
+      "in_stock": "En stock",
+      "low_stock": "Stock limité"
+    }
+  },
+  "collections": {
+    "general": {
+      "no_products": "Aucun produit ne correspond à votre sélection.",
+      "items_count": {
+        "one": "{{ count }} produit",
+        "other": "{{ count }} produits"
+      },
+      "clear_all": "Effacer les filtres",
+      "filter_and_sort": "Filtrer et trier",
+      "sort_button": "Trier",
+      "use_fewer_filters": "Essayez de retirer un filtre."
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Votre panier",
+      "empty": "Votre panier est vide.",
+      "subtotal": "Sous-total",
+      "shipping_at_checkout": "Frais de livraison calculés à l'étape suivante",
+      "checkout": "Passer commande",
+      "remove": "Retirer",
+      "edit_quantity": "Modifier la quantité",
+      "view_cart": "Voir le panier",
+      "close_cart": "Fermer le panier",
+      "free_shipping_reached": "Félicitations, votre livraison est offerte !",
+      "free_shipping_remaining": "Encore {{ amount }} pour la livraison offerte.",
+      "continue_shopping": "Continuer mes achats",
+      "note": "Ajouter une note à la commande"
+    }
+  },
+  "newsletter": {
+    "success": "Merci, votre inscription est confirmée.",
+    "error": "Une erreur est survenue, merci de réessayer."
+  },
+  "contact": {
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "phone": "Téléphone",
+      "message": "Message",
+      "send": "Envoyer",
+      "success": "Votre message a bien été envoyé, nous revenons vers vous rapidement.",
+      "error": "Un ou plusieurs champs comportent une erreur."
+    }
+  },
+  "corporate": {
+    "form": {
+      "title": "Votre demande de devis",
+      "name": "Nom et prénom",
+      "company": "Entreprise",
+      "email": "Email",
+      "phone": "Téléphone",
+      "quantity": "Nombre de coffrets souhaités",
+      "budget": "Budget indicatif par coffret",
+      "date": "Date souhaitée de livraison",
+      "gift_type": "Type de cadeau envisagé",
+      "message": "Votre message",
+      "submit": "Envoyer ma demande",
+      "success": "Merci pour votre demande. Notre équipe vous recontacte sous 48h.",
+      "error": "Un ou plusieurs champs comportent une erreur."
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Passer au contenu",
+    "close": "Fermer",
+    "previous_slide": "Diapositive précédente",
+    "next_slide": "Diapositive suivante",
+    "total_reviews": "Nombre total d'avis"
+  },
+  "404": {
+    "title": "Page introuvable",
+    "subtext": "Il semble que cette page n'existe plus ou ait changé d'adresse.",
+    "link": "Retour à l'accueil"
+  }
+}

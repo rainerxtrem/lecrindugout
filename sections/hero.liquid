@@ -1,0 +1,165 @@
+<section
+  class="hero hero--align-{{ section.settings.text_position }}"
+  style="--overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; min-height: {{ section.settings.height }}px; --hero-text-color: {{ section.settings.text_color }};"
+>
+  <div class="hero__media">
+    {% if section.settings.image_mobile %}
+      <img
+        class="hero__media--mobile"
+        src="{{ section.settings.image_mobile | image_url: width: 900 }}"
+        srcset="{{ section.settings.image_mobile | image_url: width: 600 }} 600w, {{ section.settings.image_mobile | image_url: width: 900 }} 900w"
+        alt="{{ section.settings.image_mobile.alt | escape }}"
+        width="{{ section.settings.image_mobile.width }}"
+        height="{{ section.settings.image_mobile.height }}"
+      >
+    {% elsif section.settings.image %}
+      <img
+        class="hero__media--mobile"
+        src="{{ section.settings.image | image_url: width: 900 }}"
+        alt="{{ section.settings.image.alt | escape }}"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+      >
+    {% endif %}
+
+    {% if section.settings.image %}
+      <img
+        class="hero__media--desktop"
+        src="{{ section.settings.image | image_url: width: 2000 }}"
+        srcset="{{ section.settings.image | image_url: width: 1200 }} 1200w, {{ section.settings.image | image_url: width: 1600 }} 1600w, {{ section.settings.image | image_url: width: 2000 }} 2000w"
+        sizes="100vw"
+        alt="{{ section.settings.image.alt | escape }}"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+        fetchpriority="high"
+      >
+    {% else %}
+      <div class="hero__media--desktop placeholder-media" style="background:var(--color-sand); height:100%;">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>
+    {% endif %}
+  </div>
+
+  <div class="hero__overlay"></div>
+
+  <div class="hero__content">
+    <div class="hero__inner" data-animate>
+      {% if section.settings.eyebrow != blank %}
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h1>{{ section.settings.title }}</h1>
+      {% endif %}
+      {% if section.settings.text != blank %}
+        <p>{{ section.settings.text }}</p>
+      {% endif %}
+      <div class="hero__actions">
+        {% if section.settings.button_label != blank %}
+          <a href="{{ section.settings.button_url }}" class="btn">{{ section.settings.button_label }}</a>
+        {% endif %}
+        {% if section.settings.button_label_2 != blank %}
+          <a href="{{ section.settings.button_url_2 }}" class="btn btn--outline" style="color: var(--hero-text-color); border-color: var(--hero-text-color);">{{ section.settings.button_label_2 }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image (mobile)",
+      "info": "Si vide, l'image desktop recadrée sera utilisée"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Hauteur",
+      "min": 400,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "default": 680
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Opacité du voile",
+      "min": 0,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Couleur du texte",
+      "default": "#FBFAF6"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Position du texte",
+      "options": [
+        { "value": "left", "label": "Gauche" },
+        { "value": "center", "label": "Centré" },
+        { "value": "right", "label": "Droite" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Mention courte",
+      "default": "L'Écrin du Goût"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre",
+      "default": "Le goût des belles choses"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texte",
+      "default": "Une sélection de produits d'exception, choisis avec passion pour les gourmets curieux."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Bouton principal",
+      "default": "Découvrir la collection"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Lien du bouton principal"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Bouton secondaire",
+      "default": "Nos cadeaux gourmands"
+    },
+    {
+      "type": "url",
+      "id": "button_url_2",
+      "label": "Lien du bouton secondaire"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

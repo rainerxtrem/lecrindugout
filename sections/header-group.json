@@ -1,0 +1,13 @@
+{
+  "name": "Groupe d'en-tête",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar"
+    },
+    "header": {
+      "type": "header"
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

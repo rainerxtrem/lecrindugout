@@ -1,0 +1,54 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="section-heading" data-animate>
+      <h1>{{ 'general.search.search' | t }}</h1>
+      <form action="{{ routes.search_url }}" method="get" style="display:flex; gap:10px; max-width:30rem; margin-top:20px;">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.search' | t }}">
+        <input type="hidden" name="type" value="product">
+        <button type="submit" class="btn">{{ 'general.search.search' | t }}</button>
+      </form>
+    </div>
+
+    {% if search.performed %}
+      {% if search.results_count == 0 %}
+        <p style="opacity:0.7;">{{ 'general.search.no_results' | t: terms: search.terms }}</p>
+      {% else %}
+        {% paginate search.results by 24 %}
+          <p style="opacity:0.7; margin-bottom:24px;">{{ 'general.search.results_count' | t: count: search.results_count }}</p>
+          <div class="grid grid--collection">
+            {% for item in search.results %}
+              {% if item.object_type == 'product' %}
+                {% render 'product-card', product: item %}
+              {% else %}
+                <a href="{{ item.url }}" class="product-card">
+                  <div class="product-card__body">
+                    <h3 class="product-card__title">{{ item.title }}</h3>
+                  </div>
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% render 'pagination', paginate: paginate %}
+        {% endpaginate %}
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Résultats de recherche",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" }
+      ],
+      "default": "ivoire"
+    }
+  ]
+}
+{% endschema %}

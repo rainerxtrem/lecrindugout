@@ -1,0 +1,56 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="section-heading{% if section.settings.center_heading %} section-heading--center{% endif %}" data-animate>
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+    </div>
+
+    {% if section.settings.collection != blank %}
+      {% assign featured_collection = collections[section.settings.collection] %}
+      <div class="grid grid--collection">
+        {% for product in featured_collection.products limit: section.settings.product_limit %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
+      </div>
+
+      {% if section.settings.show_view_all and featured_collection.url != blank %}
+        <div style="text-align:center; margin-top:40px;">
+          <a href="{{ featured_collection.url }}" class="btn btn--outline">{{ section.settings.view_all_label }}</a>
+        </div>
+      {% endif %}
+    {% else %}
+      <p style="opacity:0.6;">Sélectionnez une collection dans les réglages de cette section.</p>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Produits vedettes",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" },
+        { "value": "sable", "label": "Sable" }
+      ],
+      "default": "ivoire"
+    },
+    { "type": "checkbox", "id": "center_heading", "label": "Centrer le titre", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Sélection" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Les incontournables" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Les produits préférés de nos clients, choisis pour leur qualité et leur caractère." },
+    { "type": "collection", "id": "collection", "label": "Collection à afficher" },
+    { "type": "range", "id": "product_limit", "label": "Nombre de produits", "min": 4, "max": 12, "step": 1, "default": 8 },
+    { "type": "checkbox", "id": "show_view_all", "label": "Afficher le bouton \"Voir tout\"", "default": true },
+    { "type": "text", "id": "view_all_label", "label": "Texte du bouton", "default": "Voir toute la collection" }
+  ],
+  "presets": [
+    { "name": "Produits vedettes" }
+  ]
+}
+{% endschema %}

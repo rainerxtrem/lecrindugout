@@ -1,0 +1,61 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width" style="max-width: 40rem;">
+    <div class="section-heading section-heading--center" data-animate>
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow" style="justify-content:center;">{{ section.settings.eyebrow }}</p>{% endif %}
+      <h1>{{ section.settings.title }}</h1>
+      {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+    </div>
+
+    {% form 'contact', id: 'ContactForm' %}
+      {% if form.posted_successfully? %}
+        <p class="form-status form-status--success">{{ 'contact.form.success' | t }}</p>
+      {% elsif form.errors %}
+        <p class="form-status form-status--error">{{ 'contact.form.error' | t }}</p>
+      {% endif %}
+
+      <div class="form-grid form-grid--2">
+        <div class="field">
+          <label class="field__label" for="ContactFormName">{{ 'contact.form.name' | t }}</label>
+          <input class="field__input" type="text" id="ContactFormName" name="contact[name]" value="{% if customer %}{{ customer.name }}{% endif %}" required>
+        </div>
+        <div class="field">
+          <label class="field__label" for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
+          <input class="field__input" type="email" id="ContactFormEmail" name="contact[email]" value="{% if customer %}{{ customer.email }}{% endif %}" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
+        <input class="field__input" type="tel" id="ContactFormPhone" name="contact[phone]">
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="ContactFormMessage">{{ 'contact.form.message' | t }}</label>
+        <textarea class="field__textarea" id="ContactFormMessage" name="contact[body]" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn--full">{{ 'contact.form.send' | t }}</button>
+    {% endform %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Formulaire de contact",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "sable", "label": "Sable" }
+      ],
+      "default": "ivoire"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Contact" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Parlons-en" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Une question sur un produit, une commande ou une envie de cadeau ? Écrivez-nous." }
+  ]
+}
+{% endschema %}

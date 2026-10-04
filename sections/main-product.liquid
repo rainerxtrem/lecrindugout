@@ -1,0 +1,176 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign money_format = shop.money_format
+-%}
+
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="product-layout">
+      <div class="product-gallery" data-gallery>
+        <div class="product-gallery__main" data-gallery-main-item data-media-id="{{ product.featured_media.id }}">
+          {% if product.featured_media %}
+            <img
+              data-gallery-main-image
+              src="{{ product.featured_media.preview_image | image_url: width: 1200 }}"
+              alt="{{ product.featured_media.alt | escape }}"
+              width="{{ product.featured_media.preview_image.width }}"
+              height="{{ product.featured_media.preview_image.height }}"
+            >
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag }}
+          {% endif %}
+        </div>
+
+        {% if product.media.size > 1 %}
+          <div class="product-gallery__thumbs">
+            {% for media in product.media %}
+              <button
+                type="button"
+                class="product-gallery__thumb{% if media.id == product.featured_media.id %} is-active{% endif %}"
+                data-gallery-thumb
+                data-media-id="{{ media.id }}"
+                aria-label="Image {{ forloop.index }}"
+              >
+                <img src="{{ media.preview_image | image_url: width: 200 }}" alt="" loading="lazy" width="100" height="100">
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="product-info">
+        {% if product.vendor != blank and product.vendor != shop.name %}
+          <p class="product-info__vendor">{{ product.vendor }}</p>
+        {% endif %}
+        <h1 class="product-info__title">{{ product.title }}</h1>
+
+        {% render 'price', product: product %}
+
+        {% if section.settings.show_short_description %}
+          <p class="product-info__short">{{ product.description | strip_html | truncatewords: 32 }}</p>
+        {% endif %}
+
+        <form data-product-form data-variants-json="ProductVariants-{{ section.id }}" data-price-target="[data-product-price]" data-gallery-target="[data-gallery]" data-money-format="{{ money_format }}" action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+            <p data-product-form-error hidden style="color: var(--color-terracotta); margin-bottom: 14px;"></p>
+
+            {% unless product.has_only_default_variant %}
+              {% for option in product.options_with_values %}
+                <div class="product-info__variants">
+                  <p class="field__label" style="margin-bottom:10px;">{{ option.name }}</p>
+                  <div class="variant-swatches">
+                    {% for value in option.values %}
+                      {% assign input_id = 'OptionValue-' | append: section.id | append: '-' | append: option.position | append: '-' | append: forloop.index %}
+                      <input
+                        type="radio"
+                        id="{{ input_id }}"
+                        name="option-{{ option.position }}"
+                        value="{{ value | escape }}"
+                        data-option-position="{{ option.position }}"
+                        {% if current_variant.options[option.position | minus: 1] == value %}checked{% endif %}
+                      >
+                      <label for="{{ input_id }}">{{ value }}</label>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endfor %}
+            {% endunless %}
+
+            <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id-input>
+
+            <div class="product-form__row">
+              {% render 'quantity-input' %}
+              <button
+                type="submit"
+                class="btn btn--full"
+                data-add-to-cart-button
+                data-add-text="{{ 'products.product.add_to_cart' | t }}"
+                data-unavailable-text="{{ 'products.product.sold_out' | t }}"
+                {% unless current_variant.available %}disabled{% endunless %}
+              >
+                {% if current_variant.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}
+              </button>
+            </div>
+          </form>
+
+        <script type="application/json" id="ProductVariants-{{ section.id }}">
+          [
+            {% for variant in product.variants %}
+              {
+                "id": {{ variant.id }},
+                "options": {{ variant.options | json }},
+                "price": {{ variant.price }},
+                "compare_at_price": {{ variant.compare_at_price | default: 0 }},
+                "available": {{ variant.available }},
+                "featured_media_id": {{ variant.featured_media.id | default: 'null' }}
+              }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          ]
+        </script>
+
+        <div class="product-info__meta">
+          <span>{% render 'icon', name: 'truck' %} {{ section.settings.delivery_text }}</span>
+          <span>{% render 'icon', name: 'shield' %} {{ settings.reassurance_payment }}</span>
+        </div>
+
+        {% if section.blocks.size > 0 %}
+          <div class="accordion" style="margin-top:32px;">
+            {% for block in section.blocks %}
+              {% if block.type == 'accordion' %}
+                {% assign panel_id = 'AccordionPanel-' | append: block.id %}
+                <div class="accordion__item" {{ block.shopify_attributes }}>
+                  <button class="accordion__trigger" data-accordion-trigger aria-expanded="false" aria-controls="{{ panel_id }}">
+                    {{ block.settings.title }}
+                    <span class="accordion__icon">{% render 'icon', name: 'plus' %}</span>
+                  </button>
+                  <div class="accordion__panel" id="{{ panel_id }}">
+                    <div class="accordion__panel-inner">{{ block.settings.content }}</div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page produit",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" }
+      ],
+      "default": "ivoire"
+    },
+    { "type": "checkbox", "id": "show_short_description", "label": "Afficher un résumé de la description", "default": true },
+    { "type": "text", "id": "delivery_text", "label": "Texte de livraison", "default": "Expédition rapide en 24/48h" }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Bloc accordéon",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Description" },
+        { "type": "richtext", "id": "content", "label": "Contenu" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "accordion", "settings": { "title": "Description" } },
+      { "type": "accordion", "settings": { "title": "Ingrédients" } },
+      { "type": "accordion", "settings": { "title": "Informations nutritionnelles" } },
+      { "type": "accordion", "settings": { "title": "Allergènes" } },
+      { "type": "accordion", "settings": { "title": "Conseils de dégustation" } },
+      { "type": "accordion", "settings": { "title": "Livraison" } }
+    ]
+  }
+}
+{% endschema %}

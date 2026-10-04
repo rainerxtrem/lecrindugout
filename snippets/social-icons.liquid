@@ -1,0 +1,15 @@
+{%- comment -%} Liste des icônes de réseaux sociaux configurés dans les réglages du thème {%- endcomment -%}
+<ul class="{{ class | default: 'site-footer__social' }}" role="list">
+  {% if settings.social_instagram != blank %}
+    <li><a href="{{ settings.social_instagram }}" aria-label="Instagram" target="_blank" rel="noopener">{% render 'icon', name: 'instagram' %}</a></li>
+  {% endif %}
+  {% if settings.social_facebook != blank %}
+    <li><a href="{{ settings.social_facebook }}" aria-label="Facebook" target="_blank" rel="noopener">{% render 'icon', name: 'facebook' %}</a></li>
+  {% endif %}
+  {% if settings.social_pinterest != blank %}
+    <li><a href="{{ settings.social_pinterest }}" aria-label="Pinterest" target="_blank" rel="noopener">{% render 'icon', name: 'pinterest' %}</a></li>
+  {% endif %}
+  {% if settings.social_tiktok != blank %}
+    <li><a href="{{ settings.social_tiktok }}" aria-label="TikTok" target="_blank" rel="noopener">{% render 'icon', name: 'tiktok' %}</a></li>
+  {% endif %}
+</ul>

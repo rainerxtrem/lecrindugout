@@ -1,0 +1,87 @@
+{%- liquid
+  assign threshold_cents = settings.cart_free_shipping_threshold | times: 100
+  assign remaining_cents = threshold_cents | minus: cart.total_price
+  if remaining_cents < 0
+    assign remaining_cents = 0
+  endif
+  assign remaining_money = remaining_cents | money
+-%}
+
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <h1 class="section-heading">{{ 'cart.general.title' | t }}</h1>
+
+    {% if cart.item_count == 0 %}
+      <div style="text-align:center; padding: 60px 0;">
+        <p style="opacity:0.7; margin-bottom:20px;">{{ 'cart.general.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--outline">{{ 'cart.general.continue_shopping' | t }}</a>
+      </div>
+    {% else %}
+      {% if settings.cart_free_shipping_enable %}
+        <p class="inline-notice" style="margin-bottom:28px;">
+          {% if remaining_cents == 0 %}
+            {% render 'icon', name: 'check' %} {{ 'cart.general.free_shipping_reached' | t }}
+          {% else %}
+            {% render 'icon', name: 'truck' %} {{ 'cart.general.free_shipping_remaining' | t: amount: remaining_money }}
+          {% endif %}
+        </p>
+      {% endif %}
+
+      {% form 'cart', cart %}
+        <div style="display:flex; flex-direction:column; gap:24px; margin-bottom:32px;">
+          {% for item in cart.items %}
+            <div class="cart-item" style="padding-bottom:20px; border-bottom:1px solid rgba(0,0,0,0.08);">
+              <div class="cart-item__media" style="width:110px; height:130px;">
+                {% if item.image %}
+                  <img src="{{ item.image | image_url: width: 220 }}" alt="{{ item.image.alt | escape }}" width="110" height="130" loading="lazy">
+                {% endif %}
+              </div>
+              <div class="cart-item__info">
+                <p class="cart-item__title"><a href="{{ item.url }}">{{ item.product.title }}</a></p>
+                {% unless item.variant.title contains 'Default' %}
+                  <p class="cart-item__variant">{{ item.variant.title }}</p>
+                {% endunless %}
+                <div class="cart-item__footer">
+                  {% render 'quantity-input', name: 'updates[' | append: forloop.index0 | append: ']', value: item.quantity %}
+                  <span class="price">{{ item.final_line_price | money }}</span>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div style="display:flex; justify-content:flex-end;">
+          <div style="max-width: 24rem; width:100%;">
+            <div class="cart-drawer__subtotal">
+              <span>{{ 'cart.general.subtotal' | t }}</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+            <p class="cart-drawer__shipping-note">{{ 'cart.general.shipping_at_checkout' | t }}</p>
+            <div style="display:flex; flex-direction:column; gap:12px; margin-top:20px;">
+              <button type="submit" name="update" class="btn btn--outline btn--full">{{ 'cart.general.edit_quantity' | t }}</button>
+              <button type="submit" name="checkout" class="btn btn--full">{{ 'cart.general.checkout' | t }}</button>
+            </div>
+          </div>
+        </div>
+      {% endform %}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Panier (page)",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" }
+      ],
+      "default": "ivoire"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,23 @@
+{%- comment -%}
+  Affiche le prix d'un produit ou d'une variante.
+  Usage: {% render 'price', product: product %}
+  ou     {% render 'price', variant: variant %}
+{%- endcomment -%}
+{%- liquid
+  assign target = variant | default: product.selected_or_first_available_variant
+  assign compare_at = target.compare_at_price
+  assign price = target.price
+  assign on_sale = false
+  if compare_at > price
+    assign on_sale = true
+  endif
+-%}
+<span class="price{% if on_sale %} price--sale{% endif %}" data-product-price>
+  {% if on_sale %}
+    <span class="price__regular" data-price-regular>{{ price | money }}</span>
+    <span class="price__compare" data-price-compare>{{ compare_at | money }}</span>
+  {% else %}
+    <span class="price__regular" data-price-regular>{{ price | money }}</span>
+    <span class="price__compare" data-price-compare hidden>{{ compare_at | money }}</span>
+  {% endif %}
+</span>

@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "color_scheme": "ivoire",
+        "show_short_description": true,
+        "delivery_text": "Expédition rapide en 24/48h"
+      },
+      "blocks": {
+        "a1": { "type": "accordion", "settings": { "title": "Description" } },
+        "a2": { "type": "accordion", "settings": { "title": "Ingrédients" } },
+        "a3": { "type": "accordion", "settings": { "title": "Informations nutritionnelles" } },
+        "a4": { "type": "accordion", "settings": { "title": "Allergènes" } },
+        "a5": { "type": "accordion", "settings": { "title": "Conseils de dégustation" } },
+        "a6": { "type": "accordion", "settings": { "title": "Livraison" } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4", "a5", "a6"]
+    },
+    "recommendations": {
+      "type": "main-product-recommendations",
+      "settings": {
+        "color_scheme": "blanc-casse",
+        "title": "Vous aimerez peut-être aussi",
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": ["main", "recommendations"]
+}

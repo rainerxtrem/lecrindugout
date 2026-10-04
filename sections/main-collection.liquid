@@ -1,0 +1,106 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="collection-header">
+      {% if section.settings.show_image and collection.image %}
+        <div class="collection-header__image" data-animate>
+          <img
+            src="{{ collection.image | image_url: width: 1600 }}"
+            alt="{{ collection.image.alt | default: collection.title | escape }}"
+            width="{{ collection.image.width }}"
+            height="{{ collection.image.height }}"
+          >
+        </div>
+      {% endif %}
+      <div class="section-heading" data-animate>
+        <h1>{{ collection.title }}</h1>
+        {% if collection.description != blank %}
+          <div>{{ collection.description }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% paginate collection.products by section.settings.products_per_page %}
+      <div class="collection-toolbar">
+        <p class="collection-toolbar__count">
+          {{ 'collections.general.items_count' | t: count: collection.products_count }}
+        </p>
+        <div class="collection-toolbar__controls">
+          <form data-sort-form>
+            <select name="sort_by" class="field__select" aria-label="{{ 'collections.general.sort_button' | t }}" onchange="this.form.submit()">
+              {% for option in collection.sort_options %}
+                <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>{{ option.name }}</option>
+              {% endfor %}
+            </select>
+          </form>
+        </div>
+      </div>
+
+      <div class="collection-layout{% if section.settings.enable_filters %} collection-layout--with-filters{% endif %}">
+        {% if section.settings.enable_filters %}
+          <aside class="filters-panel">
+            <form data-filters-form>
+              {% for filter in collection.filters %}
+                <details class="filters-panel__group" open>
+                  <summary>{{ filter.label }}</summary>
+                  <div class="filters-panel__options">
+                    {% for value in filter.values %}
+                      <label>
+                        <input
+                          type="checkbox"
+                          name="{{ value.param_name }}"
+                          value="{{ value.value }}"
+                          {% if value.active %}checked{% endif %}
+                          onchange="this.form.submit()"
+                        >
+                        {{ value.label }} ({{ value.count }})
+                      </label>
+                    {% endfor %}
+                  </div>
+                </details>
+              {% endfor %}
+              {% if collection.current_vendors != empty or collection.current_type != blank %}
+                <button type="submit" class="btn btn--outline btn--small">{{ 'collections.general.filter_and_sort' | t }}</button>
+                <a href="{{ collection.url }}" class="btn--ghost btn--small">{{ 'collections.general.clear_all' | t }}</a>
+              {% endif %}
+            </form>
+          </aside>
+        {% endif %}
+
+        <div>
+          {% if collection.products.size == 0 %}
+            <p style="opacity:0.7; padding: 40px 0;">{{ 'collections.general.no_products' | t }}</p>
+          {% else %}
+            <div class="grid grid--collection">
+              {% for product in collection.products %}
+                {% render 'product-card', product: product %}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% render 'pagination', paginate: paginate %}
+        </div>
+      </div>
+    {% endpaginate %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" }
+      ],
+      "default": "ivoire"
+    },
+    { "type": "checkbox", "id": "show_image", "label": "Afficher l'image de collection", "default": true },
+    { "type": "checkbox", "id": "enable_filters", "label": "Activer les filtres", "default": true },
+    { "type": "range", "id": "products_per_page", "label": "Produits par page", "min": 8, "max": 48, "step": 4, "default": 24 }
+  ]
+}
+{% endschema %}

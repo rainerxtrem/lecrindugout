@@ -1,0 +1,81 @@
+<div class="section color-scheme-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="corporate-banner" data-animate>
+      <div class="corporate-banner__media">
+        {% if section.settings.image %}
+          <img
+            src="{{ section.settings.image | image_url: width: 1600 }}"
+            srcset="{{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1600 }} 1600w"
+            alt="{{ section.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+          >
+        {% else %}
+          {{ 'lifestyle-3' | placeholder_svg_tag }}
+        {% endif %}
+      </div>
+      <div class="corporate-banner__content">
+        {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+        {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+        {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+
+        {% if section.settings.note != blank %}
+          <div class="corporate-banner__note">
+            {% render 'icon', name: 'truck' %}
+            <span>{{ section.settings.note }}</span>
+          </div>
+        {% endif %}
+
+        <div class="corporate-banner__actions">
+          {% if section.settings.button_label != blank %}
+            <a href="{{ section.settings.button_url }}" class="btn" style="background:var(--color-gold); color:var(--color-chocolate);">{{ section.settings.button_label }}</a>
+          {% endif %}
+          {% if section.settings.button_label_2 != blank %}
+            <a href="{{ section.settings.button_url_2 }}" class="btn btn--outline" style="color:#fff; border-color:#fff;">{{ section.settings.button_label_2 }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bandeau entreprises",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur (fond de section)",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "chocolat", "label": "Chocolat" }
+      ],
+      "default": "ivoire"
+    },
+    { "type": "image_picker", "id": "image", "label": "Photographie" },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Entreprises" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Des cadeaux qui ont du goût" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texte",
+      "default": "Pour remercier vos collaborateurs, partenaires ou clients, nous imaginons des coffrets gourmands adaptés à vos envies et à votre budget."
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note (envoi postal)",
+      "default": "Certains de nos coffrets sont également compatibles avec l'expédition par voie postale."
+    },
+    { "type": "text", "id": "button_label", "label": "Bouton principal", "default": "Créer mon cadeau d'entreprise" },
+    { "type": "url", "id": "button_url", "label": "Lien du bouton principal" },
+    { "type": "text", "id": "button_label_2", "label": "Bouton secondaire", "default": "Demander un devis" },
+    { "type": "url", "id": "button_url_2", "label": "Lien du bouton secondaire" }
+  ],
+  "presets": [
+    { "name": "Bandeau entreprises" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "color_scheme": "ivoire",
+        "show_image": true,
+        "enable_filters": true,
+        "products_per_page": 24
+      }
+    }
+  },
+  "order": ["main"]
+}

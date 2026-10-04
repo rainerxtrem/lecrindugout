@@ -1,0 +1,16 @@
+{%- comment -%}
+  Sélecteur de quantité accessible.
+  Usage: {% render 'quantity-input', name: 'quantity', value: 1 %}
+{%- endcomment -%}
+<div class="quantity-selector" data-quantity-selector>
+  <button type="button" data-quantity-step="-1" aria-label="{{ 'minus' }}">{% render 'icon', name: 'minus' %}</button>
+  <input
+    type="number"
+    name="{{ name | default: 'quantity' }}"
+    value="{{ value | default: 1 }}"
+    min="1"
+    inputmode="numeric"
+    aria-label="{{ 'products.product.quantity' | t }}"
+  >
+  <button type="button" data-quantity-step="1" aria-label="plus">{% render 'icon', name: 'plus' %}</button>
+</div>

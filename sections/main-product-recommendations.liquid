@@ -1,0 +1,38 @@
+<div
+  class="section color-scheme-{{ section.settings.color_scheme }}"
+  data-product-recommendations
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}&intent=related"
+>
+  {% if recommendations.performed and recommendations.products_count > 0 %}
+    <div class="page-width">
+      <div class="section-heading section-heading--center" data-animate>
+        <h2>{{ section.settings.title }}</h2>
+      </div>
+      <div class="grid grid--collection">
+        {% for product in recommendations.products %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Produits complémentaires",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "ivoire", "label": "Ivoire" },
+        { "value": "blanc-casse", "label": "Blanc cassé" }
+      ],
+      "default": "blanc-casse"
+    },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Vous aimerez peut-être aussi" },
+    { "type": "range", "id": "products_to_show", "label": "Nombre de produits", "min": 2, "max": 8, "step": 1, "default": 4 }
+  ]
+}
+{% endschema %}
