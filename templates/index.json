@@ -12,7 +12,6 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "image": "shopify://shop_images/kitchen-and-dining-minimal-2.jpg",
         "height": 640,
         "overlay_opacity": 35,
         "text_color": "#fbfaf6",
