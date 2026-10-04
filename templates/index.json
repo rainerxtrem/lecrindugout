@@ -1,47 +1,124 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
       "settings": {
+        "height": 680,
+        "overlay_opacity": 25,
+        "text_color": "#FBFAF6",
+        "text_position": "left",
         "eyebrow": "L'Écrin du Goût",
         "title": "Le goût des belles choses",
         "text": "Une sélection de produits d'exception, choisis avec passion pour les gourmets curieux.",
         "button_label": "Découvrir la collection",
         "button_url": "",
         "button_label_2": "Nos cadeaux gourmands",
-        "button_url_2": "",
-        "height": 680,
-        "overlay_opacity": 25,
-        "text_color": "#FBFAF6",
-        "text_position": "left"
+        "button_url_2": ""
       }
     },
     "reassurance": {
       "type": "reassurance",
       "blocks": {
-        "r1": { "type": "item", "settings": { "icon": "leaf", "label": "Produits soigneusement sélectionnés" } },
-        "r2": { "type": "item", "settings": { "icon": "truck", "label": "Expédition rapide" } },
-        "r3": { "type": "item", "settings": { "icon": "gift", "label": "Coffrets personnalisables" } },
-        "r4": { "type": "item", "settings": { "icon": "shield", "label": "Paiement sécurisé" } }
+        "r1": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "label": "Produits soigneusement sélectionnés"
+          }
+        },
+        "r2": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "label": "Expédition rapide"
+          }
+        },
+        "r3": {
+          "type": "item",
+          "settings": {
+            "icon": "gift",
+            "label": "Coffrets personnalisables"
+          }
+        },
+        "r4": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "label": "Paiement sécurisé"
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3", "r4"]
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ],
+      "settings": {}
     },
     "categories": {
       "type": "categories",
+      "blocks": {
+        "c1": {
+          "type": "category",
+          "settings": {
+            "title": "Sucré",
+            "description": "Chocolats, biscuits et confiseries de caractère.",
+            "size": "wide"
+          }
+        },
+        "c2": {
+          "type": "category",
+          "settings": {
+            "title": "Salé",
+            "description": "Huiles, condiments et conserves d'exception."
+          }
+        },
+        "c3": {
+          "type": "category",
+          "settings": {
+            "title": "Boissons",
+            "description": "Thés, infusions et cafés de belle provenance."
+          }
+        },
+        "c4": {
+          "type": "category",
+          "settings": {
+            "title": "Épices & condiments",
+            "description": "Pour relever chaque préparation."
+          }
+        },
+        "c5": {
+          "type": "category",
+          "settings": {
+            "title": "Coffrets cadeaux",
+            "description": "Des compositions prêtes à offrir.",
+            "size": "wide"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
       "settings": {
         "color_scheme": "sauge-clair",
         "eyebrow": "Collections",
         "title": "Explorer l'épicerie",
         "text": "Des grandes familles de produits, pensées pour la cuisine, la dégustation et le cadeau."
-      },
-      "blocks": {
-        "c1": { "type": "category", "settings": { "title": "Sucré", "description": "Chocolats, biscuits et confiseries de caractère.", "size": "wide" } },
-        "c2": { "type": "category", "settings": { "title": "Salé", "description": "Huiles, condiments et conserves d'exception." } },
-        "c3": { "type": "category", "settings": { "title": "Boissons", "description": "Thés, infusions et cafés de belle provenance." } },
-        "c4": { "type": "category", "settings": { "title": "Épices & condiments", "description": "Pour relever chaque préparation." } },
-        "c5": { "type": "category", "settings": { "title": "Coffrets cadeaux", "description": "Des compositions prêtes à offrir.", "size": "wide" } }
-      },
-      "block_order": ["c1", "c2", "c3", "c4", "c5"]
+      }
     },
     "featured-products": {
       "type": "featured-products",
