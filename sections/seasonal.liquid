@@ -12,11 +12,11 @@
             height="{{ section.settings.image.height }}"
           >
         {% else %}
-          {{ 'lifestyle-4' | placeholder_svg_tag }}
+          <div class="media-fallback"></div>
         {% endif %}
       </div>
       <div class="seasonal__content">
-        {% if section.settings.eyebrow != blank %}<p class="eyebrow" style="color:var(--color-gold);">{{ section.settings.eyebrow }}</p>{% endif %}
+        {% if section.settings.eyebrow != blank %}<p class="eyebrow" style="color:var(--color-gold-light);">{{ section.settings.eyebrow }}</p>{% endif %}
         {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
         {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
         {% if section.settings.button_label != blank %}

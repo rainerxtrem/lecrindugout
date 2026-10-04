@@ -51,7 +51,7 @@
         {% endif %}
 
         <form data-product-form data-variants-json="ProductVariants-{{ section.id }}" data-price-target="[data-product-price]" data-gallery-target="[data-gallery]" data-money-format="{{ money_format }}" action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
-            <p data-product-form-error hidden style="color: var(--color-terracotta); margin-bottom: 14px;"></p>
+            <p data-product-form-error hidden style="color: var(--color-terracotta-deep); margin-bottom: 14px;"></p>
 
             {% unless product.has_only_default_variant %}
               {% for option in product.options_with_values %}

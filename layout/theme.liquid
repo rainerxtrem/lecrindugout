@@ -33,11 +33,11 @@
 
   {{ content_for_header }}
 
-  {%- comment -%} Polices natives Shopify {%- endcomment -%}
-  {{ settings.type_header_font | font_face: font_display: 'swap' }}
-  {{ settings.type_body_font | font_face: font_display: 'swap' }}
-
   <style>
+    {%- comment -%} Polices natives Shopify {%- endcomment -%}
+    {{ settings.type_header_font | font_face: font_display: 'swap' }}
+    {{ settings.type_body_font | font_face: font_display: 'swap' }}
+
     :root{
       --font-heading: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
       --font-heading-weight: {{ settings.type_header_font.weight }};
@@ -45,8 +45,8 @@
       --font-body: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
       --font-body-weight: {{ settings.type_body_font.weight }};
       --font-body-style: {{ settings.type_body_font.style }};
-      --heading-scale: {{ settings.heading_scale | default: 100 }}%;
-      --body-scale: {{ settings.body_scale | default: 100 }}%;
+      --heading-scale: {{ settings.heading_scale | default: 100 }};
+      --body-scale: {{ settings.body_scale | default: 100 }};
 
       --color-ivory: {{ settings.color_ivory }};
       --color-off-white: {{ settings.color_off_white }};

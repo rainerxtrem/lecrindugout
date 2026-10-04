@@ -11,7 +11,7 @@
             height="{{ section.settings.image.height }}"
           >
         {% else %}
-          {{ 'product-1' | placeholder_svg_tag }}
+          <div class="media-fallback media-fallback--light"></div>
         {% endif %}
       </div>
       <div class="postal-shipping__content">

@@ -2,6 +2,22 @@
    Sections spécifiques
    ========================================================================== */
 
+/* ---------- Fond de remplacement (quand aucune image n'est choisie) ---------- */
+
+.media-fallback {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  background:
+    radial-gradient(ellipse at 80% 20%, color-mix(in srgb, var(--color-gold) 35%, transparent) 0%, transparent 55%),
+    linear-gradient(135deg, var(--color-chocolate) 0%, var(--color-brown) 100%);
+}
+.media-fallback--light {
+  background:
+    radial-gradient(ellipse at 30% 30%, color-mix(in srgb, var(--color-off-white) 70%, transparent) 0%, transparent 60%),
+    linear-gradient(135deg, var(--color-sand) 0%, var(--color-sage) 100%);
+}
+
 /* ---------- Hero ---------- */
 
 .hero {
@@ -26,9 +42,11 @@
   padding: clamp(80px, 14vw, 140px) 24px clamp(48px, 8vw, 90px);
 }
 .hero__inner { max-width: 36rem; color: var(--hero-text-color, #fff); }
-.hero__inner .eyebrow { color: inherit; opacity: 0.9; }
+.hero__inner .eyebrow { color: inherit; }
+.hero__inner { text-shadow: 0 1px 18px rgba(20,14,10,0.35); }
+.hero__inner .btn { text-shadow: none; }
 .hero__inner h1 { color: inherit; }
-.hero__inner p { color: inherit; opacity: 0.92; font-size: 1.15rem; margin: 18px 0 30px; }
+.hero__inner p { color: inherit; font-size: 1.15rem; margin: 18px 0 30px; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
 .hero--align-left { justify-content: flex-start; text-align: left; }
@@ -89,9 +107,9 @@
   justify-content: center;
   gap: 16px;
 }
-.corporate-banner__content .eyebrow { color: var(--color-gold); }
+.corporate-banner__content .eyebrow { color: var(--color-gold-light); }
 .corporate-banner__content h2 { color: #fff; }
-.corporate-banner__content p { opacity: 0.92; font-size: 1.05rem; }
+.corporate-banner__content p { font-size: 1.05rem; }
 .corporate-banner__note {
   display: flex;
   gap: 10px;
@@ -154,10 +172,10 @@
 }
 .seasonal__media { position: absolute; inset: 0; }
 .seasonal__media img { width: 100%; height: 100%; object-fit: cover; }
-.seasonal__media::after { content: ""; position: absolute; inset: 0; background: rgba(15,10,8,0.38); }
+.seasonal__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(20,12,8,0.78) 0%, rgba(20,12,8,0.4) 60%, rgba(20,12,8,0.15) 100%); }
 .seasonal__content { position: relative; color: #fff; padding: clamp(32px, 6vw, 64px); max-width: 34rem; }
 .seasonal__content h2 { color: #fff; }
-.seasonal__content p { opacity: 0.92; margin: 14px 0 26px; font-size: 1.05rem; }
+.seasonal__content p { margin: 14px 0 26px; font-size: 1.05rem; }
 
 /* ---------- Newsletter ---------- */
 
