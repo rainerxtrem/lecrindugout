@@ -11,20 +11,63 @@
   "sections": {
     "main": {
       "type": "main-product",
+      "blocks": {
+        "a1": {
+          "type": "accordion",
+          "settings": {
+            "title": "Description",
+            "content": ""
+          }
+        },
+        "a2": {
+          "type": "accordion",
+          "settings": {
+            "title": "Ingrédients",
+            "content": ""
+          }
+        },
+        "a3": {
+          "type": "accordion",
+          "settings": {
+            "title": "Informations nutritionnelles",
+            "content": ""
+          }
+        },
+        "a4": {
+          "type": "accordion",
+          "settings": {
+            "title": "Allergènes",
+            "content": ""
+          }
+        },
+        "a5": {
+          "type": "accordion",
+          "settings": {
+            "title": "Conseils de dégustation",
+            "content": ""
+          }
+        },
+        "a6": {
+          "type": "accordion",
+          "settings": {
+            "title": "Livraison",
+            "content": ""
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3",
+        "a4",
+        "a5",
+        "a6"
+      ],
       "settings": {
         "color_scheme": "ivoire",
         "show_short_description": true,
-        "delivery_text": "Expédition rapide en 24/48h"
-      },
-      "blocks": {
-        "a1": { "type": "accordion", "settings": { "title": "Description" } },
-        "a2": { "type": "accordion", "settings": { "title": "Ingrédients" } },
-        "a3": { "type": "accordion", "settings": { "title": "Informations nutritionnelles" } },
-        "a4": { "type": "accordion", "settings": { "title": "Allergènes" } },
-        "a5": { "type": "accordion", "settings": { "title": "Conseils de dégustation" } },
-        "a6": { "type": "accordion", "settings": { "title": "Livraison" } }
-      },
-      "block_order": ["a1", "a2", "a3", "a4", "a5", "a6"]
+        "delivery_text": "Préparation en magasin rapide"
+      }
     },
     "recommendations": {
       "type": "main-product-recommendations",
@@ -35,5 +78,8 @@
       }
     }
   },
-  "order": ["main", "recommendations"]
+  "order": [
+    "main",
+    "recommendations"
+  ]
 }
