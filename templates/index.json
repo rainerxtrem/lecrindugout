@@ -15,7 +15,7 @@
         "image": "shopify://shop_images/kitchen-and-dining-minimal-2.jpg",
         "height": 640,
         "overlay_opacity": 35,
-        "text_color": "#FBFAF6",
+        "text_color": "#fbfaf6",
         "text_position": "center",
         "eyebrow": "Épicerie fine — Arnage",
         "title": "L'écrin du Goût",
@@ -104,42 +104,54 @@
           "type": "category",
           "settings": {
             "collection": "confiseries-chocolats-et-produits-sucres",
-            "title": "Épicerie sucrée"
+            "title": "Épicerie sucrée",
+            "description": "",
+            "url": ""
           }
         },
         "c2": {
           "type": "category",
           "settings": {
             "collection": "miels",
-            "title": "Miels & confitures"
+            "title": "Miels & confitures",
+            "description": "",
+            "url": ""
           }
         },
         "c3": {
           "type": "category",
           "settings": {
             "collection": "biscuits-sales",
-            "title": "L'apéritif"
+            "title": "L'apéritif",
+            "description": "",
+            "url": ""
           }
         },
         "c4": {
           "type": "category",
           "settings": {
             "collection": "sels-poivres-et-epices",
-            "title": "Sels, poivres & épices"
+            "title": "Sels, poivres & épices",
+            "description": "",
+            "url": ""
           }
         },
         "c5": {
           "type": "category",
           "settings": {
             "collection": "vinaigres",
-            "title": "Huiles & vinaigres"
+            "title": "Huiles & vinaigres",
+            "description": "",
+            "url": ""
           }
         },
         "c6": {
           "type": "category",
           "settings": {
             "collection": "thes-et-cafes",
-            "title": "Thés & cafés"
+            "title": "Thés & cafés",
+            "description": "",
+            "url": ""
           }
         }
       },
@@ -159,20 +171,6 @@
         "text": ""
       }
     },
-    "featured-products": {
-      "type": "featured-products",
-      "settings": {
-        "color_scheme": "blanc-casse",
-        "center_heading": true,
-        "eyebrow": "Sélection",
-        "title": "Les incontournables",
-        "text": "",
-        "collection": "epicerie-et-produits-locaux",
-        "product_limit": 8,
-        "show_view_all": true,
-        "view_all_label": "Voir toute l'épicerie"
-      }
-    },
     "corporate-banner": {
       "type": "corporate-gifts-banner",
       "settings": {
@@ -180,7 +178,7 @@
         "image": "shopify://shop_images/COFFRET_7.png",
         "eyebrow": "Sur mesure",
         "title": "Composez votre coffret",
-        "text": "Un anniversaire, un remerciement, une table de fête : choisissez les produits, nous les mettons en écrin. Emballage soigné, mot manuscrit, retrait en boutique ou livraison — le cadeau qui ne ressemble à aucun autre.",
+        "text": "Un anniversaire, un remerciement, une table de fête : choisissez les produits, nous les mettons en écrin. Emballage soigné, mot manuscrit, retrait en boutique — le cadeau qui ne ressemble à aucun autre.",
         "note": "Entreprises : coffrets personnalisés pour vos collaborateurs et clients, sur devis.",
         "button_label": "Demander un coffret",
         "button_url": "shopify://pages/contact",
@@ -218,7 +216,6 @@
     "intro",
     "editorial-story",
     "categories",
-    "featured-products",
     "corporate-banner",
     "postal-shipping",
     "seasonal"
