@@ -12,8 +12,9 @@
     "hero": {
       "type": "hero",
       "settings": {
+        "image": "shopify://shop_images/20260620_161840.jpg",
         "height": 640,
-        "overlay_opacity": 35,
+        "overlay_opacity": 65,
         "text_color": "#fbfaf6",
         "text_position": "center",
         "eyebrow": "Épicerie fine — Arnage",
