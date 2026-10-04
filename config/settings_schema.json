@@ -44,7 +44,7 @@
         "type": "font_picker",
         "id": "type_header_font",
         "label": "Police des titres",
-        "default": "cormorant_n4",
+        "default": "garamond_n4",
         "info": "Une serif éditoriale pour les titres"
       },
       {
