@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "Groupe de pied de page",
   "type": "footer",
@@ -5,7 +14,12 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "color_scheme": "sauge-profond"
+        "color_scheme": "sauge-profond",
+        "stripes": false,
+        "eyebrow": "Newsletter",
+        "title": "Les nouvelles gourmandes",
+        "text": "Recevez nos nouveautés, nos découvertes et nos inspirations directement dans votre boîte mail.",
+        "button_label": "S'inscrire"
       }
     },
     "footer": {
@@ -30,7 +44,7 @@
           "settings": {
             "title": "Nous trouver",
             "show_address": true,
-            "text": "<p>Click &amp; Collect en boutique</p>"
+            "text": "<p>Click & Collect en boutique</p>"
           }
         }
       },
@@ -40,7 +54,9 @@
         "contact"
       ],
       "settings": {
-        "color_scheme": "chocolat"
+        "color_scheme": "chocolat",
+        "tagline": "Une sélection de produits d'exception pour les amoureux des belles choses.",
+        "legal_text": "Tous droits réservés."
       }
     }
   },
