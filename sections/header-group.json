@@ -17,19 +17,22 @@
         "a1": {
           "type": "item",
           "settings": {
-            "text": "Click & Collect à Arnage"
+            "text": "Click & Collect à Arnage",
+            "url": ""
           }
         },
         "a2": {
           "type": "item",
           "settings": {
-            "text": "Paniers gourmands sur mesure"
+            "text": "Paniers gourmands sur mesure",
+            "url": ""
           }
         },
         "a3": {
           "type": "item",
           "settings": {
-            "text": "Sélection de producteurs & artisans"
+            "text": "Sélection de producteurs & artisans",
+            "url": ""
           }
         }
       },
@@ -48,7 +51,9 @@
       "settings": {
         "menu": "main-menu",
         "show_search": true,
-        "color_scheme": "chocolat"
+        "color_scheme": "chocolat",
+        "stripes": true,
+        "tagline": "Épicerie fine — Arnage"
       }
     }
   },
