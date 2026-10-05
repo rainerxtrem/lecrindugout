@@ -161,13 +161,13 @@
         "type": "color",
         "id": "color_chocolate",
         "label": "Fond sombre (header, pied de page, bandeaux)",
-        "default": "#746764"
+        "default": "#A0503A"
       },
       {
         "type": "color",
         "id": "color_stripes",
         "label": "Couleur des rayures",
-        "default": "#CFC8C5"
+        "default": "#F6D9C4"
       },
       {
         "type": "range",

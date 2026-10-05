@@ -39,7 +39,7 @@ img, picture, svg { max-width: 100%; display: block; }
   --color-sage-deep: color-mix(in srgb, var(--color-sage-dark) 40%, var(--color-ink));
   --color-gold-light: color-mix(in srgb, var(--color-gold) 60%, var(--color-ivory));
   --color-taupe-deep: color-mix(in srgb, var(--color-chocolate) 60%, var(--color-ink));
-  --color-linen: color-mix(in srgb, var(--color-stripes-solid, #CFC8C5) 50%, var(--color-ivory));
+  --color-linen: color-mix(in srgb, var(--color-stripes-solid, #F6D9C4) 50%, var(--color-ivory));
 }
 
 a { color: inherit; text-decoration: none; }
