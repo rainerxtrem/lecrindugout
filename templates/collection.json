@@ -1,25 +1,38 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-collection",
-      "settings": {
-        "color_scheme": "ivoire",
-        "show_image": true,
-        "enable_filters": true,
-        "products_per_page": 24
-      },
       "blocks": {
         "paniers": {
           "type": "collection_message",
           "settings": {
             "collection": "paniers-gourmands",
-            "text": "<p>Nos paniers gourmands sont <strong>déjà composés</strong> et prêts à offrir : une sélection pensée avec soin, présentée avec élégance.</p><p>Envie d'un cadeau qui vous ressemble ? <strong>Composez votre propre panier</strong> avec les produits de votre choix, nous nous occupons du reste.</p>"
+            "text": "<p>Nos paniers gourmands présentés ici sont <strong>déjà composés</strong> et prêts à offrir : une sélection pensée avec soin, présentée avec élégance.</p><p>Envie d'un cadeau qui vous ressemble ? <strong>Composez votre propre panier</strong> avec les produits de votre choix, nous nous occupons du reste.</p>",
+            "button_label": "",
+            "button_url": "",
+            "button_label_2": "",
+            "button_url_2": ""
           }
         }
       },
       "block_order": [
         "paniers"
-      ]
+      ],
+      "settings": {
+        "color_scheme": "ivoire",
+        "show_image": true,
+        "enable_filters": true,
+        "products_per_page": 24
+      }
     }
   },
   "order": [
