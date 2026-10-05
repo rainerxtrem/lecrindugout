@@ -15,7 +15,7 @@
   {% endif %}
   <div class="page-width seasonal__content" data-animate>
     {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
-    {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+    {% if section.settings.title != blank %}<h2>{{ section.settings.title | escape | replace: '|', '<br>' }}</h2>{% endif %}
     {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
     {% if section.settings.button_label != blank %}
       <a href="{{ section.settings.button_url | default: routes.all_products_collection_url }}" class="btn{% if section.settings.image %} btn--light{% endif %}">{{ section.settings.button_label }}</a>
@@ -44,7 +44,7 @@
     },
     { "type": "image_picker", "id": "image", "label": "Image" },
     { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "En ce moment" },
-    { "type": "text", "id": "title", "label": "Titre", "default": "Les coffrets de fin d'année" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Les coffrets de fin d'année", "info": "Tapez | pour forcer un retour à la ligne" },
     { "type": "textarea", "id": "text", "label": "Texte", "default": "Une sélection pensée pour les fêtes, entre gourmandise et élégance." },
     { "type": "text", "id": "button_label", "label": "Bouton", "default": "Découvrir la sélection" },
     { "type": "url", "id": "button_url", "label": "Lien du bouton" }

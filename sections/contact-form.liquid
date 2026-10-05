@@ -2,7 +2,7 @@
   <div class="page-width" style="max-width: 40rem;">
     <div class="section-heading section-heading--center" data-animate>
       {% if section.settings.eyebrow != blank %}<p class="eyebrow" style="justify-content:center;">{{ section.settings.eyebrow }}</p>{% endif %}
-      <h1>{{ section.settings.title }}</h1>
+      <h1>{{ section.settings.title | escape | replace: '|', '<br>' }}</h1>
       {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
     </div>
 
@@ -54,7 +54,7 @@
       "default": "ivoire"
     },
     { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Contact" },
-    { "type": "text", "id": "title", "label": "Titre", "default": "Parlons-en" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Parlons-en", "info": "Tapez | pour forcer un retour à la ligne" },
     { "type": "textarea", "id": "text", "label": "Texte", "default": "Une question sur un produit, une commande ou une envie de cadeau ? Écrivez-nous." }
   ]
 }

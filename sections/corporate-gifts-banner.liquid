@@ -17,7 +17,7 @@
   <div class="editorial-split__content{% if section.settings.color_scheme == 'chocolat' %} has-frame{% endif %}">
     <div class="editorial-split__inner" data-animate>
       {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
-      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title | escape | replace: '|', '<br>' }}</h2>{% endif %}
       {% if section.settings.text != blank %}<div class="editorial-split__text">{{ section.settings.text }}</div>{% endif %}
 
       {% if section.settings.note != blank %}
@@ -58,7 +58,7 @@
     },
     { "type": "image_picker", "id": "image", "label": "Photographie" },
     { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Entreprises" },
-    { "type": "text", "id": "title", "label": "Titre", "default": "Des cadeaux qui ont du goût" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Des cadeaux qui ont du goût", "info": "Tapez | pour forcer un retour à la ligne" },
     {
       "type": "textarea",
       "id": "text",

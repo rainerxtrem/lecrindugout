@@ -46,7 +46,7 @@
         <p class="eyebrow">{{ section.settings.eyebrow }}</p>
       {% endif %}
       {% if section.settings.title != blank %}
-        <h1>{{ section.settings.title }}</h1>
+        <h1>{{ section.settings.title | escape | replace: '|', '<br>' }}</h1>
       {% endif %}
       {% if section.settings.text != blank %}
         <p>{{ section.settings.text }}</p>
@@ -125,7 +125,8 @@
       "type": "text",
       "id": "title",
       "label": "Titre",
-      "default": "Le goût des belles choses"
+      "default": "Le goût des belles choses",
+      "info": "Tapez | pour forcer un retour à la ligne"
     },
     {
       "type": "textarea",

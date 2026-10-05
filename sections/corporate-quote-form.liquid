@@ -2,7 +2,7 @@
   <div class="page-width" style="max-width: 44rem;">
     <div class="section-heading section-heading--center" data-animate>
       {% if section.settings.eyebrow != blank %}<p class="eyebrow" style="justify-content:center;">{{ section.settings.eyebrow }}</p>{% endif %}
-      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title | escape | replace: '|', '<br>' }}</h2>{% endif %}
       {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
     </div>
 
@@ -90,7 +90,7 @@
       "default": "sable"
     },
     { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Votre projet" },
-    { "type": "text", "id": "title", "label": "Titre", "default": "Parlons de votre projet" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Parlons de votre projet", "info": "Tapez | pour forcer un retour à la ligne" },
     {
       "type": "textarea",
       "id": "text",

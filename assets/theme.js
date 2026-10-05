@@ -19,6 +19,17 @@
     onScroll();
   }
 
+  /* ---------------- Pas de mot seul en fin de paragraphe ---------------- */
+  // Les navigateurs récents le font via text-wrap: pretty ; sinon on lie les deux derniers mots
+  if (!(window.CSS && CSS.supports("text-wrap", "pretty"))) {
+    document.querySelectorAll(".rich-text__text p, .editorial-split__text, .rte p, .section-heading p").forEach(function (el) {
+      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      var last = null;
+      while (walker.nextNode()) { if (walker.currentNode.nodeValue.trim()) last = walker.currentNode; }
+      if (last) last.nodeValue = last.nodeValue.replace(/ (\S+\s*)$/, "\u00a0$1");
+    });
+  }
+
   /* ---------------- Mega menu (desktop) ---------------- */
   var navItems = document.querySelectorAll("[data-nav-item]");
   navItems.forEach(function (item) {

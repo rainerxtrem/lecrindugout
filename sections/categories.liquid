@@ -2,7 +2,7 @@
   <div class="page-width">
     <div class="section-heading{% if section.settings.center_heading %} section-heading--center{% endif %}" data-animate>
       {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
-      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title | escape | replace: '|', '<br>' }}</h2>{% endif %}
       {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
     </div>
 
@@ -69,7 +69,7 @@
     },
     { "type": "checkbox", "id": "center_heading", "label": "Centrer le titre", "default": true },
     { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Collections" },
-    { "type": "text", "id": "title", "label": "Titre", "default": "Explorer l'épicerie" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Explorer l'épicerie", "info": "Tapez | pour forcer un retour à la ligne" },
     { "type": "textarea", "id": "text", "label": "Texte", "default": "Des grandes familles de produits, pensées pour la cuisine, la dégustation et le cadeau." }
   ],
   "blocks": [

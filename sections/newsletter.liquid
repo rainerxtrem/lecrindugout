@@ -2,7 +2,7 @@
   <div class="page-width">
     <div class="newsletter__inner" data-animate>
       {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
-      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title | escape | replace: '|', '<br>' }}</h2>{% endif %}
       {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
 
       {% form 'customer', id: 'NewsletterForm' %}
@@ -48,7 +48,7 @@
     },
     { "type": "checkbox", "id": "stripes", "label": "Fines rayures sur le fond", "default": false },
     { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Newsletter" },
-    { "type": "text", "id": "title", "label": "Titre", "default": "Les nouvelles gourmandes" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Les nouvelles gourmandes", "info": "Tapez | pour forcer un retour à la ligne" },
     {
       "type": "textarea",
       "id": "text",

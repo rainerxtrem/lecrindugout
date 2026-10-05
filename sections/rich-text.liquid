@@ -2,7 +2,7 @@
   <div class="page-width">
     <div class="rich-text" data-animate>
       {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
-      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title | escape | replace: '|', '<br>' }}</h2>{% endif %}
       {% if section.settings.text != blank %}<div class="rich-text__text">{{ section.settings.text }}</div>{% endif %}
       {% if section.settings.button_label != blank %}
         <a href="{{ section.settings.button_url | default: routes.collections_url }}" class="btn btn--outline">{{ section.settings.button_label }}</a>
@@ -30,7 +30,7 @@
       "default": "ivoire"
     },
     { "type": "text", "id": "eyebrow", "label": "Mention courte" },
-    { "type": "text", "id": "title", "label": "Titre", "default": "Le goût du beau produit" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Le goût du beau produit", "info": "Tapez | pour forcer un retour à la ligne" },
     { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Une sélection exigeante de produits d'artisans et de petites maisons.</p>" },
     { "type": "text", "id": "button_label", "label": "Bouton" },
     { "type": "url", "id": "button_url", "label": "Lien du bouton" }

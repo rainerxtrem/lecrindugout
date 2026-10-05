@@ -17,7 +17,7 @@
   <div class="editorial-split__content">
     <div class="editorial-split__inner" data-animate>
       {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
-      {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title | escape | replace: '|', '<br>' }}</h2>{% endif %}
       {% if section.settings.text != blank %}<div class="editorial-split__text">{{ section.settings.text | newline_to_br }}</div>{% endif %}
       {% if section.settings.signature != blank %}<p class="editorial-split__signature">{{ section.settings.signature }}</p>{% endif %}
       {% if section.settings.button_label != blank %}
@@ -59,7 +59,7 @@
     },
     { "type": "image_picker", "id": "image", "label": "Image" },
     { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Notre sélection" },
-    { "type": "text", "id": "title", "label": "Titre", "default": "Des produits qui ont une histoire" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Des produits qui ont une histoire", "info": "Tapez | pour forcer un retour à la ligne" },
     {
       "type": "textarea",
       "id": "text",

@@ -66,6 +66,8 @@ h3 { font-size: calc(clamp(1.05rem, 0.98rem + 0.35vw, 1.3rem) * var(--heading-sc
 h4 { font-size: calc(clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem) * var(--heading-scale, 100) / 100); }
 
 p { margin: 0 0 1em; }
+h1, h2, h3 { text-wrap: balance; }
+p, li, .rte, .rich-text__text, .editorial-split__text { text-wrap: pretty; }
 p:last-child { margin-bottom: 0; }
 
 .visually-hidden {
