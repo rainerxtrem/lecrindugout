@@ -42,7 +42,7 @@
         "a3"
       ],
       "settings": {
-        "enable": true,
+        "enable": false,
         "color_scheme": "taupe-fonce"
       }
     },
