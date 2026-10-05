@@ -1,20 +1,48 @@
+{%- comment -%}
+  Les marges sont portées par le bloc intérieur : sans produit à montrer, la section ne prend aucune place.
+  1) Au chargement : autres produits de la même collection (repli).
+  2) Le script remplace ce repli par les recommandations Shopify, s'il y en a.
+{%- endcomment -%}
 <div
-  class="section color-scheme-{{ section.settings.color_scheme }}"
+  class="product-recommendations color-scheme-{{ section.settings.color_scheme }}"
   data-product-recommendations
   data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}&intent=related"
 >
-  {% if recommendations.performed and recommendations.products_count > 0 %}
-    <div class="page-width">
-      <div class="section-heading section-heading--center" data-animate>
-        <h2>{{ section.settings.title | escape | replace: '|', '<br>' }}</h2>
-      </div>
-      <div class="grid grid--collection">
-        {% for product in recommendations.products %}
-          {% render 'product-card', product: product %}
-        {% endfor %}
+  {%- liquid
+    assign limit = section.settings.products_to_show
+    unless recommendations.performed
+      assign fallback_collection = nil
+      for c in product.collections
+        if c.handle != 'all' and c.handle != 'frontpage' and c.products_count > 1
+          assign fallback_collection = c
+          break
+        endif
+      endfor
+    endunless
+  -%}
+  {%- capture cards -%}
+    {%- if recommendations.performed -%}
+      {%- for p in recommendations.products -%}{% render 'product-card', product: p %}{%- endfor -%}
+    {%- elsif fallback_collection -%}
+      {%- assign shown = 0 -%}
+      {%- for p in fallback_collection.products limit: 24 -%}
+        {%- if p.id != product.id and p.available and shown < limit -%}
+          {% render 'product-card', product: p %}
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endcapture -%}
+  {%- if cards != blank -%}
+    <div class="section">
+      <div class="page-width">
+        <div class="section-heading section-heading--center" data-animate>
+          <h2>{{ section.settings.title | escape | replace: '|', '<br>' }}</h2>
+        </div>
+        <div class="grid grid--collection">{{ cards }}</div>
       </div>
     </div>
-  {% endif %}
+  {%- endif -%}
 </div>
 
 {% schema %}

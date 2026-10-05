@@ -363,3 +363,6 @@
   .promo-banner--image .promo-banner__media { aspect-ratio: auto; }
   .promo-banner--reverse .promo-banner__media { order: 2; }
 }
+
+/* ---------- Produits complémentaires ---------- */
+.product-recommendations:empty { display: none; }
