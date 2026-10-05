@@ -379,3 +379,22 @@
   .hero__actions { flex-direction: column; align-items: stretch; max-width: 22rem; margin-inline: auto; }
   .hero__actions .btn { width: 100%; min-width: 0; }
 }
+
+/* ---------- Message de collection (ex. paniers déjà prêts / sur mesure) ---------- */
+.collection-message {
+  max-width: 44rem;
+  margin: -12px auto 8px;
+  padding: 26px 32px;
+  text-align: center;
+  border: 1px solid var(--color-gold-line);
+  background: var(--color-off-white);
+}
+.collection-message__text { font-size: 1.02rem; line-height: 1.75; text-wrap: pretty; }
+.collection-message__text p { margin: 0 0 0.6em; }
+.collection-message__text p:last-child { margin: 0; }
+.collection-message__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 22px; }
+@media screen and (max-width: 599px) {
+  .collection-message { padding: 22px 18px; }
+  .collection-message__actions { flex-direction: column; }
+  .collection-message__actions .btn { width: 100%; min-width: 0; }
+}

@@ -18,6 +18,24 @@
           <div class="collection-header__description rte">{{ collection.description }}</div>
         {% endif %}
       </div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'collection_message' and block.settings.collection == collection.handle -%}
+          <div class="collection-message" data-animate {{ block.shopify_attributes }}>
+            {% if block.settings.text != blank %}<div class="collection-message__text">{{ block.settings.text }}</div>{% endif %}
+            {% if block.settings.button_label != blank or block.settings.button_label_2 != blank %}
+              <div class="collection-message__actions">
+                {% if block.settings.button_label != blank %}
+                  <a href="{{ block.settings.button_url | default: '/pages/contact' }}" class="btn">{{ block.settings.button_label }}</a>
+                {% endif %}
+                {% if block.settings.button_label_2 != blank %}
+                  <a href="{{ block.settings.button_url_2 | default: routes.collections_url }}" class="btn btn--outline">{{ block.settings.button_label_2 }}</a>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
 
     {% paginate collection.products by section.settings.products_per_page %}
@@ -134,6 +152,20 @@
     { "type": "checkbox", "id": "show_image", "label": "Afficher l'image de collection", "default": true },
     { "type": "checkbox", "id": "enable_filters", "label": "Activer les filtres", "default": true },
     { "type": "range", "id": "products_per_page", "label": "Produits par page", "min": 8, "max": 48, "step": 4, "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "collection_message",
+      "name": "Message de collection",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection concernée", "info": "Le message n'apparaît que sur la page de cette collection" },
+        { "type": "richtext", "id": "text", "label": "Texte" },
+        { "type": "text", "id": "button_label", "label": "Bouton principal" },
+        { "type": "url", "id": "button_url", "label": "Lien du bouton principal", "info": "Si vide : page Contact" },
+        { "type": "text", "id": "button_label_2", "label": "Bouton secondaire" },
+        { "type": "url", "id": "button_url_2", "label": "Lien du bouton secondaire", "info": "Si vide : toutes les collections" }
+      ]
+    }
   ]
 }
 {% endschema %}
