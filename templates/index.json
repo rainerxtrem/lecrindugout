@@ -217,6 +217,7 @@
         "enable": true,
         "color_scheme": "taupe-fonce",
         "frame": true,
+        "image": "shopify://shop_images/IMG_5918.jpg",
         "image_position": "left",
         "icon": "star",
         "eyebrow": "Cet hiver",
