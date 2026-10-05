@@ -24,10 +24,35 @@
   navItems.forEach(function (item) {
     var trigger = item.querySelector("[data-nav-trigger]");
     if (!trigger) return;
-    var open = function () { item.classList.add("is-open"); trigger.setAttribute("aria-expanded", "true"); };
-    var close = function () { item.classList.remove("is-open"); trigger.setAttribute("aria-expanded", "false"); };
+    var closeTimer = null;
+    var open = function () {
+      clearTimeout(closeTimer);
+      navItems.forEach(function (other) {
+        if (other !== item && other.classList.contains("is-open")) {
+          other.classList.remove("is-open");
+          var t = other.querySelector("[data-nav-trigger]");
+          if (t) t.setAttribute("aria-expanded", "false");
+        }
+      });
+      item.classList.add("is-open");
+      trigger.setAttribute("aria-expanded", "true");
+    };
+    var close = function () {
+      clearTimeout(closeTimer);
+      item.classList.remove("is-open");
+      trigger.setAttribute("aria-expanded", "false");
+    };
+    // Petit délai avant fermeture : la souris peut s'écarter brièvement en descendant vers le menu
+    var scheduleClose = function () {
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(close, 300);
+    };
     item.addEventListener("mouseenter", open);
-    item.addEventListener("mouseleave", close);
+    item.addEventListener("mouseleave", scheduleClose);
+    trigger.addEventListener("click", function () {
+      // Souris : le survol ouvre déjà le menu, le clic le garde ouvert. Tactile : le clic bascule.
+      if (window.matchMedia("(hover: hover)").matches || !item.classList.contains("is-open")) { open(); } else { close(); }
+    });
     trigger.addEventListener("focus", open);
     item.addEventListener("focusout", function (e) {
       if (!item.contains(e.relatedTarget)) close();
