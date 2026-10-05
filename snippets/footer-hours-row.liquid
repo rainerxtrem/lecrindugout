@@ -1,0 +1,8 @@
+{%- comment -%} Une ligne d'horaires du pied de page (un jour ou une plage de jours) {%- endcomment -%}
+<div class="site-footer__hours-row">
+  <dt>{{ start | capitalize }}{% if end != start %} – {{ end | capitalize }}{% endif %}</dt>
+  <dd>
+    {%- assign slots = hours | split: '/' -%}
+    {%- for slot in slots -%}<span>{{ slot | strip | replace: ' - ', '–' | replace: '-', '–' }}</span>{%- endfor -%}
+  </dd>
+</div>

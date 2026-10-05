@@ -287,7 +287,7 @@
   padding-block: 56px 36px;
 }
 @media screen and (min-width: 700px) {
-  .site-footer__grid { grid-template-columns: 1.4fr; grid-auto-flow: column; grid-auto-columns: 1fr; padding-block: 72px 48px; }
+  .site-footer__grid { grid-template-columns: 1.4fr; grid-auto-flow: column; grid-auto-columns: 1fr; padding-block: 56px 40px; }
 }
 .site-footer__brand .site-header__logo-text { color: inherit; }
 .site-footer__tagline { margin-top: 14px; opacity: 0.85; max-width: 30ch; font-size: 0.92rem; }
@@ -306,30 +306,18 @@
 .site-footer__social svg { width: 20px; height: 20px; }
 .site-footer__contact p { margin: 0 0 10px; }
 .site-footer__contact a { text-decoration: underline; text-underline-offset: 3px; }
-.site-footer__hours {
-  margin: 0;
-  display: grid;
-  grid-template-columns: max-content max-content;
-  column-gap: 0;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-.site-footer__hours dt,
-.site-footer__hours dd {
-  padding-block: 8px;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-text-on-dark) 12%, transparent);
-}
+.site-footer__hours { margin: 0; display: grid; gap: 14px; font-size: 0.9rem; line-height: 1.45; }
 .site-footer__hours dt {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   opacity: 0.75;
-  padding-top: 10px;
-  padding-right: 22px;
+  margin-bottom: 3px;
 }
-.site-footer__hours dd { margin: 0; font-variant-numeric: tabular-nums; }
-.site-footer__hours dd span { display: block; white-space: nowrap; }
+.site-footer__hours dd { margin: 0; font-variant-numeric: tabular-nums; display: flex; flex-wrap: wrap; column-gap: 10px; }
+.site-footer__hours dd span { white-space: nowrap; }
+.site-footer__hours dd span + span::before { content: "·"; margin-right: 10px; opacity: 0.7; }
 .site-footer__hours-note { margin-top: 14px; font-size: 0.85rem; opacity: 0.8; }
 .site-footer__bottom {
   border-top: 1px solid color-mix(in srgb, var(--color-text-on-dark) 15%, transparent);

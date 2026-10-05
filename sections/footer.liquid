@@ -46,17 +46,27 @@
             </div>
           {% when 'hours' %}
             {%- capture hours_rows -%}
+              {%- comment -%} Jours consécutifs aux mêmes horaires regroupés : « Mardi – Mercredi » {%- endcomment -%}
               {%- assign days = 'lundi,mardi,mercredi,jeudi,vendredi,samedi,dimanche' | split: ',' -%}
+              {%- assign group_start = '' -%}
+              {%- assign group_end = '' -%}
+              {%- assign group_hours = '' -%}
               {%- for day in days -%}
-                {%- assign hours = block.settings[day] -%}
-                {%- if hours != blank -%}
-                  <dt>{{ day | capitalize }}</dt>
-                  <dd>
-                    {%- assign slots = hours | split: '/' -%}
-                    {%- for slot in slots -%}<span>{{ slot | strip | replace: ' - ', ' – ' }}</span>{%- endfor -%}
-                  </dd>
+                {%- assign hours = block.settings[day] | strip -%}
+                {%- if hours != blank and hours == group_hours -%}
+                  {%- assign group_end = day -%}
+                {%- else -%}
+                  {%- if group_hours != blank -%}
+                    {% render 'footer-hours-row', start: group_start, end: group_end, hours: group_hours %}
+                  {%- endif -%}
+                  {%- assign group_start = day -%}
+                  {%- assign group_end = day -%}
+                  {%- assign group_hours = hours -%}
                 {%- endif -%}
               {%- endfor -%}
+              {%- if group_hours != blank -%}
+                {% render 'footer-hours-row', start: group_start, end: group_end, hours: group_hours %}
+              {%- endif -%}
             {%- endcapture -%}
             {% if hours_rows != blank %}
               <div {{ block.shopify_attributes }}>
