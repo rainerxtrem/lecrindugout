@@ -23,7 +23,9 @@
         "button_label": "Découvrir la boutique",
         "button_url": "shopify://collections/all",
         "button_label_2": "Composer un coffret",
-        "button_url_2": "shopify://pages/contact"
+        "button_url_2": "shopify://pages/contact",
+        "call_label": "Commander une planche apéritive / raclette",
+        "call_phone": "09 61 45 68 32"
       }
     },
     "reassurance": {

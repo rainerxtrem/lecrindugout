@@ -58,6 +58,17 @@
         {% if section.settings.button_label_2 != blank %}
           <a href="{{ section.settings.button_url_2 | default: routes.collections_url }}" class="btn btn--outline-light">{{ section.settings.button_label_2 }}</a>
         {% endif %}
+        {% if section.settings.call_label != blank and section.settings.call_phone != blank %}
+          {%- assign tel = section.settings.call_phone | remove: ' ' | remove: '.' | remove: '-' -%}
+          {%- assign tel_first = tel | slice: 0 -%}
+          {%- if tel.size == 10 and tel_first == '0' -%}
+            {%- assign tel = tel | remove_first: '0' | prepend: '+33' -%}
+          {%- endif -%}
+          <a href="tel:{{ tel }}" class="btn btn--outline-light btn--call">
+            {% render 'icon', name: 'phone' %}
+            <span>{{ section.settings.call_label }}</span>
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -155,6 +166,23 @@
       "type": "url",
       "id": "button_url_2",
       "label": "Lien du bouton secondaire"
+    },
+    {
+      "type": "header",
+      "content": "Bouton d'appel"
+    },
+    {
+      "type": "text",
+      "id": "call_label",
+      "label": "Texte du bouton d'appel",
+      "info": "Un clic lance l'appel (sur mobile, compose directement le numéro)",
+      "default": "Commander une planche apéritive / raclette"
+    },
+    {
+      "type": "text",
+      "id": "call_phone",
+      "label": "Numéro de téléphone",
+      "default": "09 61 45 68 32"
     }
   ],
   "presets": [
