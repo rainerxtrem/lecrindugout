@@ -92,9 +92,9 @@
 
 /* ---------- Texte d'introduction ---------- */
 
-.rich-text { max-width: 46rem; margin-inline: auto; text-align: center; }
+.rich-text { max-width: 52rem; margin-inline: auto; text-align: center; }
 .rich-text .eyebrow { justify-content: center; }
-.rich-text__text { margin: 24px auto 0; max-width: 38rem; font-size: 1.05rem; line-height: 1.8; }
+.rich-text__text { margin: 24px auto 0; max-width: 46rem; font-size: 1.05rem; line-height: 1.8; }
 .rich-text .btn { margin-top: 32px; }
 
 /* ---------- Bandeau entreprises (home) ---------- */
