@@ -16,7 +16,9 @@
           "type": "accordion",
           "settings": {
             "title": "Description",
-            "content": ""
+            "source": "description",
+            "content": "",
+            "open": true
           }
         },
         "a2": {
@@ -24,7 +26,8 @@
           "disabled": true,
           "settings": {
             "title": "Ingrédients",
-            "content": ""
+            "content": "",
+            "source": "custom"
           }
         },
         "a3": {
@@ -32,7 +35,8 @@
           "disabled": true,
           "settings": {
             "title": "Informations nutritionnelles",
-            "content": ""
+            "content": "",
+            "source": "custom"
           }
         },
         "a4": {
@@ -40,7 +44,8 @@
           "disabled": true,
           "settings": {
             "title": "Allergènes",
-            "content": ""
+            "content": "",
+            "source": "custom"
           }
         },
         "a5": {
@@ -48,7 +53,8 @@
           "disabled": true,
           "settings": {
             "title": "Conseils de dégustation",
-            "content": ""
+            "content": "",
+            "source": "custom"
           }
         }
       },
@@ -61,7 +67,7 @@
       ],
       "settings": {
         "color_scheme": "ivoire",
-        "show_short_description": true,
+        "show_short_description": false,
         "delivery_text": "Préparation en magasin rapide"
       }
     },

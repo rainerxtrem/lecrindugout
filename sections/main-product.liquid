@@ -117,16 +117,25 @@
           <div class="accordion" style="margin-top:32px;">
             {% for block in section.blocks %}
               {% if block.type == 'accordion' %}
-                {% assign panel_id = 'AccordionPanel-' | append: block.id %}
-                <div class="accordion__item" {{ block.shopify_attributes }}>
-                  <button class="accordion__trigger" data-accordion-trigger aria-expanded="false" aria-controls="{{ panel_id }}">
-                    {{ block.settings.title }}
-                    <span class="accordion__icon">{% render 'icon', name: 'plus' %}</span>
-                  </button>
-                  <div class="accordion__panel" id="{{ panel_id }}">
-                    <div class="accordion__panel-inner">{{ block.settings.content }}</div>
+                {%- liquid
+                  if block.settings.source == 'description'
+                    assign panel_content = product.description
+                  else
+                    assign panel_content = block.settings.content
+                  endif
+                -%}
+                {% if panel_content != blank %}
+                  {% assign panel_id = 'AccordionPanel-' | append: block.id %}
+                  <div class="accordion__item" {{ block.shopify_attributes }}>
+                    <button class="accordion__trigger" data-accordion-trigger aria-expanded="{{ block.settings.open }}" aria-controls="{{ panel_id }}">
+                      {{ block.settings.title }}
+                      <span class="accordion__icon">{% render 'icon', name: 'plus' %}</span>
+                    </button>
+                    <div class="accordion__panel{% if block.settings.open %} is-open{% endif %}" id="{{ panel_id }}">
+                      <div class="accordion__panel-inner rte">{{ panel_content }}</div>
+                    </div>
                   </div>
-                </div>
+                {% endif %}
               {% endif %}
             {% endfor %}
           </div>
@@ -150,7 +159,7 @@
       ],
       "default": "ivoire"
     },
-    { "type": "checkbox", "id": "show_short_description", "label": "Afficher un résumé de la description", "default": true },
+    { "type": "checkbox", "id": "show_short_description", "label": "Afficher un résumé de la description sous le prix", "default": false },
     { "type": "text", "id": "delivery_text", "label": "Texte de livraison", "default": "Expédition rapide en 24/48h" }
   ],
   "blocks": [
@@ -159,7 +168,23 @@
       "name": "Bloc accordéon",
       "settings": [
         { "type": "text", "id": "title", "label": "Titre", "default": "Description" },
-        { "type": "richtext", "id": "content", "label": "Contenu" }
+        {
+          "type": "select",
+          "id": "source",
+          "label": "Contenu affiché",
+          "options": [
+            { "value": "description", "label": "Description du produit (avec sa mise en forme)" },
+            { "value": "custom", "label": "Texte ci-dessous" }
+          ],
+          "default": "custom"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Texte",
+          "info": "Utilisé si « Texte ci-dessous » est choisi. Peut être relié à un métachamp produit (icône de source dynamique) pour un contenu propre à chaque produit."
+        },
+        { "type": "checkbox", "id": "open", "label": "Ouvert par défaut", "default": false }
       ]
     }
   ],

@@ -293,7 +293,12 @@ textarea { min-height: 120px; resize: vertical; }
   max-height: 0;
   transition: max-height 0.35s ease;
 }
-.accordion__panel-inner { padding: 0 2px 20px; opacity: 0.9; }
+.accordion__panel.is-open { max-height: none; }
+.accordion__panel-inner { padding: 0 2px 22px; }
+.accordion__panel-inner > :first-child { margin-top: 0; }
+.accordion__panel-inner.rte ul { list-style: disc; }
+.accordion__panel-inner.rte ol { list-style: decimal; }
+.accordion__panel-inner.rte strong, .accordion__panel-inner.rte b { font-weight: 600; }
 
 /* ---------- Cards (category / editorial) ---------- */
 

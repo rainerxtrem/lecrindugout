@@ -85,7 +85,15 @@
     trigger.addEventListener("click", function () {
       var expanded = trigger.getAttribute("aria-expanded") === "true";
       trigger.setAttribute("aria-expanded", String(!expanded));
-      panel.style.maxHeight = expanded ? "0px" : inner.scrollHeight + "px";
+      if (expanded) {
+        // Un panneau ouvert par défaut a max-height: none : on fixe sa hauteur avant de l'animer vers 0
+        panel.style.maxHeight = inner.scrollHeight + "px";
+        panel.offsetHeight;
+        panel.classList.remove("is-open");
+        panel.style.maxHeight = "0px";
+      } else {
+        panel.style.maxHeight = inner.scrollHeight + "px";
+      }
     });
   });
 
