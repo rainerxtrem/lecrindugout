@@ -84,7 +84,7 @@
 }
 .reassurance__icon {
   display: flex; align-items: center; justify-content: center;
-  color: var(--scheme-accent, var(--color-sage-dark));
+  color: var(--color-gold);
 }
 .reassurance__icon svg { width: 30px; height: 30px; stroke-width: 1.2; }
 .reassurance__label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; margin: 0; }

@@ -1,5 +1,5 @@
 {% if section.settings.enable %}
-<section class="seasonal color-scheme-{{ section.settings.color_scheme }}{% unless section.settings.image %} has-stripes{% endunless %}{% if section.settings.image %} seasonal--image{% endif %}">
+<section class="seasonal color-scheme-{{ section.settings.color_scheme }}{% unless section.settings.image %} has-stripes has-frame{% endunless %}{% if section.settings.image %} seasonal--image{% endif %}">
   {% if section.settings.image %}
     <div class="seasonal__media">
       <img

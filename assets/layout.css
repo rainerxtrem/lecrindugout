@@ -35,6 +35,7 @@
 .has-stripes {
   background-image: repeating-linear-gradient(90deg, var(--color-stripes) 0 1px, transparent 1px 6px);
 }
+.site-header { border-bottom: 1px solid var(--color-gold-line); }
 .site-header.is-stuck { box-shadow: 0 8px 24px rgba(20,15,10,0.18); }
 
 .site-header__top {
@@ -266,6 +267,7 @@
 
 .site-footer {
   background-color: var(--scheme-bg, var(--color-chocolate));
+  border-top: 1px solid var(--color-gold-line);
   color: var(--scheme-text, var(--color-ivory));
 }
 .site-footer a:hover { opacity: 0.75; }

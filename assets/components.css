@@ -320,7 +320,7 @@ textarea { min-height: 120px; resize: vertical; }
   width: 28px;
   height: 1px;
   margin: 12px auto 0;
-  background: var(--scheme-accent, currentColor);
+  background: var(--color-gold);
   transition: width 0.3s ease;
 }
 .category-card:hover .category-card__content h3::after { width: 56px; }

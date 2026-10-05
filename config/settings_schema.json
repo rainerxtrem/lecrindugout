@@ -94,20 +94,20 @@
       {
         "type": "color",
         "id": "color_ivory",
-        "label": "Ivoire",
-        "default": "#F7F2E7"
+        "label": "Fond clair principal",
+        "default": "#EEEAE7"
       },
       {
         "type": "color",
         "id": "color_off_white",
         "label": "Blanc cassé",
-        "default": "#FBFAF6"
+        "default": "#F7F5F3"
       },
       {
         "type": "color",
         "id": "color_sand",
         "label": "Sable / beige chaud",
-        "default": "#E7D9BC"
+        "default": "#E3DCD6"
       },
       {
         "type": "header",
@@ -145,7 +145,7 @@
         "type": "color",
         "id": "color_gold",
         "label": "Doré discret (accent)",
-        "default": "#B38B4D"
+        "default": "#C29550"
       },
       {
         "type": "header",
@@ -154,20 +154,20 @@
       {
         "type": "color",
         "id": "color_brown",
-        "label": "Brun profond",
-        "default": "#4B3A2F"
+        "label": "Prune (bandeaux foncés, étiquettes)",
+        "default": "#4A3539"
       },
       {
         "type": "color",
         "id": "color_chocolate",
-        "label": "Fond sombre (header, pied de page, bandeaux)",
-        "default": "#A0503A"
+        "label": "Taupe (header, pied de page, bandeaux)",
+        "default": "#746764"
       },
       {
         "type": "color",
         "id": "color_stripes",
         "label": "Couleur des rayures",
-        "default": "#F6D9C4"
+        "default": "#C29550"
       },
       {
         "type": "range",
@@ -177,13 +177,13 @@
         "max": 100,
         "step": 5,
         "unit": "%",
-        "default": 30
+        "default": 0
       },
       {
         "type": "color",
         "id": "color_ink",
         "label": "Noir doux (texte)",
-        "default": "#2A2420"
+        "default": "#2E1A1E"
       },
       {
         "type": "header",
@@ -193,13 +193,13 @@
         "type": "color",
         "id": "color_text_on_light",
         "label": "Texte sur fond clair",
-        "default": "#2A2420"
+        "default": "#3A2E2C"
       },
       {
         "type": "color",
         "id": "color_text_on_dark",
         "label": "Texte sur fond profond",
-        "default": "#F7F2E7"
+        "default": "#F7F5F3"
       }
     ]
   },
