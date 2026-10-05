@@ -1,0 +1,101 @@
+{%- liquid
+  assign has_image = false
+  if section.settings.image != blank
+    assign has_image = true
+  endif
+-%}
+{% if section.settings.enable %}
+<section class="promo-banner color-scheme-{{ section.settings.color_scheme }}{% if has_image %} promo-banner--image{% if section.settings.image_position == 'right' %} promo-banner--reverse{% endif %}{% endif %}">
+  {% if has_image %}
+    <div class="promo-banner__media">
+      <img
+        src="{{ section.settings.image | image_url: width: 1400 }}"
+        srcset="{{ section.settings.image | image_url: width: 750 }} 750w, {{ section.settings.image | image_url: width: 1100 }} 1100w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+        sizes="(min-width: 900px) 50vw, 100vw"
+        alt="{{ section.settings.image.alt | default: section.settings.title | remove: '|' | escape }}"
+        loading="lazy"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+        style="object-position: {{ section.settings.image.presentation.focal_point | default: 'center' }};"
+      >
+    </div>
+  {% endif %}
+
+  <div class="promo-banner__content{% if section.settings.frame %} has-frame{% endif %}">
+    <div class="promo-banner__inner" data-animate>
+      {% if section.settings.icon != 'none' %}
+        <span class="promo-banner__icon">{% render 'icon', name: section.settings.icon %}</span>
+      {% endif %}
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+      {% if section.settings.title != blank %}<h2>{{ section.settings.title | escape | replace: '|', '<br>' }}</h2>{% endif %}
+      {% if section.settings.text != blank %}<div class="promo-banner__text">{{ section.settings.text }}</div>{% endif %}
+      {% if section.settings.note != blank %}<p class="promo-banner__note">{{ section.settings.note }}</p>{% endif %}
+      {% if section.settings.button_label != blank %}
+        <a href="{{ section.settings.button_url | default: '/pages/contact' }}" class="btn">{{ section.settings.button_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Bandeau promotionnel",
+  "settings": [
+    { "type": "checkbox", "id": "enable", "label": "Afficher ce bandeau", "default": true },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Ambiance de couleur",
+      "options": [
+        { "value": "chocolat", "label": "Taupe" },
+        { "value": "taupe-fonce", "label": "Prune" },
+        { "value": "lin", "label": "Lin (taupe clair)" },
+        { "value": "blanc-casse", "label": "Blanc cassé" }
+      ],
+      "default": "chocolat"
+    },
+    { "type": "checkbox", "id": "frame", "label": "Cadre doré", "default": true },
+    { "type": "header", "content": "Photo" },
+    { "type": "image_picker", "id": "image", "label": "Photo", "info": "Facultatif : sans photo, le texte est centré sur toute la largeur" },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Position de la photo",
+      "options": [
+        { "value": "left", "label": "Gauche" },
+        { "value": "right", "label": "Droite" }
+      ],
+      "default": "left"
+    },
+    { "type": "header", "content": "Texte" },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Icône",
+      "options": [
+        { "value": "none", "label": "Aucune" },
+        { "value": "gift", "label": "Cadeau" },
+        { "value": "star", "label": "Étoile" },
+        { "value": "leaf", "label": "Feuille" },
+        { "value": "pin", "label": "Boutique" }
+      ],
+      "default": "star"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Mention courte", "default": "Cet hiver" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Plateaux raclette | sur commande", "info": "Tapez | pour forcer un retour à la ligne" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte",
+      "default": "<p>Fromages affinés, charcuteries fines et accompagnements : nous préparons votre plateau raclette, prêt à partager.</p>"
+    },
+    { "type": "text", "id": "note", "label": "Précision (facultatif)", "default": "Sur commande au 09 61 45 68 32 ou en boutique" },
+    { "type": "text", "id": "button_label", "label": "Bouton", "default": "Commander mon plateau" },
+    { "type": "url", "id": "button_url", "label": "Lien du bouton", "info": "Si vide : page Contact" }
+  ],
+  "presets": [
+    { "name": "Bandeau promotionnel" }
+  ]
+}
+{% endschema %}

@@ -210,6 +210,22 @@
         "button_label": "Réserver mon coffret",
         "button_url": "shopify://pages/contact"
       }
+    },
+    "raclette": {
+      "type": "promo-banner",
+      "settings": {
+        "enable": true,
+        "color_scheme": "taupe-fonce",
+        "frame": true,
+        "image_position": "left",
+        "icon": "star",
+        "eyebrow": "Cet hiver",
+        "title": "Plateaux raclette | sur commande",
+        "text": "<p>Fromages affinés, charcuteries fines et accompagnements : nous préparons votre plateau raclette, prêt à partager.</p>",
+        "note": "Sur commande au 09 61 45 68 32 ou en boutique",
+        "button_label": "Commander mon plateau",
+        "button_url": "shopify://pages/contact"
+      }
     }
   },
   "order": [
@@ -220,6 +236,7 @@
     "categories",
     "corporate-banner",
     "postal-shipping",
-    "seasonal"
+    "seasonal",
+    "raclette"
   ]
 }
