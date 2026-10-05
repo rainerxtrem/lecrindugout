@@ -64,9 +64,10 @@
           {%- if tel.size == 10 and tel_first == '0' -%}
             {%- assign tel = tel | remove_first: '0' | prepend: '+33' -%}
           {%- endif -%}
-          <a href="tel:{{ tel }}" class="btn btn--outline-light btn--call">
+          <a href="tel:{{ tel }}" class="btn btn--outline-light btn--call" aria-label="{{ section.settings.call_label | escape }} : {{ section.settings.call_phone | escape }}">
             {% render 'icon', name: 'phone' %}
             <span>{{ section.settings.call_label }}</span>
+            <span class="btn--call__number" aria-hidden="true">{{ section.settings.call_phone }}</span>
           </a>
         {% endif %}
       </div>
