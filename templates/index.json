@@ -179,15 +179,16 @@
         "eyebrow": "Sur mesure",
         "title": "Composez votre coffret",
         "text": "Un anniversaire, un remerciement, une table de fête : choisissez les produits, nous les mettons en écrin. Emballage soigné, mot manuscrit, retrait en boutique — le cadeau qui ne ressemble à aucun autre.",
-        "note": "Entreprises : coffrets personnalisés pour vos collaborateurs et clients, sur devis.",
-        "button_label": "Demander un coffret",
-        "button_url": "shopify://pages/contact",
+        "note": "Entreprises : coffrets personnalisés pour vos collaborateurs et clients, sur devis. Certains de nos coffrets sont spécialement adaptés à l'expédition par voie postale.",
+        "button_label": "Réserver mon coffret",
+        "button_url": "shopify://collections/paniers-gourmands",
         "button_label_2": "Demander un devis",
         "button_url_2": "shopify://pages/contact"
       }
     },
     "postal-shipping": {
       "type": "postal-shipping",
+      "disabled": true,
       "settings": {
         "color_scheme": "sable",
         "eyebrow": "Expédition",
@@ -199,6 +200,7 @@
     },
     "seasonal": {
       "type": "seasonal",
+      "disabled": true,
       "settings": {
         "enable": true,
         "color_scheme": "chocolat",
