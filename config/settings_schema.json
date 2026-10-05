@@ -160,8 +160,24 @@
       {
         "type": "color",
         "id": "color_chocolate",
-        "label": "Chocolat",
-        "default": "#3A2A1F"
+        "label": "Fond sombre (header, pied de page, bandeaux)",
+        "default": "#746764"
+      },
+      {
+        "type": "color",
+        "id": "color_stripes",
+        "label": "Couleur des rayures",
+        "default": "#CFC8C5"
+      },
+      {
+        "type": "range",
+        "id": "stripes_opacity",
+        "label": "Intensité des rayures",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 30
       },
       {
         "type": "color",

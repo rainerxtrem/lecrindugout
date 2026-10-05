@@ -90,7 +90,7 @@
 .badge--sale { background: var(--color-terracotta); }
 .badge--new { background: var(--color-sage-dark); }
 .badge--sold-out { background: color-mix(in srgb, var(--color-ink) 50%, transparent); }
-.badge--gold { background: var(--color-gold); color: var(--color-chocolate); }
+.badge--gold { background: var(--color-gold); color: var(--color-ink); }
 
 /* ---------- Product card ---------- */
 

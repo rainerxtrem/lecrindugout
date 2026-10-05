@@ -33,7 +33,7 @@
   transition: box-shadow 0.3s ease;
 }
 .has-stripes {
-  background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.045) 0 2px, transparent 2px 7px);
+  background-image: repeating-linear-gradient(90deg, var(--color-stripes) 0 1px, transparent 1px 6px);
 }
 .site-header.is-stuck { box-shadow: 0 8px 24px rgba(20,15,10,0.18); }
 
@@ -99,8 +99,8 @@
   min-width: 18px; height: 18px;
   padding: 0 4px;
   border-radius: 9px;
-  background: var(--color-gold);
-  color: var(--color-chocolate);
+  background: var(--color-ivory);
+  color: var(--color-ink);
   font-size: 0.66rem;
   font-weight: 600;
   display: flex; align-items: center; justify-content: center;
@@ -265,7 +265,7 @@
 /* ---------- Footer ---------- */
 
 .site-footer {
-  background: var(--scheme-bg, var(--color-chocolate));
+  background-color: var(--scheme-bg, var(--color-chocolate));
   color: var(--scheme-text, var(--color-ivory));
 }
 .site-footer a:hover { opacity: 0.75; }

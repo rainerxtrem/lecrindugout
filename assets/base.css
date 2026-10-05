@@ -192,9 +192,9 @@ p:last-child { margin-bottom: 0; }
   --scheme-text: var(--color-text-on-dark);
   --scheme-heading: var(--color-text-on-dark);
   --scheme-border: color-mix(in srgb, var(--color-text-on-dark) 20%, transparent);
-  --scheme-accent: var(--color-gold-light);
-  --scheme-button-bg: var(--color-gold);
-  --scheme-button-text: var(--color-chocolate);
+  --scheme-accent: var(--color-text-on-dark);
+  --scheme-button-bg: var(--color-ivory);
+  --scheme-button-text: var(--color-ink);
 }
 .color-scheme-brun {
   --scheme-bg: var(--color-brown);
