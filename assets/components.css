@@ -88,7 +88,7 @@
   color: var(--color-ivory);
 }
 .badge--sale { background: var(--color-terracotta); }
-.badge--new { background: var(--color-sage-dark); }
+.badge--new { background: var(--color-taupe-deep); }
 .badge--sold-out { background: color-mix(in srgb, var(--color-ink) 50%, transparent); }
 .badge--gold { background: var(--color-gold); color: var(--color-ink); }
 
@@ -221,7 +221,7 @@ textarea {
 }
 textarea { min-height: 120px; resize: vertical; }
 .field__input:focus, textarea:focus, select:focus {
-  border-color: var(--color-sage-dark);
+  border-color: var(--color-chocolate);
 }
 .form-grid {
   display: grid;
@@ -237,7 +237,7 @@ textarea { min-height: 120px; resize: vertical; }
   border-radius: var(--radius-button);
   font-size: 0.9rem;
 }
-.form-status--success { background: color-mix(in srgb, var(--color-sage-dark) 15%, transparent); }
+.form-status--success { background: var(--color-linen); }
 .form-status--error { background: color-mix(in srgb, var(--color-terracotta) 18%, transparent); }
 
 /* ---------- Quantity selector ---------- */
@@ -340,7 +340,7 @@ textarea { min-height: 120px; resize: vertical; }
   font-size: 0.85rem;
   padding: 12px 16px;
   border-radius: var(--radius-button);
-  background: color-mix(in srgb, var(--color-sage) 30%, var(--color-off-white));
+  background: var(--color-linen);
 }
 
 /* ---------- Visuel de remplacement (produit sans photo) ---------- */

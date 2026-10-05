@@ -14,7 +14,7 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "color_scheme": "sauge-profond",
+        "color_scheme": "lin",
         "stripes": false,
         "eyebrow": "Newsletter",
         "title": "Les nouvelles gourmandes",

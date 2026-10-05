@@ -86,7 +86,7 @@
     "editorial-story": {
       "type": "editorial-block",
       "settings": {
-        "color_scheme": "sauge-profond",
+        "color_scheme": "taupe-fonce",
         "image_position": "left",
         "image": "shopify://shop_images/20260620_161840.jpg",
         "eyebrow": "Notre exigence",

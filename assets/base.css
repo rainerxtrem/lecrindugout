@@ -38,6 +38,8 @@ img, picture, svg { max-width: 100%; display: block; }
   --color-terracotta-bg: color-mix(in srgb, var(--color-terracotta) 75%, var(--color-ink));
   --color-sage-deep: color-mix(in srgb, var(--color-sage-dark) 40%, var(--color-ink));
   --color-gold-light: color-mix(in srgb, var(--color-gold) 60%, var(--color-ivory));
+  --color-taupe-deep: color-mix(in srgb, var(--color-chocolate) 60%, var(--color-ink));
+  --color-linen: color-mix(in srgb, var(--color-stripes-solid, #CFC8C5) 50%, var(--color-ivory));
 }
 
 a { color: inherit; text-decoration: none; }
@@ -92,7 +94,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-sage-dark);
+  outline: 2px solid var(--color-chocolate);
   outline-offset: 2px;
 }
 
@@ -138,7 +140,7 @@ p:last-child { margin-bottom: 0; }
   --scheme-text: var(--color-text-on-light);
   --scheme-heading: var(--color-ink);
   --scheme-border: color-mix(in srgb, var(--color-ink) 12%, transparent);
-  --scheme-accent: var(--color-sage-dark);
+  --scheme-accent: var(--color-taupe-deep);
   --scheme-button-bg: var(--color-ink);
   --scheme-button-text: var(--color-ivory);
 }
@@ -184,6 +186,24 @@ p:last-child { margin-bottom: 0; }
   --scheme-heading: var(--color-text-on-dark);
   --scheme-border: color-mix(in srgb, var(--color-text-on-dark) 25%, transparent);
   --scheme-accent: var(--color-text-on-dark);
+  --scheme-button-bg: var(--color-ink);
+  --scheme-button-text: var(--color-ivory);
+}
+.color-scheme-taupe-fonce {
+  --scheme-bg: var(--color-taupe-deep);
+  --scheme-text: var(--color-text-on-dark);
+  --scheme-heading: var(--color-text-on-dark);
+  --scheme-border: color-mix(in srgb, var(--color-text-on-dark) 20%, transparent);
+  --scheme-accent: var(--color-text-on-dark);
+  --scheme-button-bg: var(--color-ivory);
+  --scheme-button-text: var(--color-ink);
+}
+.color-scheme-lin {
+  --scheme-bg: var(--color-linen);
+  --scheme-text: var(--color-text-on-light);
+  --scheme-heading: var(--color-ink);
+  --scheme-border: color-mix(in srgb, var(--color-ink) 14%, transparent);
+  --scheme-accent: var(--color-taupe-deep);
   --scheme-button-bg: var(--color-ink);
   --scheme-button-text: var(--color-ivory);
 }
