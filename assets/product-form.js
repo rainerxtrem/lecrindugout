@@ -53,6 +53,11 @@
     }
 
     function findVariant() {
+      // Produit sans choix d'options (variante unique) : on garde la variante déjà sélectionnée
+      if (optionInputs.length === 0) {
+        var currentId = idInput ? String(idInput.value) : "";
+        return variants.find(function (v) { return String(v.id) === currentId; }) || variants[0];
+      }
       var selected = getSelectedOptions();
       return variants.find(function (v) {
         return v.options.length === selected.length && v.options.every(function (opt, i) { return opt === selected[i]; });
