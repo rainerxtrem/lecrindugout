@@ -14,10 +14,10 @@
           "settings": {
             "collection": "paniers-gourmands",
             "text": "<p>Nos paniers gourmands sont <strong>déjà composés</strong> et prêts à offrir : une sélection pensée avec soin, présentée avec élégance.</p><p>Envie d'un cadeau qui vous ressemble ? <strong>Composez votre propre panier</strong> avec les produits de votre choix, nous nous occupons du reste.</p>",
-            "button_label": "Composer mon panier sur mesure",
-            "button_url": "shopify://pages/contact",
-            "button_label_2": "Parcourir l'épicerie",
-            "button_url_2": "shopify://collections/all"
+            "button_label": "",
+            "button_url": "",
+            "button_label_2": "",
+            "button_url_2": ""
           }
         }
       },
